@@ -21,6 +21,7 @@
   
 
   <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
   
@@ -30,7 +31,7 @@
   
 
   
-  <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
   
 
   <script>
@@ -44,12 +45,55 @@
 </head>
 
 <body>
-    <div id="loading-bar-wrapper">
-  <div id="loading-bar" class="pure"></div>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover  half">
+      
+        
+  <h1 class="title">YMLiang</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder>
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+      
+        <li>
+          <a class="nav home" href="/" id="home">
+            <i class="fas fa-rss fa-fw"></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/" rel="nofollow" id="friends">
+            <i class="fas fa-link fa-fw"></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/" rel="nofollow" id="about">
+            <i class="fas fa-info-circle fa-fw"></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
 </div>
 
-    <script>setLoadingBarProgress(20)</script>
+      
+    </cover>
     <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
 	<div class="wrapper">
 		<div class="nav-main container container--flex">
       <a class="logo flat-box" href="/">
@@ -57,31 +101,31 @@
           YMLiang
         
       </a>
-			<div class="menu">
+			<div class="menu navgation">
 				<ul class="h-list">
           
   					
   						<li>
-								<a id="https:ymliang.netlify.com" class="nav flat-box" href="https://ymliang.netlify.com/">
-									<i class="fas fa-home fa-fw"></i>&nbsp;主页
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;示例
 								</a>
 							</li>
       			
   						<li>
-								<a id="home" class="nav flat-box" href="/">
-									<i class="fas fa-rss fa-fw"></i>&nbsp;博客
-								</a>
-							</li>
-      			
-  						<li>
-								<a id="archives" class="nav flat-box" href="/archives/">
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
 									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
 								</a>
 							</li>
       			
   						<li>
-								<a id="friends" class="nav flat-box" href="/friends/">
-									<i class="fas fa-users fa-fw"></i>&nbsp;朋友
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
 								</a>
 							</li>
       			
@@ -93,7 +137,7 @@
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
 						<input type="text" class="input u-search-input" placeholder="搜索">
-						<span class="icon"><i class="fas fa-search fa-fw"></i></span>
+						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
 			
@@ -109,256 +153,863 @@
 			<a class="logo flat-box"></a>
 			<ul class="switcher h-list">
 				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
-				<li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
 			</ul>
 		</div>
 	</div>
 </header>
 	<aside class="menu-phone">
     <header>
-		<nav class="menu">
+		<nav class="menu navgation">
       <ul>
+        
           
-              
-                  <li>
-										<a id="https:ymliang.netlify.com" class="nav flat-box" href="https://ymliang.netlify.com/">
-											<i class="fas fa-home fa-fw"></i>&nbsp;主页
-										</a>
-                  </li>
-              
-                  <li>
-										<a id="home" class="nav flat-box" href="/">
-											<i class="fas fa-rss fa-fw"></i>&nbsp;博客
-										</a>
-                  </li>
-              
-                  <li>
-										<a id="archives" class="nav flat-box" href="/archives/">
-											<i class="fas fa-archive fa-fw"></i>&nbsp;归档
-										</a>
-                  </li>
-              
-                  <li>
-										<a id="friends" class="nav flat-box" href="/friends/">
-											<i class="fas fa-users fa-fw"></i>&nbsp;朋友
-										</a>
-                  </li>
-              
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/" id="projects">
+								<i class="fas fa-code-branch fa-fw"></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+								<i class="fas fa-book fa-fw"></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
        
       </ul>
 		</nav>
     </header>
 	</aside>
+<script>setLoadingBarProgress(40);</script>
 
-    <script>setLoadingBarProgress(40);</script>
-    <div class="l_body">
-    <div class='container clearfix'>
-        <div class='l_main'>
-            
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
 	
-    <script>
-        window.subData= { title:'year : 2019'}
-    </script>
-
-
-
-
+		
   <section class="post-list">
+    
       
         
           
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-
-
-
-      
-
-      
-
-      
         
           
             <div class="post-wrapper">
               <article class="post reveal ">
-    
-<section class="meta">
   
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/05/06/leetCode-155-最小栈/">
-              
-                  leetCode 155 最小栈
-              
-          </a>
-      </h2>
-    
 
-    <div class="new-meta-box">
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
       
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
+        
+  <h2 class="title">
+    <a href="/2019/05/23/spark知识梳理/">
+      spark知识梳理
+    </a>
+  </h2>
+
+
       
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-05-06
-          </a>
-        </div>
-      
-      
+      <div class="new-meta-box">
         
           
-          <div class="new-meta-item category">
-            <a href="/categories/leetcode/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              leetcode
-            </a>
-          </div>
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-23</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/spark/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>spark</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+  <div class="new-meta-item top-post">
+    <a class="notlink">
+      <i class="fas fa-angle-double-up" aria-hidden="true"></i>
+      <p>置顶</p>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="Spark定义"><a href="#Spark定义" class="headerlink" title="Spark定义:"></a>Spark定义:</h3><p>Spark编程始于数据集，而数据集往往存放在分布式持久化存储之上，比如Hadoop分布式文件系统HDFS</p>
+<p>编写Spark 程序通常包括一系列相关步骤。</p>
+<pre><code>• 在输入数据集上定义一组转换。
+• 调用 action，用以将转换后的数据集保存到持久存储上，或者把结果返回到驱动程序的
+本地内存。
+• 运行本地计算，本地计算处理分布式计算的结果。本地计算有助于你确定下一步的转换
+和 action。
+</code></pre>
+      
+        <div class="readmore">
+          <a href="/2019/05/23/spark知识梳理/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/spark/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>spark</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
       
+    
+    
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/05/30/beego框架搭建踩坑/">
+      beego框架搭建踩坑
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-30</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
       
       
     </div>
-    <hr>
-  </div>
-</section>
+    
+  </section>
+</article>
 
-    <section class="article typo">
-        <pre><code>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+          </div>
+        
+      
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/05/21/redis取经之路/">
+      redis取经之路
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-21</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/redis/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>redis</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>###redis基本数据结构</p>
+<p>Redis使用的是自己构建的简单动态字符串(SDS)[simple dynamic string,SDS]的抽象类型，并将SDS用做Rdis的默认字符串表示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SET msg &quot;hello&quot;</span><br><span class="line">Ok</span><br></pre></td></tr></table></figure></p>
+<p>redis的Key-Value的存储方式</p>
+<pre><code>key是一个字符串对象，对象的底层实现是一个保存着字符串&quot;msg&quot;的SDS
+value也是一个字符串对象，对象的底层实现是一个保存着字符串&quot;hello&quot;的SDS
+</code></pre><p>SDS除了用来保存数据库中的字符串值之外，还被用作缓冲区(Buffer):AOF模块中的AOF缓冲区</p>
+<p>基本数据类型</p>
+<pre><code>- 字符串命令:GET SET DEL
+
+- 列表:一个列表结构可以有序地存储多个字符串
+
+     LPUSH RPUSH 表示元素推入列表的左端和右端
+     LPOP RPOP分别从列表的左端和右端弹出元素，被弹出的元素不再属于列表
+     LINDEX用于获取列表在给定位置的上一个元素
+     LRANGE用于获取列表在给定范围上的所有元素
+
+- 集合:列表可以存储多个相同的字符串，集合则通过散列表来保证自己存储的每个字符串都是各不相同的(这些散列表只有键，但没有与键相关联的值)
+     redis的集合使用的是无序方式存储元素
+
+     SADD:将元素添加到集合
+
+        redis&gt; sadd fengjr &quot;hehehehe&quot;
+        (integer) 1
+
+     SREM:从集合移除元素，命令会返回被移除元素的数量
+     SMEMBERS:获取集合包含的所有元素将得到一个由元素组成的序列
+     SISMEMBER:快速检查一个元素是否已经存在于集合中
+
+- 散列:redis的散列可以存储多个键值对之间的映射。和字符串一样，散列存储的值既可以是字符串，又可以是数字值，并且用户同样可以对散列存储的数字值执行自增操作或者自减操作
+
+     HSET:在散列里面关联起给定的键值对
+
+        hset hash-key sub-key1 value1
+        hset hash-key sub-key2 value2
+        栗子:
+        redis&gt; HSET myhash field1 123
+        redis&gt; HSET myhash name liangym
+
+     返回值为1表示给定的键不存在于散列里面，添加成功
+     返回值为0表示给定的键存在于散列里面，添加失败
+
+
+     HDEL:如果给定键存在于散列里面，删除这个键
+        栗子:
+        redis&gt; HDEL myhash name
+        (integer) 1 删除成功
+
+     HGET:从散列里面获取某个键的值
+
+     HGETALL:获取散列包含的所有键值对
+        栗子:
+        redis&gt; HGETALL myhash
+        1) &quot;filed1&quot;
+        2) &quot;foo&quot;
+        3) &quot;field1&quot;
+        4) &quot;123&quot;
+
+     HINCRBY:对散列存储的值执行自增操作
+
+     HINCRBY key field icrement
+        栗子:
+        redis&gt;HINCRBY myhash field1 123
+        (integer) 246
+
+
+- 有序集合:和散列一样都用于存储键值对：有序集合的键被称为成员(member)，每个成员都是各不相同的；而有序集合的值则被称为分值(score)，分值必须为浮点数
+
+     ZADD:将一个带有给定分值的成员添加到有序集合里面
+        栗子:
+        redis&gt;zadd zset-key 728 member
+
+     ZRANGE:根据元素在有序排列中所处的位置，从有序集合里面获取多个元素
+     ZRANGEBYSCORE:获取有序集合在给定分值范围内的所有元素
+     ZREM:如果给定成员存在于有序集合，那么移除这个成员
+     ZINCRBY:给有序集合成员的分值执行自增操作
+        栗子:
+        ZINCRBY key increment member
+        redis&gt;ZINCRBY zset-key 123 member1
+
+    ZSCORE:检查记录的有序集合的值
+        栗子:
+        ZSCORE key member
+        redis&gt;ZSCORE zset-key member1
+        &quot;851&quot;
+</code></pre><h3 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h3><pre><code>数据结构
+内存存储(这使得Redis的速度非常快)
+远程(这使得Redis可以与多个客户端和服务器进行连接)
+持久化(这可以使得服务器可以再重启之后仍然保持重启之前的数据)
+可扩展(通过主从复制和分片)
+
+通过将传统数据库的一部分数据处理任务以及存储任务转交给redis来完成，可以提升网页的载入速度，并降低资源的占用量
+</code></pre><h3 id="场景一：登录和cookie缓存"><a href="#场景一：登录和cookie缓存" class="headerlink" title="场景一：登录和cookie缓存"></a>场景一：登录和cookie缓存</h3><pre><code>将登录信息存储在cookie中  可以用签名(signed) 和令牌(token)
+使用redis来记录用户信息，将每天要对数据库执行的写入操作减少了很多
+</code></pre><h3 id="场景二：购物车"><a href="#场景二：购物车" class="headerlink" title="场景二：购物车"></a>场景二：购物车</h3><pre><code>定义：
+散列：每个用户的购物车
+key：商品ID
+value：商品订购数量
+
+将会话和购物车都存储到Redis里面，这样可以减少请求的体积，还可以使得我们根据用户浏览过的上铺，用户放入购物车的商品，以及用户最终购买的商品进行统计计算。
+实现：在查看过这件商品的用户当中，有X%的用户最终购买了这件商品， 购买了这件商品的用户也购买了某某某其他商品 等功能
+</code></pre><h3 id="网页缓存"><a href="#网页缓存" class="headerlink" title="网页缓存"></a>网页缓存</h3><pre><code>页面内容不需要动态生成，减少网站在动态生成内容上面所花的时间，可以降低网站处理相同负载所需的服务器数量，并让网站的速度变得更快(增强用户体验)
+
+中间层的作用：对于一个不能被缓存的请求，函数将直接生成并返回页面，而对于可以被缓存的请求，函数首先会尝试从缓存里取出并返回被缓存的页面，如果缓存页面不存在，那么函数会生成页面并将其缓存在Redis中5分钟，最后将页面返回给函数调用者
+</code></pre><h3 id="数据行缓存"><a href="#数据行缓存" class="headerlink" title="数据行缓存"></a>数据行缓存</h3><pre><code>场景：促销活动，会推出一些特价商品供用户抢购
+疑虑：网站如果对整个促销页面进行缓存，可能会导致用户看到错误的特价商品的数量，但如果每次都从数据库里面取出特价商品的剩余数量的话又会给数据库带来巨大的压力，导致我们需要花费额外的成本来扩展数据库。
+解决：促销活动必定会带来一些负载，所以必须对数据进行缓存，编写一个持续运行的守护进程，让这个函数将指定的数据行缓存到redis里面，并不定期地对这些缓存进行更新。
+
+设置两个有序集合，分别为：调度有序集合，延时有序集合，调度顾名思义调度，延时则是设置了指定数据航的缓存需要每隔多少秒更新一次
+如果数据行记录的是特价促销商品的剩余数量，并且参与促销活动的用户非常多的话，那么我们最好每隔几秒更新一次数据行缓存；另一方面，如果数据并不经常改变，或者商品缺货是可以接受的，那么我们可以将更新缓存的时间变长
+</code></pre><h3 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h3><h3 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h3>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/redis/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>redis</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/05/16/Git配置SSH密钥/">
+      Git配置SSH密钥
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-16</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/git/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>git</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><pre><code>在随便一个文件夹空白处右击 点击 Git Bash Here
+初次安装git配置用户名和邮箱
+
+
+$ git config --global user.name &quot;yiming.liang&quot;
+$ git config --global user.email &quot;18135479521@163.com&quot;
+注意：（引号内请输入你自己设置的名字，和你自己的邮箱）此用户名和邮箱是git提交代码时用来显示你身份和联系方式的，并不是github用户名和邮箱
+git使用ssh密钥
+--------------------------------------------------------------------------------
+
+git使用https协议，每次pull, push都会提示要输入密码，使用git协议，然后使用ssh密钥，这样免去每次都输密码的麻烦
+
+初次使用git的用户要使用git协议大概需要三个步骤：
+一、生成密钥对
+二、设置远程仓库（本文以github为例）上的公钥
+三、把git的 remote url 修改为git协议（以上两个步骤初次设置过以后，以后使用都不需要再次设置，此步骤视以后项目的remote url而定，如果以后其他项目的协议为https则需要此步骤）
+一、生成密钥对
+--------------------------------------------------------------------------------
+大多数 Git 服务器都会选择使用 SSH 公钥来进行授权。系统中的每个用户都必须提供一个公钥用于授权，没有的话就要生成一个。生成公钥的过程在所有操作系统上都差不多。首先你要确认一下本机是否已经有一个公钥。
+SSH 公钥默认储存在账户的主目录下的 ~/.ssh 目录。进去看看：
+
+$ cd ~/.ssh
+$ ls
+
+authorized_keys2  id_dsa       known_hosts config            id_dsa.pub
+
+看一下有没有id_rsa和id_rsa.pub(或者是id_dsa和id_dsa.pub之类成对的文件)，有 .pub 后缀的文件就是公钥，另一个文件则是密钥。
+假如没有这些文件，甚至连 .ssh 目录都没有，可以用 ssh-keygen 来创建。该程序在 Linux/Mac 系统上由 SSH 包提供，而在 Windows 上则包含在 MSysGit 包里：
+$ ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;
+
+Creates a new ssh key using the provided email # Generating public/private rsa key pair.
+Enter file in which to save the key (/home/you/.ssh/id_rsa):
+直接按Enter就行。然后，会提示你输入密码，如下(建议输一个，安全一点，当然不输也行，应该不会有人闲的无聊冒充你去修改你的代码)：
+Enter same passphrase again: [Type passphrase again]
+完了之后，大概是这样：
+Your public key has been saved in /home/you/.ssh/id_rsa.pub.
+The key fingerprint is: # 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@youremail.com
+到此为止，你本地的密钥对就生成了。
+二、添加公钥到你的远程仓库（github）
+1、查看你生成的公钥：
+$ cat ~/.ssh/id_rsa.pub
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0X6L1zLL4VHuvGb8aJH3ippTozmReSUzgntvk434aJ/v7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8vR3c8E7CjZN733f5AL8uEYJA+YZevY5UCvEg+umT7PHghKYaJwaCxV7sjYP7Z6V79OMCEAGDNXC26IBMdMgOluQjp6o6j2KAdtRBdCDS/QIU5THQDxJ9lBXjk1fiq9tITo/aXBvjZeD+gH/Apkh/0GbO8VQLiYYmNfqqAHHeXdltORn8N7C9lOa/UW3KM7QdXo6J0GFlBVQeTE/IGqhMS5PMln3 admin@admin-PC
+
+2、登陆你的github帐户。点击你的头像，然后 Settings -&gt; 左栏点击 SSH and GPG keys -&gt; 点击 New SSH key
+3、然后你复制上面的公钥内容，粘贴进“Key”文本域内。 title域，自己随便起个名字。
+4、点击 Add key。
+完成以后，验证下这个key是不是正常工作：
+$ ssh -T git@github.com
+
+Attempts to ssh to github
+如果，看到：
+Hi xxx! You&apos;ve successfully authenticated, but GitHub does not # provide shell access.
+恭喜你，你的设置已经成功了。
+三、修改git的remote url
+
+使用命令 git remote -v 查看你当前的 remote url
+$ git remote -v
+origin https://github.com/someaccount/someproject.git (fetch)
+origin https://github.com/someaccount/someproject.git (push)
+如果是以上的结果那么说明此项目是使用https协议进行访问的（如果地址是git开头则表示是git协议）
+你可以登陆你的github，就像本文开头的图例，你在上面可以看到你的ssh协议相应的url，类似：
+
+
+复制此ssh链接，然后使用命令 git remote set-url 来调整你的url。
+git remote set-url origin git@github.com:someaccount/someproject.git
+然后你可以再用命令 git remote -v 查看一下，url是否已经变成了ssh地址。
+然后你就可以愉快的使用git fetch, git pull , git push，再也不用输入烦人的密码了
+参考链接：http://www.tuicool.com/articles/BzUrAvF
+</code></pre>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/git/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>git</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/05/06/leetCode-155-最小栈/">
+      leetCode 155 最小栈
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/leetcode/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>leetcode</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <pre><code>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
 
 push(x) -- 将元素 x 推入栈中。
 pop() -- 删除栈顶的元素。
 top() -- 获取栈顶元素。
 getMin() -- 检索栈中的最小元素。
 </code></pre>
+      
+        <div class="readmore">
+          <a href="/2019/05/06/leetCode-155-最小栈/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
         
-            <div class="readmore">
-                <a href="/2019/05/06/leetCode-155-最小栈/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
+          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
         
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/leetcode/"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
-                
-            </div>
-        
-    </section>
+      </div>
+    
+  </section>
 </article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/05/06/linux高级命令/">
-              
-                  linux高级命令
-              
-          </a>
-      </h2>
-    
 
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-05-06
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/linux/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              linux
-            </a>
           </div>
         
       
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
       
+        
+  <h2 class="title">
+    <a href="/2019/05/06/linux高级命令/">
+      linux高级命令
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/linux/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
       
     </div>
-    <hr>
-  </div>
-</section>
+  </section>
 
-    <section class="article typo">
-        <h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><pre><code>awk是行处理器: 相比较屏幕处理的优点，在处理庞大文件时不会出现内存溢出或是处理缓慢的问题，通常用来格式化文本信息
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><pre><code>awk是行处理器: 相比较屏幕处理的优点，在处理庞大文件时不会出现内存溢出或是处理缓慢的问题，通常用来格式化文本信息
 awk处理过程: 依次对每一行进行处理，然后输出
 awk命令形式:
 awk [-F|-f|-v] ‘BEGIN{} //{command1; command2} END{}’ file
@@ -586,739 +1237,517 @@ Bob     2415 40 57 62
 awk手册
 http://www.chinaunix.net/old_jh/7/16985.html
 </code></pre>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
         
-
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
         
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/linux/"><i class="fas fa-hashtag fa-fw"></i>linux</a>
-                
-            </div>
-        
-    </section>
+      </div>
+    
+  </section>
 </article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/04/25/springCloud多模块打包时报错问题/">
-              
-                  springCloud多模块打包时报错问题
-              
-          </a>
-      </h2>
-    
 
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-04-25
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/springCloud-springboot/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              springCloud,springboot
-            </a>
           </div>
         
       
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
       
+        
+  <h2 class="title">
+    <a href="/2019/04/25/springCloud多模块打包时报错问题/">
+      springCloud多模块打包时报错问题
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-04-25</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/springCloud-springboot/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>springCloud,springboot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
       
     </div>
-    <hr>
-  </div>
-</section>
+  </section>
 
-    <section class="article typo">
-        <p>执行mvn clean package spring-boot:repackage，报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.5.3.RELEASE:repackage (default)</span><br><span class="line"> on project webapps-api-bid: Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.5.3.RELEASE:</span><br><span class="line"> repackage failed: Unable to find main class</span><br></pre></td></tr></table></figure></p>
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>执行mvn clean package spring-boot:repackage，报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.5.3.RELEASE:repackage (default)</span><br><span class="line"> on project webapps-api-bid: Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.5.3.RELEASE:</span><br><span class="line"> repackage failed: Unable to find main class</span><br></pre></td></tr></table></figure></p>
 <p>错误提示：</p>
 <p><code>repackage failed: Unable to find main class</code><br>
+      
+        <div class="readmore">
+          <a href="/2019/04/25/springCloud多模块打包时报错问题/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </p></div>
+    
+      <div class="full-width auto-padding tags">
         
-            <div class="readmore">
-                <a href="/2019/04/25/springCloud多模块打包时报错问题/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
+          <a href="/tags/springCloud-springboot/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>springCloud,springboot</a>
         
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/springCloud-springboot/"><i class="fas fa-hashtag fa-fw"></i>springCloud,springboot</a>
-                
-            </div>
-        
-    </p></section>
+      </div>
+    
+  </section>
 </article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/04/18/SQL分析函数场景实例/">
-              
-                  SQL分析函数场景实例
-              
-          </a>
-      </h2>
-    
 
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-04-18
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/sql/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              sql
-            </a>
           </div>
         
       
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
       
+        
+  <h2 class="title">
+    <a href="/2019/04/18/SQL分析函数场景实例/">
+      SQL分析函数场景实例
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-04-18</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/sql/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>sql</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
       
     </div>
-    <hr>
-  </div>
-</section>
+  </section>
 
-    <section class="article typo">
-        <h3 id="分析函数"><a href="#分析函数" class="headerlink" title="分析函数"></a>分析函数</h3><ol>
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="分析函数"><a href="#分析函数" class="headerlink" title="分析函数"></a>分析函数</h3><ol>
 <li><p>用来排序的函数<br>它和聚合函数的不同之处是对于每个组返回多行<br><code>row_number() over()
 rank() over()
 dense_rank() over()
 first_value() over()</code></p>
+      
+        <div class="readmore">
+          <a href="/2019/04/18/SQL分析函数场景实例/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </li></ol></div>
+    
+      <div class="full-width auto-padding tags">
         
-            <div class="readmore">
-                <a href="/2019/04/18/SQL分析函数场景实例/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
+          <a href="/tags/sql/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>sql</a>
         
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/sql/"><i class="fas fa-hashtag fa-fw"></i>sql</a>
-                
-            </div>
-        
-    </li></ol></section>
+      </div>
+    
+  </section>
 </article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/04/17/springboot踩坑出坑记/">
-              
-                  springboot踩坑出坑记
-              
-          </a>
-      </h2>
-    
 
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-04-17
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/springCloud-springboot/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              springCloud,springboot
-            </a>
           </div>
         
       
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
       
+        
+  <h2 class="title">
+    <a href="/2019/04/17/springboot踩坑出坑记/">
+      springboot踩坑出坑记
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-04-17</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/springCloud-springboot/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>springCloud,springboot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
       
     </div>
-    <hr>
-  </div>
-</section>
+  </section>
 
-    <section class="article typo">
-        <p>4月15到4月17我都在把毕设从eclipse重构到IDEA中，springboot最让我头疼的是它的版本问题，因为每一个版本对应的依赖包都有可能出错，这里分享一下如何成功移植用eclipse写的springboot到IDEA中，比较简单的步骤我这里不详细说了，说一下我遇到的一些很难找出问题的地方<br>ps:只是针对于我的项目和我个人水平，大神勿喷嘿嘿<br>
-        
-            <div class="readmore">
-                <a href="/2019/04/17/springboot踩坑出坑记/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
-        
 
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>4月15到4月17我都在把毕设从eclipse重构到IDEA中，springboot最让我头疼的是它的版本问题，因为每一个版本对应的依赖包都有可能出错，这里分享一下如何成功移植用eclipse写的springboot到IDEA中，比较简单的步骤我这里不详细说了，说一下我遇到的一些很难找出问题的地方<br>ps:只是针对于我的项目和我个人水平，大神勿喷嘿嘿<br>
+      
+        <div class="readmore">
+          <a href="/2019/04/17/springboot踩坑出坑记/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </p></div>
+    
+      <div class="full-width auto-padding tags">
         
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/springCloud-springboot/"><i class="fas fa-hashtag fa-fw"></i>springCloud,springboot</a>
-                
-            </div>
+          <a href="/tags/springCloud-springboot/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>springCloud,springboot</a>
         
-    </p></section>
+      </div>
+    
+  </section>
 </article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/04/10/含有重复字符的最长子串/">
-              
-                  含有重复字符的最长子串
-              
-          </a>
-      </h2>
-    
 
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-04-10
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/算法/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              算法
-            </a>
           </div>
         
       
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
       
+        
+  <h2 class="title">
+    <a href="/2019/04/10/含有重复字符的最长子串/">
+      含有重复字符的最长子串
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-04-10</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/算法/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>算法</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
       
     </div>
-    <hr>
-  </div>
-</section>
+  </section>
 
-    <section class="article typo">
-        <pre><code>* 给定一个字符串，请你找出其中不含有重复字符的最长子串的长度。
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <pre><code>* 给定一个字符串，请你找出其中不含有重复字符的最长子串的长度。
 *
 * 示例 1:
 * 输入: &quot;abcabcbb&quot;
 * 输出: 3
 * 解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。
 </code></pre>
-        
-            <div class="readmore">
-                <a href="/2019/04/10/含有重复字符的最长子串/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/leetcode/"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
-                
-            </div>
-        
-    </section>
-</article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/03/25/慢SQL优化解决方案-看这一篇就够了/">
-              
-                  慢SQL优化解决方案(看这一篇就够了)
-              
-          </a>
-      </h2>
-    
-
-    <div class="new-meta-box">
       
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
+        <div class="readmore">
+          <a href="/2019/04/10/含有重复字符的最长子串/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
           </a>
         </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-03-25
-          </a>
-        </div>
-      
-      
-        
-      
-      
       
     </div>
-    <hr>
-  </div>
-</section>
-
-    <section class="article typo">
-        <h3 id="慢SQL问题"><a href="#慢SQL问题" class="headerlink" title="慢SQL问题"></a>慢SQL问题</h3><p>导致慢 SQL 的原因：<br>在遇到慢 SQL 情况时，不能简单的把原因归结为 SQL 编写问题(虽然这是最常见的因素)<br>实际上导致慢 SQL 有很多因素，甚至包括硬件和 mysql 本身的 bug。根据出现的概率从大到小，罗列如下：<br>
-        
-            <div class="readmore">
-                <a href="/2019/03/25/慢SQL优化解决方案-看这一篇就够了/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/SQL/"><i class="fas fa-hashtag fa-fw"></i>SQL</a>
-                
-            </div>
-        
-    </p></section>
-</article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
     
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
+        
+      </div>
     
-      <h2 class="title">
-          <a href="/2019/03/20/字符移位问题/">
-              
-                  字符移位问题
-              
-          </a>
-      </h2>
-    
-
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-03-20
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/算法/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              算法
-            </a>
-          </div>
-        
-      
-      
-      
-    </div>
-    <hr>
-  </div>
-</section>
-
-    <section class="article typo">
-        <p>有一个由小写字母组成的字符串 S，和一个整数数组 shifts。我们将字母表中的下一个字母称为原字母的 移位（由于字母表是环绕的， ‘z’ 将会变成 ‘a’）。例如·，shift(‘a’) = ‘b’， shift(‘t’) = ‘u’,， 以及 shift(‘z’) = ‘a’。对于每个 shifts[i] = x ， 我们会将 S 中的前 i+1 个字母移位 x 次。返回将所有这些移位都应用到 S 后最终得到的字符串。<br>
-        
-            <div class="readmore">
-                <a href="/2019/03/20/字符移位问题/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/leetcode/"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
-                
-            </div>
-        
-    </p></section>
-</article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/">
-              
-                  leetcode 1013:总持续时间可被60整除的歌曲
-              
-          </a>
-      </h2>
-    
-
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-03-20
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/JAVA/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              JAVA
-            </a>
-          </div>
-        
-      
-      
-      
-    </div>
-    <hr>
-  </div>
-</section>
-
-    <section class="article typo">
-        <h3 id="leetcode-1013-总持续时间可被-60-整除的歌曲"><a href="#leetcode-1013-总持续时间可被-60-整除的歌曲" class="headerlink" title="leetcode 1013:总持续时间可被 60 整除的歌曲"></a>leetcode 1013:总持续时间可被 60 整除的歌曲</h3><blockquote>
-<p>在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。<br>返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字  i &lt; j 且有 (time[i] + time[j]) % 60 == 0。</p>
-</blockquote>
-<pre><code>示例 1：
-输入：[30,20,150,100,40]
-输出：3
-解释：这三对的总持续时间可被 60 整数：
-(time[0] = 30, time[2] = 150): 总持续时间 180
-(time[1] = 20, time[3] = 100): 总持续时间 120
-(time[1] = 20, time[4] = 40): 总持续时间 60
-
-示例 2：
-输入：[60,60,60]
-输出：3
-解释：所有三对的总持续时间都是 120，可以被 60 整数。
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">方法1：时间复杂度O(n^2)，效率奇低</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int resutl = 0;</span><br><span class="line">        for(int i = 0;i&lt;time.length-1;i++)&#123;</span><br><span class="line">            for (int j = i+1; j &lt; time.length; j++) &#123;</span><br><span class="line">                if(time[i]+time[j]%60==0)&#123;</span><br><span class="line">                    result++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">方法2：</span><br><span class="line">    利用数组，将每个数对60取模后的值当作新数组的下标，并记录次数</span><br><span class="line">    接着遇到连续多个都能整出60的数，则此时 arr[0]的值应该会++多次</span><br><span class="line">    若arr[0]=3 即有3个60，他们两两组合则可以组合的数量为(n(n-1))/2 result = (3*2)/2 = 3</span><br><span class="line">    同理，取mode后的值为30也是特殊情况，则组合的方法和0的一样，接着下面写就可以了</span><br><span class="line">    排除了特殊情况后，正常情况就是20  40,   10   50之类的相加为60的数，这些数2 2 组合直接乘就可以了</span><br><span class="line">    </span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        int[] res = new int[60];</span><br><span class="line">        for(int i:time)&#123;</span><br><span class="line">            res[i%60]++;</span><br><span class="line">        &#125;</span><br><span class="line">        result += (res[0] * (res[0]-1))/2;</span><br><span class="line">        result += (res[30] * (res[30]-1))/2;</span><br><span class="line">        //正常情况，相加为60证明一定能被60整除</span><br><span class="line">        for(int i = 1;i&lt;30;i++)&#123;</span><br><span class="line">            result += (res[i] * res[60-i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/Leetcode/"><i class="fas fa-hashtag fa-fw"></i>Leetcode</a>
-                
-            </div>
-        
-    </section>
-</article>
-            </div>
-          
-        
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
-    
-<section class="meta">
-  
-  
-  <div class="meta" id="header-meta">
-    
-      <h2 class="title">
-          <a href="/2019/03/20/Kafka如何利用Zookeeper做负载均衡/">
-              
-                  Kafka如何利用Zookeeper做负载均衡
-              
-          </a>
-      </h2>
-    
-
-    <div class="new-meta-box">
-      
-        <div class="new-meta-item author">
-          <a href="http://yoursite.com">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            YMLiang
-          </a>
-        </div>
-      
-      
-        <div class="new-meta-item date">
-          <a class="notlink">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            2019-03-20
-          </a>
-        </div>
-      
-      
-        
-          
-          <div class="new-meta-item category">
-            <a href="/categories/kafka/">
-              <i class="fas fa-folder-open" aria-hidden="true"></i>
-              kafka
-            </a>
-          </div>
-        
-      
-      
-      
-    </div>
-    <hr>
-  </div>
-</section>
-
-    <section class="article typo">
-        <h3 id="Kafka与Zookeeper"><a href="#Kafka与Zookeeper" class="headerlink" title="Kafka与Zookeeper"></a>Kafka与Zookeeper</h3><ul>
-<li><p>Kafka如何利用zookeeper做负载均衡</p>
-<pre><code>Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡。
-</code></pre><ul>
-<li><p>broker在zk中注册</p>
-<p>  kafka的每个broker（相当于一个节点，相当于一个机器）在启动时，都会在zk中注册，告诉zk其brokerid，在整个的集群中，<code>broker.id/brokers/ids</code>，当节点失效时，zk就会删除该节点，就很方便的监控整个集群broker的变化，及时调整负载均衡。</p>
-</li>
-<li><p>topic在zk中注册</p>
-<p>  在kafka中可以定义很多个topic，每个topic又被分为很多个分区。一般情况下，每个分区独立在存在一个broker上，所有的这些topic和broker的对应关系都有zk进行维护</p>
-</li>
-<li><p>consumer(消费者)在zk中注册</p>
-<ul>
-<li><p>注册新的消费者，当有新的消费者注册到zk中，zk会创建专用的节点来保存相关信息，路径<code>ls /consumers/{group_id}/  [ids,owners,offset]</code>，Ids:记录该消费分组有几个正在消费的消费者，Owmners：记录该消费分组消费的topic信息，Offset：记录topic每个分区中的每个offset</p>
-</li>
-<li><p>监听消费者分组中消费者的变化 ,监听/consumers/{group_id}/ids的子节点的变化，一旦发现消费者新增或者减少及时调整消费者的负载均衡。</p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>  转载<br>  作者：SmartBrain<br>  原文：<a href="https://blog.csdn.net/Peter_Changyb/article/details/81562855" target="_blank" rel="noopener">https://blog.csdn.net/Peter_Changyb/article/details/81562855</a> </p>
-</li>
-</ul>
-
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/kafka/"><i class="fas fa-hashtag fa-fw"></i>kafka</a>
-                
-            </div>
-        
-    </section>
-</article>
-            </div>
-          
-        
-      
-
   </section>
+</article>
 
-
-
-
-
-
+          </div>
+        
+      
+    
+  </section>
   
+    
       <br>
       <div class="prev-next">
-          <div class="prev-next">
-              
-              <p class="current">
-                  1 / 3
-              </p>
-              
-                  <a class="next" rel="next" href="/archives/2019/page/2/">
-                      <section class="post next">
-                          &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-                      </section>
-                  </a>
-              
-
-          </div>
+        <div class="prev-next">
+          
+          <p class="current">
+            1 / 3
+          </p>
+          
+            <a class="next" rel="next" href="/archives/2019/page/2/">
+              <section class="post next">
+                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </section>
+            </a>
+          
+        </div>
       </div>
 
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
+
   
 
-  <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-  
 
-  
-
-
-
-
-
-<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-
-
-
-
-        </div>
-        <aside class='l_side'>
-            
-  
+	
+</div>
+<aside class="l_side">
   
     
+    
       
-      
-        <section class="author">
+        
+          
+          
+            <section class="widget author">
   <div class="content pure">
     
       <div class="avatar">
-        <img class="avatar" src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png">
+        <img class="avatar" src="/images/toux.png">
       </div>
     
-    
-      <div class="text">
-        
-        
-        
-          <p><span id="jinrishici-sentence">柳暗花明又一村</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
     
     
       <div class="social-wrapper">
         
           
-            <a href="mailto:yiming.liang@fengjr.com" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-envelope" aria-hidden="true"></i></a>
+            <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
           
         
           
-            <a href="https://github.com/YiMLiang" class="social flat-btn" target="_blank" rel="external"><i class="social fab fa-github" aria-hidden="true"></i></a>
+            <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
           
         
           
-            <a href="https://music.163.com/#/user/home?id=63035382" class="social flat-btn" target="_blank" rel="external"><i class="social fas fa-music" aria-hidden="true"></i></a>
+            <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
           
         
       </div>
@@ -1326,25 +1755,69 @@ first_value() over()</code></p>
   </div>
 </section>
 
-      
-    
-  
-    
-      
+          
+        
       
         
+          
+          
+            
 
-      
-    
-  
-    
-      
+          
+        
       
         
-  <section class="category">
+          
+          
+            <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/material-x/" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          主题文档
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;所有分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
   
 </header>
 
@@ -1353,6 +1826,8 @@ first_value() over()</code></p>
         
           <li><a class="flat-box" title="/categories/JAVA/" href="/categories/JAVA/"><div class="name">JAVA</div><div class="badge">(1)</div></a></li>
         
+          <li><a class="flat-box" title="/categories/git/" href="/categories/git/"><div class="name">git</div><div class="badge">(1)</div></a></li>
+        
           <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class="name">kafka</div><div class="badge">(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/leetcode/" href="/categories/leetcode/"><div class="name">leetcode</div><div class="badge">(1)</div></a></li>
@@ -1360,6 +1835,10 @@ first_value() over()</code></p>
           <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class="name">linux</div><div class="badge">(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/maven/" href="/categories/maven/"><div class="name">maven</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class="name">redis</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/spark/" href="/categories/spark/"><div class="name">spark</div><div class="badge">(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/sparkSql/" href="/categories/sparkSql/"><div class="name">sparkSql</div><div class="badge">(1)</div></a></li>
         
@@ -1378,79 +1857,44 @@ first_value() over()</code></p>
   </section>
 
 
-      
-    
-  
-    
-      
+          
+        
       
         
-  <section class="tagcloud">
+          
+          
+            
+  <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
   
 </header>
 
     <div class="content pure">
-      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/Leetcode/" style="font-size: 14px; color: #999">Leetcode</a> <a href="/tags/Oracle/" style="font-size: 14px; color: #999">Oracle</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 24px; color: #555">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/sparkSql/" style="font-size: 19px; color: #777">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 14px; color: #999">springCloud</a> <a href="/tags/springCloud-springboot/" style="font-size: 19px; color: #777">springCloud,springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
+      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/Leetcode/" style="font-size: 14px; color: #999">Leetcode</a> <a href="/tags/Oracle/" style="font-size: 14px; color: #999">Oracle</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 24px; color: #555">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 19px; color: #777">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 19px; color: #777">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 14px; color: #999">springCloud</a> <a href="/tags/springCloud-springboot/" style="font-size: 19px; color: #777">springCloud,springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
     </div>
   </section>
 
 
-      
-    
-  
-    
-      
-      
-        <section class="list">
-  
-<header class="pure">
-  <div><i class="fas fa-link fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;特别链接</div>
-  
-</header>
-
-  <div class="content pure">
-    <ul class="entry">
-      
-        <li><a class="flat-box" title="https://xaoxuu.com/about/" href="https://xaoxuu.com/about/">
-          <div class="name">
-            
-              <i class="fas fa-comment-dots fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;关于我 / 留言板
-          </div>
           
-        </a></li>
-      
-    </ul>
-  </div>
-</section>
-
-      
-    
-  
-    
-      
+        
       
         
-
-      
-    
-  
-    
-      
-      
-        
+          
+          
+            
 
 
-  <section class="music">
+  <section class="widget music">
     
 <header class="pure">
   <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
   
-    <a class="rightBtn" target="_blank" rel="external nofollow noopener noreferrer" href="https://music.163.com/#/user/home?id=63035382" title="https://music.163.com/#/user/home?id=63035382">
+    <a class="rightBtn" rel="external nofollow noopener noreferrer" target="_blank" href="https://music.163.com/#/user/home?id=63035382" title="https://music.163.com/#/user/home?id=63035382">
     <i class="far fa-heart fa-fw"></i></a>
   
 </header>
@@ -1468,31 +1912,37 @@ first_value() over()</code></p>
   </section>
 
 
+          
+        
       
     
+
   
+</aside>
 
-
-        </aside>
-        <script>setLoadingBarProgress(60);</script>
-    </div>
-    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
-    </div>
-    <footer id="footer" class="clearfix">
+<footer id="footer" class="clearfix">
   
   
     <div class="social-wrapper">
       
         
-          <a href="mailto:yiming.liang@fengjr.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external"></a>
+          <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
         
       
         
-          <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external"></a>
+          <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
         
       
         
-          <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-music flat-btn" target="_blank" rel="external"></a>
+          <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
         
       
     </div>
@@ -1500,12 +1950,35 @@ first_value() over()</code></p>
   <br>
   <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
-  <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，总访问量为 <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
   </div>
 </footer>
+<script>setLoadingBarProgress(80);</script>
 
-    <script>setLoadingBarProgress(80);</script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+
+
+
+	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+	
+
+	
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 
   <script>
     var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
@@ -1522,6 +1995,7 @@ first_value() over()</code></p>
     if(!ROOT.endsWith('/'))ROOT += '/';
   </script>
 
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
 
 
   <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
@@ -1554,53 +2028,166 @@ first_value() over()</code></p>
 
 
 
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
   
-    
-      <script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1/js/volantis.min.js"></script>
-    
   
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-    return GUEST_INFO.indexOf(item) > -1
-  });
-  var notify = 'false' == true;
-  var verify = 'false' == true;
-  var valine = new Valine();
-  valine.init({
-    el: '#valine_container',
-    notify: notify,
-    verify: verify,
-    guest_info: guest_info,
-    
-    appId: "这里填写了",
-    appKey: "这里也填写了自己的key",
-    placeholder: "on my way to the topp.",
-    pageSize:'10',
-    avatar:'mp',
-    lang:'zh-cn',
-    highlight:''
-  })
-  </script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
 
 
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
 
 
-  <script src="/js/app.js"></script>
-<script src="/js/search.js"></script>
-<script src="/js/clipboard-use.js"></script>
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
 
 
 
 
 
-
-    <script>setLoadingBarProgress(100);</script>
-</body>
+  <script>setLoadingBarProgress(100);</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
 </html>
+<!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
+opacity：表示线条透明度（0~1），默认：0.5
+count：表示线条的总数量，默认：150
+zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
