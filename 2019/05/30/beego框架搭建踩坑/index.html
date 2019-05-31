@@ -314,11 +314,11 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <!-- ## 什么是beego -->
-<pre><code>一个框架：可以理解为Golang的MVC框架
+          <h3 id="什么是beego"><a href="#什么是beego" class="headerlink" title="什么是beego"></a>什么是beego</h3><pre><code>一个框架：可以理解为Golang的MVC框架
 四个特点：简单化、智能化、模块化、高性能
 具体好处去官网自行浏览
 </code></pre><p><a href="https://beego.me/" target="_blank" rel="noopener">官网传送门</a></p>
+<a id="more"></a>
 <h3 id="踩坑之前先安装一下Golang"><a href="#踩坑之前先安装一下Golang" class="headerlink" title="踩坑之前先安装一下Golang"></a>踩坑之前先安装一下Golang</h3><pre><code>1. 找go的官网下载 https://studygolang.com/articles/6165 windows下载后缀为msi的文件，之后傻瓜式安装
 2. 配置GOROOT和GPATH环境变量
     https://studygolang.com/articles/6165 这里有
@@ -339,10 +339,63 @@ GOPATH：
     pkg:
     src: 项目名:
             main.go
-</code></pre><h3 id="beego框架安装"><a href="#beego框架安装" class="headerlink" title="beego框架安装"></a>beego框架安装</h3><blockquote>
+</code></pre><h3 id="beego框架安装"><a href="#beego框架安装" class="headerlink" title="beego框架安装"></a>beego框架安装</h3><pre><code>beego 包含一些示例应用程序以帮您学习并使用 beego 应用框架。
+您需要安装 Go 1.1+ 以确保所有功能的正常使用。
+你需要安装或者升级 Beego 和 Bee 的开发工具:
+
+命令在你的GOPATH下输入
+go get github.com/astaxie/beego
+go get -u github.com/beego/bee
+
+为了更加方便的操作，请将 $GOPATH/bin 加入到你的 $PATH 变量中。请确保在此之前您已经添加了 $GOPATH 变量。 windows下只需要$path里面配了 %GOPATH%\bin 即可
+
+检测是否安装：
+1. 在你GOPATH/src 输入 bee new 你的项目名称
+2. cd 你的项目名称
+3. bee run
+
+之后访问 localhost:8080 出现下图即搭建成功
+</code></pre><p><img src="/images/beego/beego1.png" alt="beego搭建"></p>
+<pre><code>接着可以实现一个小的功能体验一下MVC架构
+1. 用goland打开你的项目
+</code></pre><p><img src="/images/beego/beego2.png" alt="beego搭建"></p>
+<pre><code>项目结构后面会出文章解释，先简单了解一下，这里我们主要了解一下controllers和routers
+先看一下写法：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package controllers</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;github.com/astaxie/beego&quot;</span><br><span class="line">)</span><br><span class="line">//声明了一个控制器 HelloController</span><br><span class="line">//这个控制器里面内嵌了beego.Controller这就是Go的嵌入方式</span><br><span class="line">//也就是HelloController自动拥有了所有 beego.Controller 的方法</span><br><span class="line">//这类似于面向对象里的继承</span><br><span class="line"></span><br><span class="line">type HelloController struct &#123;</span><br><span class="line">	beego.Controller //这里相当于继承beego.Controller</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//而beego.Controller拥有很多方法</span><br><span class="line">//其中包括Init、Prepare、Post、Get、Delete、Head等方法</span><br><span class="line">//我们可以通过重写的方式来实现这些方法，而我们下面的代码就是重写了Get方法。</span><br><span class="line">//重写Get方法</span><br><span class="line">func (hello *HelloController) Get() &#123;</span><br><span class="line">	hello.Ctx.WriteString(&quot;hello go&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>这里写了一个hello.go 的 controller
+
+那么上面的代码到底做了些什么呢？
+
+首先我们导入了包 github.com/astaxie/beego。我们知道 Go 语言里面被导入的包会按照深度优先的顺序去执行导入包的初始化（变量和 init 函数，更多详情），beego 包中会初始化一个 BeeAPP 的应用和一些参数。
+定义 Controller，这里我们定义了一个 struct 为 HelloController，充分利用了 Go 语言的组合的概念，匿名包含了 beego.Controller，这样我们的 HelloController 就拥有了 beego.Controller 的所有方法。
+定义 RESTful 方法，通过匿名组合之后，其实目前的 HelloController 已经拥有了 Get、Post、Delete、Put 等方法，这些方法是分别用来对应用户请求的 Method 函数，如果用户发起的是 POST 请求，那么就执行 Post 函数。所以这里我们定义了 HelloController 的 Get 方法用来重写继承的 Get 函数，这样当用户发起 GET 请求的时候就会执行该函数。
+Router 注册路由，路由就是告诉 beego，当用户来请求的时候，该如何去调用相应的 Controller，这里我们注册了请求 / 的时候，请求到 HelloController。这里我们需要知道，Router 函数的两个参数函数，第一个是路径，第二个是 Controller 的指针。
+Run 应用，
+bee run 启动，其实就是内部监听了 8080 端口：Go 默认情况会监听你本机所有的 IP 上面的 8080 端口
+停止服务的话，请按 Ctrl+c。
+
+
+
+
+之后在 routers 下 routers.go下添加 
+
+// 然后将新增的HelloController添加路由，修改routers/router.go文件新增路由
+beego.Router(&quot;/hello&quot;, &amp;controllers.HelloController{})
+
+和java的controller写法类似 /hello 是后缀 即你用localhost:8080/hello可以访问界面
+
+如果是用goland进行开发，可以直接启动main.go，其中的配置如下
+1. 点击edit configurations
+</code></pre><p><img src="/images/beego/beego3.png" alt="beego搭建"><br><img src="/images/beego/beego4.png" alt="beego搭建"></p>
+<pre><code>下面我们访问一下 localhost:8080/hello
+</code></pre><p><img src="/images/beego/beego5.png" alt="beego搭建"></p>
+<pre><code>OVER！！！
+</code></pre><blockquote>
 <p>感谢帮助我踩坑成功的各位哥哥，正是由于你们的付出，才让我们踩更少的坑，感恩<br>如果涉及到您的版权问题，请联系我删除，谢谢<br><a href="mailto:18135479521@163.com" target="_blank" rel="noopener">18135479521@163.com</a></p>
 </blockquote>
 <p>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+<p><a href="https://app.netlify.com/sites/ymliang/deploys" target="_blank" rel="noopener"><img src="https://api.netlify.com/api/v1/badges/0f11aaba-6571-4f78-b114-467979ef9df5/deploy-status" alt="Netlify Status"></a></p>
+<p><a href><img src="https://img.shields.io/badge/download-26k-green.svg?style=flat-square" alt="Travis"></a> <a href><img src="https://img.shields.io/badge/windows-black.svg?style=flat-square&amp;logo=windows" alt="Travis"></a></p>
 
         </div>
         
@@ -354,10 +407,10 @@ GOPATH：
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-30T21:03:43+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-31T13:28:16+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 2019年5月30日</p>
+    <p>最后更新于 2019年5月31日</p>
   </a>
 </div>
 
@@ -377,7 +430,10 @@ GOPATH：
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/05/30/beego框架搭建踩坑/&title=beego框架搭建踩坑 | YMLiang&summary=">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/05/30/beego框架搭建踩坑/&title=beego框架搭建踩坑 | YMLiang&summary=什么是beego一个框架：可以理解为Golang的MVC框架
+四个特点：简单化、智能化、模块化、高性能
+具体好处去官网自行浏览
+官网传送门">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -385,7 +441,10 @@ GOPATH：
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/05/30/beego框架搭建踩坑/&title=beego框架搭建踩坑 | YMLiang&summary=">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/05/30/beego框架搭建踩坑/&title=beego框架搭建踩坑 | YMLiang&summary=什么是beego一个框架：可以理解为Golang的MVC框架
+四个特点：简单化、智能化、模块化、高性能
+具体好处去官网自行浏览
+官网传送门">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -393,7 +452,10 @@ GOPATH：
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/05/30/beego框架搭建踩坑/&title=beego框架搭建踩坑 | YMLiang&summary=">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/05/30/beego框架搭建踩坑/&title=beego框架搭建踩坑 | YMLiang&summary=什么是beego一个框架：可以理解为Golang的MVC框架
+四个特点：简单化、智能化、模块化、高性能
+具体好处去官网自行浏览
+官网传送门">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           
@@ -528,7 +590,7 @@ GOPATH：
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#踩坑之前先安装一下Golang"><span class="toc-text">踩坑之前先安装一下Golang</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#beego框架安装"><span class="toc-text">beego框架安装</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是beego"><span class="toc-text">什么是beego</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#踩坑之前先安装一下Golang"><span class="toc-text">踩坑之前先安装一下Golang</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#beego框架安装"><span class="toc-text">beego框架安装</span></a></li></ol>
     </div>
   </section>
 
