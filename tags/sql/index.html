@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: SQL | YMLiang</title>
+  <title>Tag: sql | YMLiang</title>
   
   
   <meta name="description" content="YMLiang's blog">
@@ -244,8 +244,8 @@
       
         
   <h2 class="title">
-    <a href="/2019/03/25/慢SQL优化解决方案-看这一篇就够了/">
-      慢SQL优化解决方案(看这一篇就够了)
+    <a href="/2019/04/18/SQL分析函数场景实例/">
+      SQL分析函数场景实例
     </a>
   </h2>
 
@@ -273,7 +273,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-03-25</p>
+    <p>2019-04-18</p>
   </a>
 </div>
 
@@ -281,6 +281,14 @@
         
           
             
+  
+  <div class="new-meta-item category">
+    <a href="/categories/sql/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>sql</p>
+    </a>
+  </div>
+
 
           
         
@@ -304,20 +312,24 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="慢SQL问题"><a href="#慢SQL问题" class="headerlink" title="慢SQL问题"></a>慢SQL问题</h3><p>导致慢 SQL 的原因：<br>在遇到慢 SQL 情况时，不能简单的把原因归结为 SQL 编写问题(虽然这是最常见的因素)<br>实际上导致慢 SQL 有很多因素，甚至包括硬件和 mysql 本身的 bug。根据出现的概率从大到小，罗列如下：<br>
+      <h3 id="分析函数"><a href="#分析函数" class="headerlink" title="分析函数"></a>分析函数</h3><ol>
+<li><p>用来排序的函数<br>它和聚合函数的不同之处是对于每个组返回多行<br><code>row_number() over()
+rank() over()
+dense_rank() over()
+first_value() over()</code></p>
       
         <div class="readmore">
-          <a href="/2019/03/25/慢SQL优化解决方案-看这一篇就够了/" class="flat-box">
+          <a href="/2019/04/18/SQL分析函数场景实例/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
         </div>
       
-    </p></div>
+    </li></ol></div>
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/SQL/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>SQL</a>
+          <a href="/tags/sql/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>sql</a>
         
       </div>
     
@@ -818,4 +830,4 @@ color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canva
 <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
 opacity：表示线条透明度（0~1），默认：0.5
 count：表示线条的总数量，默认：150
-zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->�制所在层的位置，默认：-1 -->
+zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
