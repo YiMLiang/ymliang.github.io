@@ -58,7 +58,7 @@
 
   <div class="m_search">
     <form name="searchform" class="form u-search-form">
-      <input type="text" class="input u-search-input" placeholder>
+      <input type="text" class="input u-search-input" placeholder="你点我要干嘛！！">
       <i class="icon fas fa-search fa-fw"></i>
     </form>
   </div>
@@ -231,6 +231,10 @@
         
           
         
+          
+        
+          
+        
       
     
     
@@ -359,7 +363,7 @@ getMin() -- 检索栈中的最小元素。
         
   <h2 class="title">
     <a href="/2019/04/10/含有重复字符的最长子串/">
-      含有重复字符的最长子串
+      leetcode-含有重复字符的最长子串
     </a>
   </h2>
 
@@ -397,9 +401,9 @@ getMin() -- 检索栈中的最小元素。
             
   
   <div class="new-meta-item category">
-    <a href="/categories/算法/" rel="nofollow">
+    <a href="/categories/leetcode/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>算法</p>
+      <p>leetcode</p>
     </a>
   </div>
 
@@ -469,7 +473,7 @@ getMin() -- 检索栈中的最小元素。
         
   <h2 class="title">
     <a href="/2019/03/20/字符移位问题/">
-      字符移位问题
+      leetcode-字符移位问题
     </a>
   </h2>
 
@@ -507,9 +511,9 @@ getMin() -- 检索栈中的最小元素。
             
   
   <div class="new-meta-item category">
-    <a href="/categories/算法/" rel="nofollow">
+    <a href="/categories/leetcode/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>算法</p>
+      <p>leetcode</p>
     </a>
   </div>
 
@@ -546,6 +550,270 @@ getMin() -- 检索栈中的最小元素。
         </div>
       
     </p></div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/">
+      leetcode 1013:总持续时间可被60整除的歌曲
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-03-20</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/leetcode/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>leetcode</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="leetcode-1013-总持续时间可被-60-整除的歌曲"><a href="#leetcode-1013-总持续时间可被-60-整除的歌曲" class="headerlink" title="leetcode 1013:总持续时间可被 60 整除的歌曲"></a>leetcode 1013:总持续时间可被 60 整除的歌曲</h3><blockquote>
+<p>在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。<br>返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字  i &lt; j 且有 (time[i] + time[j]) % 60 == 0。</p>
+</blockquote>
+<pre><code>示例 1：
+输入：[30,20,150,100,40]
+输出：3
+解释：这三对的总持续时间可被 60 整数：
+(time[0] = 30, time[2] = 150): 总持续时间 180
+(time[1] = 20, time[3] = 100): 总持续时间 120
+(time[1] = 20, time[4] = 40): 总持续时间 60
+
+示例 2：
+输入：[60,60,60]
+输出：3
+解释：所有三对的总持续时间都是 120，可以被 60 整数。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">方法1：时间复杂度O(n^2)，效率奇低</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int resutl = 0;</span><br><span class="line">        for(int i = 0;i&lt;time.length-1;i++)&#123;</span><br><span class="line">            for (int j = i+1; j &lt; time.length; j++) &#123;</span><br><span class="line">                if(time[i]+time[j]%60==0)&#123;</span><br><span class="line">                    result++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">方法2：</span><br><span class="line">    利用数组，将每个数对60取模后的值当作新数组的下标，并记录次数</span><br><span class="line">    接着遇到连续多个都能整出60的数，则此时 arr[0]的值应该会++多次</span><br><span class="line">    若arr[0]=3 即有3个60，他们两两组合则可以组合的数量为(n(n-1))/2 result = (3*2)/2 = 3</span><br><span class="line">    同理，取mode后的值为30也是特殊情况，则组合的方法和0的一样，接着下面写就可以了</span><br><span class="line">    排除了特殊情况后，正常情况就是20  40,   10   50之类的相加为60的数，这些数2 2 组合直接乘就可以了</span><br><span class="line">    </span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        int[] res = new int[60];</span><br><span class="line">        for(int i:time)&#123;</span><br><span class="line">            res[i%60]++;</span><br><span class="line">        &#125;</span><br><span class="line">        result += (res[0] * (res[0]-1))/2;</span><br><span class="line">        result += (res[30] * (res[30]-1))/2;</span><br><span class="line">        //正常情况，相加为60证明一定能被60整除</span><br><span class="line">        for(int i = 1;i&lt;30;i++)&#123;</span><br><span class="line">            result += (res[i] * res[60-i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/02/22/Leetcode-177-第N高的薪水/">
+      Leetcode 177 第N高的薪水
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-02-22</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/leetcode/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>leetcode</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="编写一个-SQL-查询，获取-Employee-表中第-n-高的薪水（Salary）。"><a href="#编写一个-SQL-查询，获取-Employee-表中第-n-高的薪水（Salary）。" class="headerlink" title="编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。"></a>编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。</h2><ul>
+<li><p>测试数据</p>
+<pre><code>+----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+</code></pre></li>
+<li><p>例如上述 Employee 表，n = 2 时，应返回第二高的薪水 200。如果不存在第 n 高的薪水，那么查询应返回 null。</p>
+<pre><code>+------------------------+
+| getNthHighestSalary(2) |
++------------------------+
+| 200                    |
++------------------------+
+</code></pre></li>
+<li><p>首先拿到题直接思考使用分析函数了,是使用<code>row_number()</code>还是<code>dense_rank()</code></p>
+<ul>
+<li><p>row_number() over()是无论值是否相同值始终递增</p>
+<pre><code>100 1
+200 2
+200 3
+300 4
+</code></pre></li>
+<li><p>dense_rank() over()是重复的值显示的排名都相同，但其后的值跟着上一个值递增，不跳跃</p>
+<pre><code>100 1
+200 2
+200 2
+300 3
+</code></pre></li>
+<li><p>rank() over()则是重复值的排名相同，但其后的值从重复行数开始递增，跳跃式</p>
+<pre><code>100 1
+200 2
+200 2
+300 4
+</code></pre></li>
+</ul>
+</li>
+<li><p>题解</p>
+<pre><code>CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
+result NUMBER;
+BEGIN
+    /* Write your PL/SQL query statement below */
+    SELECT a.salary into result from 
+        (
+            select dense_rank() over(order by Salary desc) as rank,Salary from Employee
+        )a
+    where  a.rank = N;
+
+    RETURN result;
+END;
+</code></pre></li>
+</ul>
+
+      
+    </div>
     
       <div class="full-width auto-padding tags">
         
@@ -662,6 +930,13 @@ getMin() -- 检索栈中的最小元素。
           主题文档
         </a></li>
       
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
     </ul>
   </div>
 </section>
@@ -686,15 +961,13 @@ getMin() -- 检索栈中的最小元素。
     <div class="content pure">
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/JAVA/" href="/categories/JAVA/"><div class="name">JAVA</div><div class="badge">(1)</div></a></li>
-        
           <li><a class="flat-box" title="/categories/git/" href="/categories/git/"><div class="name">git</div><div class="badge">(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class="name">go</div><div class="badge">(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class="name">kafka</div><div class="badge">(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/leetcode/" href="/categories/leetcode/"><div class="name">leetcode</div><div class="badge">(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/leetcode/" href="/categories/leetcode/"><div class="name">leetcode</div><div class="badge">(5)</div></a></li>
         
           <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class="name">linux</div><div class="badge">(1)</div></a></li>
         
@@ -712,9 +985,7 @@ getMin() -- 检索栈中的最小元素。
         
           <li><a class="flat-box" title="/categories/sql/" href="/categories/sql/"><div class="name">sql</div><div class="badge">(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(3)</div></a></li>
-        
-          <li><a class="flat-box" title="/categories/算法/" href="/categories/算法/"><div class="name">算法</div><div class="badge">(2)</div></a></li>
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/面经/" href="/categories/面经/"><div class="name">面经</div><div class="badge">(1)</div></a></li>
         
@@ -741,7 +1012,7 @@ getMin() -- 检索栈中的最小元素。
 </header>
 
     <div class="content pure">
-      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/Leetcode/" style="font-size: 14px; color: #999">Leetcode</a> <a href="/tags/Oracle/" style="font-size: 14px; color: #999">Oracle</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 24px; color: #555">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 19px; color: #777">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 19px; color: #777">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 24px; color: #555">springCloud</a> <a href="/tags/springboot/" style="font-size: 19px; color: #777">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
+      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 24px; color: #555">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 17.33px; color: #828282">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 17.33px; color: #828282">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 20.67px; color: #6c6c6c">springCloud</a> <a href="/tags/springboot/" style="font-size: 17.33px; color: #828282">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
     </div>
   </section>
 
@@ -1050,4 +1321,4 @@ color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canva
 <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
 opacity：表示线条透明度（0~1），默认：0.5
 count：表示线条的总数量，默认：150
-zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->�，默认：-1 -->
+zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
