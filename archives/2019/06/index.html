@@ -225,9 +225,233 @@
         
           
         
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/04/Go开发基础入门——2/">
+      Go开发基础入门——2
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-04</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">    通过类型前置加一个圆括号</span><br><span class="line">    T(表达式)</span><br><span class="line">    T表示要转化的类型，表达式包括：变量，数值，函数返回值等</span><br><span class="line">    int(8.2)</span><br><span class="line">    int(80.5)</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">    布尔型无法与其他类型转换</span><br><span class="line"></span><br><span class="line">    int转换为string OK</span><br><span class="line">    string转换为int NO</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    eg:</span><br><span class="line">    chinese := 90</span><br><span class="line">	english := 90.9</span><br><span class="line">	result := string(chinese)</span><br><span class="line"></span><br><span class="line">	fmt.Println(chinese,english,result)</span><br><span class="line">    </span><br><span class="line">    90 90.9 Z</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">常量是一个简单值的标识符，在程序运行时，不会被修改的量。</span><br><span class="line"></span><br><span class="line">常量中的数据类型只可以是布尔型、数字型（整数型、浮点型和复数）和字符串型。</span><br><span class="line"></span><br><span class="line">常量的定义格式：</span><br><span class="line">const identifier [type] = value</span><br><span class="line"></span><br><span class="line">你可以省略类型说明符 [type]，因为编译器可以根据变量的值来推断其类型。</span><br><span class="line">显式类型定义： const b string = &quot;abc&quot;</span><br><span class="line">隐式类型定义： const b = &quot;abc&quot;</span><br><span class="line"></span><br><span class="line">多个相同类型的声明可以简写为：</span><br><span class="line">const c_name1, c_name2 = value1, value2</span><br><span class="line"></span><br><span class="line">常量用于枚举(常量组)：</span><br><span class="line">也可以使用 const()定义块，定义多个，每个常量单独一行，例如</span><br><span class="line">const (</span><br><span class="line">  c6 = 42</span><br><span class="line">  c7 = 1000</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">const()块定义时，如果常量未给出定义，则延续上面的定义规则，例如：</span><br><span class="line">const (</span><br><span class="line">  c7 = 42</span><br><span class="line">  c8 // c8 = 42</span><br><span class="line">  c9 // c9 = 42</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">iota迭代定义常量：</span><br><span class="line">const配合iota关键字使用，可以定义一组由0开始+1迭代的常量 演示语法：</span><br><span class="line"></span><br><span class="line">const (</span><br><span class="line">  gender_secret = iota</span><br><span class="line">  gender_male // = iota</span><br><span class="line">  gender_female // = iota</span><br><span class="line">)</span><br><span class="line">此时，三个常量值，分别是,0, 1, 2 iota的规则是：若iota出现在const()中，那么const()定义的第一行的iota就是0，第二行就是0+1=1，不论iota是否被常量使用。演示如下：</span><br><span class="line"></span><br><span class="line">const (</span><br><span class="line">  c1 = 42 // iota = 0，虽然未使用iota，但后边（const()中）有使用，此时iota被初始化为0，下面每行累加1</span><br><span class="line">  c2 = iota      // iota = 1，iota继续累加，使用了iota</span><br><span class="line">  c3 = 1024      // iota = 2，同样未使用，但iota的值继续累加。c3 被定义为1024</span><br><span class="line">  c4             // iota = 3，c4延续上面的定义c4=1024，iota继续累加</span><br><span class="line">  c5 = iota      // iota = 4，iota继续累加，使用了iota</span><br><span class="line">  c6 = iota      // iota = 5，iota继续累加，使用了iota</span><br><span class="line">)</span><br><span class="line">此时结果为：42, 1, 1024, 1024, 4, 5</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/04/Go开发基础入门/">
+      Go开发基础入门
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-04</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="Go开发入门"><a href="#Go开发入门" class="headerlink" title="Go开发入门"></a>Go开发入门</h2><h3 id="变量的定义，赋值"><a href="#变量的定义，赋值" class="headerlink" title="变量的定义，赋值"></a>变量的定义，赋值</h3><p>变量声明：Go的变量名首字母不能为数字</p>
+<ul>
+<li><p>未初始化的变量声明：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    var 变量名 变量类型</span><br><span class="line">	var a int               // 声明 int 类型的变量</span><br><span class="line">	var b [10] int          // 声明 int 类型数组</span><br><span class="line">	var c []int             // 声明 int 类型的切片 [] 内赋初值是数组，不赋值是切片</span><br><span class="line">	var d *int              // 声明 int 类型的指针</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">    打印结果为</span><br><span class="line"></span><br><span class="line">    //a=&#123;0&#125;,b=&#123;[0 0 0 0 0 0 0 0 0 0]&#125;,c=&#123;[]&#125;,d=&#123;&lt;nil&gt;&#125;</span><br><span class="line"></span><br><span class="line">    那么未初始化的变量默认值为：</span><br><span class="line"></span><br><span class="line">    整型和浮点型变量： 0</span><br><span class="line">    字符串： 0</span><br><span class="line">    布尔： false</span><br><span class="line">    函数，指针： nil</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化的变量声明：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var 变量名 变量类型 = 表达式</span><br><span class="line">var a int = 10</span><br><span class="line"></span><br><span class="line">//编译器自动推断格式</span><br><span class="line">var 变量名 = 表达式</span><br><span class="line"></span><br><span class="line">//简短声明格式(短变量声明格式)</span><br><span class="line">变量名 := 表达式</span><br><span class="line"></span><br><span class="line">:= 可以高效的创建新变量，在内存中开辟空间</span><br><span class="line">var 省略</span><br><span class="line">编译器自动推断类型</span><br><span class="line">声明变量首选这种形式</span><br><span class="line">只能用在函数体内，不能作为全局变量来声明</span><br><span class="line">变量名不能是被定义过的，不然会报错</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>变量多重赋值</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">go可以进行多变量赋值，变量与变量之间逗号隔开</span><br><span class="line">a, b, c, d := 1, 2, true, &quot;def&quot;</span><br><span class="line">fmt.Printf(&quot;a=&#123;%d&#125;,b=&#123;%d&#125;,c=&#123;%v&#125;,d=&#123;%v&#125; \n&quot;, a, b, c, d)</span><br><span class="line"></span><br><span class="line">a, b = b, a // a,b互换位置</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>匿名变量</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主要用于函数返回值，返回我们需要的字段</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
+<li>布尔型<br>布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true。</li>
+<li>数字类型<br>整型 int 和浮点型 float32、float64，Go 语言支持整型和浮点型数字，并且支持复数，其中位的运算采用补码。</li>
+<li>字符串类型:<br>字符串就是一串固定长度的字符连接起来的字符序列。Go 的字符串是由单个字节连接起来的。Go 语言的字符串的字节使用 UTF-8 编码标识 Unicode 文本。</li>
+<li>派生类型:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">包括：</span><br><span class="line">(a) 指针类型（Pointer）</span><br><span class="line">(b) 数组类型</span><br><span class="line">(c) 结构化类型(struct)</span><br><span class="line">(d) Channel 类型</span><br><span class="line">(e) 函数类型</span><br><span class="line">(f) 切片类型</span><br><span class="line">(g) 接口类型（interface）</span><br><span class="line">(h) Map 类型</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>更详细的可以参考<a href="https://www.cnblogs.com/fengbohello/p/5854108.html" target="_blank" rel="noopener">这篇博文</a>，写的非常详细</p>
+<h3 id="格式化输出语句"><a href="#格式化输出语句" class="headerlink" title="格式化输出语句"></a>格式化输出语句</h3><ul>
+<li><p>通用</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%v value，值的默认表示</span><br><span class="line">%+v 类似%v，但输出结构体时会添加字段名</span><br><span class="line">%#v 值的 Go 语法表示</span><br><span class="line">%T 值的数据类型Go语法表示，如： int , string等</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>布尔</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%t true或false</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>整数</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%b     二进制表示 </span><br><span class="line">%c     相应Unicode码点所表示的字符 </span><br><span class="line">%d     十进制表示 </span><br><span class="line">%8d    整形长度为8，不足8则在数值前补空格 超出以实际为准</span><br><span class="line">%08d   数字长度是8，不足8位的，数字前补0 超出以实际为准</span><br><span class="line">%o     八进制表示 </span><br><span class="line">%q     单引号围绕的字符字面值，由Go语法安全地转义 </span><br><span class="line">%x     十六进制表示，字母形式为小写 a-f </span><br><span class="line">%X     十六进制表示，字母形式为大写 A-F </span><br><span class="line">%U     Unicode格式：U+1234，等同于 &quot;U+%04X&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浮点,复数</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%b     无小数部分的，指数为二的幂的科学计数法，与 strconv.FormatFloat中的 &apos;b&apos; 转换格式一致。例如 -123456p-78 </span><br><span class="line">%e     科学计数法，例如 -1234.456e+78 </span><br><span class="line">%E     科学计数法，例如 -1234.456E+78 </span><br><span class="line">%f     有小数点而无指数，例如 123.456 </span><br><span class="line">%g     根据情况选择 %e 或 %f 以产生更紧凑的（无末尾的0）输出 </span><br><span class="line">%G     根据情况选择 %E 或 %f 以产生更紧凑的（无末尾的0）输出</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符串和bytes的slice表示：</p>
+  <figure class="highlight plain"><figcaption><span>字符串或切片的无解译字节 </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%q     双引号围绕的字符串，由Go语法安全地转义 </span><br><span class="line">%x     十六进制，小写字母，每字节两个字符 </span><br><span class="line">%X     十六进制，大写字母，每字节两个字符</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指针：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">%p     十六进制表示，前缀 0x</span><br><span class="line">这里没有 &apos;u&apos; 标记。若整数为无符号类型，他们就会被打印成无符号的。类似地，这里也不需要指定操作数的大小（int8，int64）。</span><br><span class="line"></span><br><span class="line">对于％ｖ来说默认的格式是：</span><br><span class="line">bool:                    %t </span><br><span class="line">int, int8 etc.:          %d </span><br><span class="line">uint, uint8 etc.:        %d, %x if printed with %#v</span><br><span class="line">float32, complex64, etc: %g</span><br><span class="line">string:                  %s</span><br><span class="line">chan:                    %p </span><br><span class="line">pointer:                 %p</span><br><span class="line">由此可以看出，默认的输出格式可以使用%v进行指定，除非输出其他与默认不同的格式，否则都可以使用%v进行替代（但是不推荐使用）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于复合对象:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">里面的元素使用如下规则进行打印：</span><br><span class="line">struct:            &#123;field0 field1 ...&#125; </span><br><span class="line">array, slice:      [elem0 elem1 ...] </span><br><span class="line">maps:              map[key1:value1 key2:value2] </span><br><span class="line">pointer to above:  &amp;&#123;&#125;, &amp;[], &amp;map[]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>宽度和精度：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">宽度是在％之后的值，如果没有指定，则使用该值的默认值，精度是跟在宽度之后的值，如果没有指定，也是使用要打印的值的默认精度．例如：％９.２f，宽度９，精度２</span><br><span class="line"></span><br><span class="line">%f:      default width, default precision </span><br><span class="line">%9f      width 9, default precision </span><br><span class="line">%.2f     default width, precision 2 </span><br><span class="line">%9.2f    width 9, precision 2 </span><br><span class="line">%9.f     width 9, precision 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里有一些<a href="https://blog.csdn.net/qq_34777600/article/details/81266453" target="_blank" rel="noopener">练习</a></p>
+
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class="post-wrapper">

@@ -316,113 +316,16 @@
 <p>redis的Key-Value的存储方式</p>
 <pre><code>key是一个字符串对象，对象的底层实现是一个保存着字符串&quot;msg&quot;的SDS
 value也是一个字符串对象，对象的底层实现是一个保存着字符串&quot;hello&quot;的SDS
-</code></pre><p>SDS除了用来保存数据库中的字符串值之外，还被用作缓冲区(Buffer):AOF模块中的AOF缓冲区</p>
-<p>基本数据类型</p>
-<pre><code>- 字符串命令:GET SET DEL
-
-- 列表:一个列表结构可以有序地存储多个字符串
-
-     LPUSH RPUSH 表示元素推入列表的左端和右端
-     LPOP RPOP分别从列表的左端和右端弹出元素，被弹出的元素不再属于列表
-     LINDEX用于获取列表在给定位置的上一个元素
-     LRANGE用于获取列表在给定范围上的所有元素
-
-- 集合:列表可以存储多个相同的字符串，集合则通过散列表来保证自己存储的每个字符串都是各不相同的(这些散列表只有键，但没有与键相关联的值)
-     redis的集合使用的是无序方式存储元素
-
-     SADD:将元素添加到集合
-
-        redis&gt; sadd fengjr &quot;hehehehe&quot;
-        (integer) 1
-
-     SREM:从集合移除元素，命令会返回被移除元素的数量
-     SMEMBERS:获取集合包含的所有元素将得到一个由元素组成的序列
-     SISMEMBER:快速检查一个元素是否已经存在于集合中
-
-- 散列:redis的散列可以存储多个键值对之间的映射。和字符串一样，散列存储的值既可以是字符串，又可以是数字值，并且用户同样可以对散列存储的数字值执行自增操作或者自减操作
-
-     HSET:在散列里面关联起给定的键值对
-
-        hset hash-key sub-key1 value1
-        hset hash-key sub-key2 value2
-        栗子:
-        redis&gt; HSET myhash field1 123
-        redis&gt; HSET myhash name liangym
-
-     返回值为1表示给定的键不存在于散列里面，添加成功
-     返回值为0表示给定的键存在于散列里面，添加失败
-
-
-     HDEL:如果给定键存在于散列里面，删除这个键
-        栗子:
-        redis&gt; HDEL myhash name
-        (integer) 1 删除成功
-
-     HGET:从散列里面获取某个键的值
-
-     HGETALL:获取散列包含的所有键值对
-        栗子:
-        redis&gt; HGETALL myhash
-        1) &quot;filed1&quot;
-        2) &quot;foo&quot;
-        3) &quot;field1&quot;
-        4) &quot;123&quot;
-
-     HINCRBY:对散列存储的值执行自增操作
-
-     HINCRBY key field icrement
-        栗子:
-        redis&gt;HINCRBY myhash field1 123
-        (integer) 246
-
-
-- 有序集合:和散列一样都用于存储键值对：有序集合的键被称为成员(member)，每个成员都是各不相同的；而有序集合的值则被称为分值(score)，分值必须为浮点数
-
-     ZADD:将一个带有给定分值的成员添加到有序集合里面
-        栗子:
-        redis&gt;zadd zset-key 728 member
-
-     ZRANGE:根据元素在有序排列中所处的位置，从有序集合里面获取多个元素
-     ZRANGEBYSCORE:获取有序集合在给定分值范围内的所有元素
-     ZREM:如果给定成员存在于有序集合，那么移除这个成员
-     ZINCRBY:给有序集合成员的分值执行自增操作
-        栗子:
-        ZINCRBY key increment member
-        redis&gt;ZINCRBY zset-key 123 member1
-
-    ZSCORE:检查记录的有序集合的值
-        栗子:
-        ZSCORE key member
-        redis&gt;ZSCORE zset-key member1
-        &quot;851&quot;
-</code></pre><h3 id="redis的特性"><a href="#redis的特性" class="headerlink" title="redis的特性"></a>redis的特性</h3><pre><code>数据结构
-内存存储(这使得Redis的速度非常快)
-远程(这使得Redis可以与多个客户端和服务器进行连接)
-持久化(这可以使得服务器可以再重启之后仍然保持重启之前的数据)
-可扩展(通过主从复制和分片)
-
-通过将传统数据库的一部分数据处理任务以及存储任务转交给redis来完成，可以提升网页的载入速度，并降低资源的占用量
-</code></pre><h3 id="场景一：登录和cookie缓存"><a href="#场景一：登录和cookie缓存" class="headerlink" title="场景一：登录和cookie缓存"></a>场景一：登录和cookie缓存</h3><pre><code>将登录信息存储在cookie中  可以用签名(signed) 和令牌(token)
-使用redis来记录用户信息，将每天要对数据库执行的写入操作减少了很多
-</code></pre><h3 id="场景二：购物车"><a href="#场景二：购物车" class="headerlink" title="场景二：购物车"></a>场景二：购物车</h3><pre><code>定义：
-散列：每个用户的购物车
-key：商品ID
-value：商品订购数量
-
-将会话和购物车都存储到Redis里面，这样可以减少请求的体积，还可以使得我们根据用户浏览过的上铺，用户放入购物车的商品，以及用户最终购买的商品进行统计计算。
-实现：在查看过这件商品的用户当中，有X%的用户最终购买了这件商品， 购买了这件商品的用户也购买了某某某其他商品 等功能
-</code></pre><h3 id="网页缓存"><a href="#网页缓存" class="headerlink" title="网页缓存"></a>网页缓存</h3><pre><code>页面内容不需要动态生成，减少网站在动态生成内容上面所花的时间，可以降低网站处理相同负载所需的服务器数量，并让网站的速度变得更快(增强用户体验)
-
-中间层的作用：对于一个不能被缓存的请求，函数将直接生成并返回页面，而对于可以被缓存的请求，函数首先会尝试从缓存里取出并返回被缓存的页面，如果缓存页面不存在，那么函数会生成页面并将其缓存在Redis中5分钟，最后将页面返回给函数调用者
-</code></pre><h3 id="数据行缓存"><a href="#数据行缓存" class="headerlink" title="数据行缓存"></a>数据行缓存</h3><pre><code>场景：促销活动，会推出一些特价商品供用户抢购
-疑虑：网站如果对整个促销页面进行缓存，可能会导致用户看到错误的特价商品的数量，但如果每次都从数据库里面取出特价商品的剩余数量的话又会给数据库带来巨大的压力，导致我们需要花费额外的成本来扩展数据库。
-解决：促销活动必定会带来一些负载，所以必须对数据进行缓存，编写一个持续运行的守护进程，让这个函数将指定的数据行缓存到redis里面，并不定期地对这些缓存进行更新。
-
-设置两个有序集合，分别为：调度有序集合，延时有序集合，调度顾名思义调度，延时则是设置了指定数据航的缓存需要每隔多少秒更新一次
-如果数据行记录的是特价促销商品的剩余数量，并且参与促销活动的用户非常多的话，那么我们最好每隔几秒更新一次数据行缓存；另一方面，如果数据并不经常改变，或者商品缺货是可以接受的，那么我们可以将更新缓存的时间变长
-</code></pre><h3 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h3><h3 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h3>
+</code></pre><p>SDS除了用来保存数据库中的字符串值之外，还被用作缓冲区(Buffer):AOF模块中的AOF缓冲区<br>
       
-    </div>
+        <div class="readmore">
+          <a href="/2019/05/21/redis取经之路/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </p></div>
     
       <div class="full-width auto-padding tags">
         
