@@ -236,6 +236,229 @@
       
         
   <h2 class="title">
+    <a href="/2019/05/06/linux高级命令/">
+      linux高级命令
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/linux/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><pre><code>awk是行处理器: 相比较屏幕处理的优点，在处理庞大文件时不会出现内存溢出或是处理缓慢的问题，通常用来格式化文本信息
+awk处理过程: 依次对每一行进行处理，然后输出
+awk命令形式:
+awk [-F|-f|-v] ‘BEGIN{} //{command1; command2} END{}’ file
+[-F|-f|-v]   大参数，-F指定分隔符，-f调用脚本，-v定义变量 var=value
+&apos;  &apos;          引用代码块
+BEGIN   初始化代码块，在对每一行进行处理之前，初始化代码，主要是引用全局变量，设置FS分隔符
+//           匹配代码块，可以是字符串或正则表达式
+{}           命令代码块，包含一条或多条命令
+；          多条命令使用分号分隔
+END      结尾代码块，在对每一行进行处理之后再执行的代码块，主要是进行最终计算或输出结尾摘要信息
+</code></pre>
+      
+        <div class="readmore">
+          <a href="/2019/05/06/linux高级命令/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/04/25/springCloud多模块打包时报错问题/">
+      springCloud多模块打包时报错问题
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-04-25</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/springCloud/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>springCloud</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>执行mvn clean package spring-boot:repackage，报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.5.3.RELEASE:repackage (default)</span><br><span class="line"> on project webapps-api-bid: Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.5.3.RELEASE:</span><br><span class="line"> repackage failed: Unable to find main class</span><br></pre></td></tr></table></figure></p>
+<p>错误提示：</p>
+<p><code>repackage failed: Unable to find main class</code><br>
+      
+        <div class="readmore">
+          <a href="/2019/04/25/springCloud多模块打包时报错问题/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </p></div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/springCloud/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>springCloud</a>
+        
+          <a href="/tags/springboot/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>springboot</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/04/18/SQL分析函数场景实例/">
       SQL分析函数场景实例
     </a>
@@ -1171,261 +1394,6 @@ testResources，test过程中涉及的资源文件，默认位于${basedir}/src/
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/02/22/Leetcode-177-第N高的薪水/">
-      Leetcode 177 第N高的薪水
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-02-22</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/leetcode/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>leetcode</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="编写一个-SQL-查询，获取-Employee-表中第-n-高的薪水（Salary）。"><a href="#编写一个-SQL-查询，获取-Employee-表中第-n-高的薪水（Salary）。" class="headerlink" title="编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。"></a>编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。</h2><ul>
-<li><p>测试数据</p>
-<pre><code>+----+--------+
-| Id | Salary |
-+----+--------+
-| 1  | 100    |
-| 2  | 200    |
-| 3  | 300    |
-+----+--------+
-</code></pre></li>
-<li><p>例如上述 Employee 表，n = 2 时，应返回第二高的薪水 200。如果不存在第 n 高的薪水，那么查询应返回 null。</p>
-<pre><code>+------------------------+
-| getNthHighestSalary(2) |
-+------------------------+
-| 200                    |
-+------------------------+
-</code></pre></li>
-<li><p>首先拿到题直接思考使用分析函数了,是使用<code>row_number()</code>还是<code>dense_rank()</code></p>
-<ul>
-<li><p>row_number() over()是无论值是否相同值始终递增</p>
-<pre><code>100 1
-200 2
-200 3
-300 4
-</code></pre></li>
-<li><p>dense_rank() over()是重复的值显示的排名都相同，但其后的值跟着上一个值递增，不跳跃</p>
-<pre><code>100 1
-200 2
-200 2
-300 3
-</code></pre></li>
-<li><p>rank() over()则是重复值的排名相同，但其后的值从重复行数开始递增，跳跃式</p>
-<pre><code>100 1
-200 2
-200 2
-300 4
-</code></pre></li>
-</ul>
-</li>
-<li><p>题解</p>
-<pre><code>CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
-result NUMBER;
-BEGIN
-    /* Write your PL/SQL query statement below */
-    SELECT a.salary into result from 
-        (
-            select dense_rank() over(order by Salary desc) as rank,Salary from Employee
-        )a
-    where  a.rank = N;
-
-    RETURN result;
-END;
-</code></pre></li>
-</ul>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/02/08/Spark访问数据库的几种方法/">
-      Spark访问数据库的几种方法
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-02-08</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/数据库/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>数据库</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>这篇文章涵盖了spark与常用关系型数据库交互的所有内容(oracle,sqlserver与mysql类似这里就不详细说明了)，这也是我项目中用到最常用的几种，应该可以帮助大家快速开发项目<br>
-      
-        <div class="readmore">
-          <a href="/2019/02/08/Spark访问数据库的几种方法/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </p></div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/sparkSql/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>sparkSql</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1441,7 +1409,7 @@ END;
             </a>
           
           <p class="current">
-            2 / 3
+            2 / 4
           </p>
           
             <a class="next" rel="next" href="/archives/2019/page/3/">

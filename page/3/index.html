@@ -192,6 +192,261 @@
       
         
   <h2 class="title">
+    <a href="/2019/02/22/Leetcode-177-第N高的薪水/">
+      Leetcode 177 第N高的薪水
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-02-22</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/leetcode/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>leetcode</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="编写一个-SQL-查询，获取-Employee-表中第-n-高的薪水（Salary）。"><a href="#编写一个-SQL-查询，获取-Employee-表中第-n-高的薪水（Salary）。" class="headerlink" title="编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。"></a>编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。</h2><ul>
+<li><p>测试数据</p>
+<pre><code>+----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+</code></pre></li>
+<li><p>例如上述 Employee 表，n = 2 时，应返回第二高的薪水 200。如果不存在第 n 高的薪水，那么查询应返回 null。</p>
+<pre><code>+------------------------+
+| getNthHighestSalary(2) |
++------------------------+
+| 200                    |
++------------------------+
+</code></pre></li>
+<li><p>首先拿到题直接思考使用分析函数了,是使用<code>row_number()</code>还是<code>dense_rank()</code></p>
+<ul>
+<li><p>row_number() over()是无论值是否相同值始终递增</p>
+<pre><code>100 1
+200 2
+200 3
+300 4
+</code></pre></li>
+<li><p>dense_rank() over()是重复的值显示的排名都相同，但其后的值跟着上一个值递增，不跳跃</p>
+<pre><code>100 1
+200 2
+200 2
+300 3
+</code></pre></li>
+<li><p>rank() over()则是重复值的排名相同，但其后的值从重复行数开始递增，跳跃式</p>
+<pre><code>100 1
+200 2
+200 2
+300 4
+</code></pre></li>
+</ul>
+</li>
+<li><p>题解</p>
+<pre><code>CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
+result NUMBER;
+BEGIN
+    /* Write your PL/SQL query statement below */
+    SELECT a.salary into result from 
+        (
+            select dense_rank() over(order by Salary desc) as rank,Salary from Employee
+        )a
+    where  a.rank = N;
+
+    RETURN result;
+END;
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/02/08/Spark访问数据库的几种方法/">
+      Spark访问数据库的几种方法
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-02-08</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/数据库/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>数据库</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>这篇文章涵盖了spark与常用关系型数据库交互的所有内容(oracle,sqlserver与mysql类似这里就不详细说明了)，这也是我项目中用到最常用的几种，应该可以帮助大家快速开发项目<br>
+      
+        <div class="readmore">
+          <a href="/2019/02/08/Spark访问数据库的几种方法/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </p></div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/sparkSql/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>sparkSql</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/02/08/Hbase之HMaster启动后经常掉的解决方案/">
       Hbase之HMaster启动后经常掉的解决方案
     </a>
@@ -1643,371 +1898,6 @@ sql(&quot;select * from temp2&quot;).show
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/01/31/SpringCloud搭建/">
-      SpringCloud搭建
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-01-31</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><p>SpringBoot+SpringCloud应用，实现微服务架构。</p>
-<p>SpringBoot:快速开发SpringMVC服务API</p>
-<p>SpringCloud:服务管理，例如服务注册、服务查找、服务调用、集群、容错机制、监控、统一配置、消息总线等。</p>
-<hr>
-<p><img src="SpringCloud搭建/boot_cloud.png" alt></p>
-<h2 id="搭建SpringCloud中心"><a href="#搭建SpringCloud中心" class="headerlink" title="搭建SpringCloud中心"></a>搭建SpringCloud中心</h2><p>SpringBoot 2.0.1和SpringCloud Finchley.RELEASE</p>
-<ol>
-<li>在pom.xml添加eureka-server包定义</li>
-</ol>
-<ul>
-<li><p>org.springframework.boot spring-boot-starter-parent 2.0.1.RELEASE </p>
-<pre><code>&lt;properties&gt;
-&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
-&lt;java.version&gt;1.8&lt;/java.version&gt;
-&lt;/properties&gt;
-
-&lt;dependencies&gt;
-    &lt;!-- eureka-server --&gt;
-    &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-
-&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;!-- spring-cloud-parent --&gt;
-        &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-        &lt;version&gt;Finchley.RELEASE&lt;/version&gt;
-        &lt;type&gt;pom&lt;/type&gt;
-        &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
-</code></pre></li>
-</ul>
-<ol start="2">
-<li><p>在application.properties定义eureka参数</p>
-<pre><code>server.port=1111
-eureka.client.registerWithEureka=false
-eureka.client.fetchRegistry=false
-eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka
-</code></pre></li>
-<li><p>编写启动类，追加启动注解标记</p>
-<pre><code>@EnableEurekaServer
-@SpringBootApplication
-public class EurekaBootApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(EurekaBootApplication.class, args);
-    }
-}
-</code></pre></li>
-<li><p>启动应用，打开浏览器测试</p>
-<pre><code>http://localhost:1111
-</code></pre></li>
-</ol>
-<h2 id="Eureka服务中心-将服务注册到Eureka中心"><a href="#Eureka服务中心-将服务注册到Eureka中心" class="headerlink" title="Eureka服务中心(将服务注册到Eureka中心)"></a>Eureka服务中心(将服务注册到Eureka中心)</h2><ol>
-<li><p>在pom.xml追加eureka-client定义</p>
-<pre><code>&lt;dependencies&gt;
-&lt;dependency&gt;
-&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;/dependencies&gt;
-
-&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;!-- spring-cloud-parent --&gt;
-        &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-        &lt;version&gt;Finchley.RELEASE&lt;/version&gt;
-        &lt;type&gt;pom&lt;/type&gt;
-        &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
-</code></pre></li>
-<li><p>在application.properties定义eureka参数</p>
-<pre><code>spring.application.name=USER-SERVICE
-eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka
-</code></pre></li>
-<li><p>在启动类前，追加启动标记</p>
-<pre><code>@EnableDiscoveryClient//这是启动标记
-@SpringBootApplication
-@MapperScan(basePackages={&quot;cn.yixue.user.dao&quot;})
-@ServletComponentScan
-public class UserBootApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(UserBootApplication.class, args);
-    }
-
-}
-</code></pre></li>
-</ol>
-<h2 id="Ribbon负载均衡-查找Eureka服务调用"><a href="#Ribbon负载均衡-查找Eureka服务调用" class="headerlink" title="Ribbon负载均衡(查找Eureka服务调用)"></a>Ribbon负载均衡(查找Eureka服务调用)</h2><p>采用集群部署服务时，需要使用ribbon负载均衡调用机制。SpringCloud提供的ribbon默认机制为轮询模式。此外还支持随机、权重等模式。</p>
-<p>ribbon可以和RestTemplate结合，也可以和feign接口模式结合。</p>
-<ol>
-<li><p>采用RestTemplate模式</p>
-<ul>
-<li><p>在pom.xml添加netflix-ribbon负载定义</p>
-   <dependency><br>       <groupid>org.springframework.cloud</groupid><br>       <artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br>   </dependency>
-</li>
-<li><p>在SpringBootApplication中创建RestTemplate对象时追加@LoadBalaced</p>
-<p>   @Bean<br>   @LoadBalanced//启用ribbon负载<br>   public RestTemplate restTemplate(){</p>
-<pre><code>return new RestTemplate();
-</code></pre><p>   }</p>
-</li>
-<li><p>使用RestTemplate调用远程服务</p>
-<p>   String url = “<a href="http://YIXUE-USER/user/ticket&quot;" target="_blank" rel="noopener">http://YIXUE-USER/user/ticket&quot;</a>;<br>   MultiValueMap&lt;String, Object&gt; params = </p>
-<pre><code>new LinkedMultiValueMap&lt;&gt;();
-</code></pre><p>   params.set(“userId”, userId);<br>   params.set(“ticket”, ticket);<br>   OvlsResult result = restTemplate.postForObject(</p>
-<pre><code>url, params, ReturnResult.class);
-</code></pre></li>
-</ul>
-</li>
-<li><p>采用Feign远程接口模式(Fegin接口调用)</p>
-<p> ribbon完全内置，jar包内部依赖，自动作用接口。</p>
-<ul>
-<li><p>在pom.xml添加openfeign定义</p>
-   <dependency><br>       <groupid>org.springframework.cloud</groupid><br>       <artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br>   </dependency><br>   <dependency><br>       <groupid>org.springframework.cloud</groupid><br>       <artifactid>spring-cloud-starter-openfeign</artifactid><br>   </dependency>
-</li>
-<li><p>编写远程服务的Remote接口(定义Fegin接口)</p>
-<p>   @FeignClient(name=”YIXUE-USER”)<br>   public interface UserRemote {</p>
-<pre><code>@PostMapping(&quot;/user/ticket&quot;)
-public OvlsResult checkTicket(
-        @RequestParam(name=&quot;userId&quot;,required=false)String userId,
-        @RequestParam(name=&quot;ticket&quot;,required=false)String token);
-</code></pre><p>   }</p>
-<p>   注意：参数多余一个，一定要使用@RequestParam标记</p>
-</li>
-<li><p>注入Remote接口对象使用(注入Feigin接口对象，实现远程服务调用)</p>
-<p>   @Autowired<br>   private UserRemote userRemote;</p>
-<p>   //Feign接口调用模式<br>   ReturnResult result = userRemote.ticket(Integer.parseInt(userId), ticket);</p>
-</li>
-<li><p>在启动类前添加@EnableFeignClients标记</p>
-<p>   @EnableFeignClients//启用feign<br>   @EnableDiscoveryClient//Eureka服务中心启动标记<br>   @SpringBootApplication<br>   @MapperScan(basePackages={“cn.yixue.video.dao”})<br>   @ServletComponentScan<br>   public class VideoBootApplication {</p>
-<pre><code>public static void main(String[] args) {
-    SpringApplication.run(VideoBootApplication.class, args);
-}
-</code></pre><p>   }</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="Hystrix断路器"><a href="#Hystrix断路器" class="headerlink" title="Hystrix断路器"></a>Hystrix断路器</h2><p>SpringCloud提供了一个hystrix套件，俗称断路器，可以在服务间调用，被调用方处理缓慢或瘫痪，对调用者提供保护机制。</p>
-<ol>
-<li><p>在pom.xml中添加hystrix工具包</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre></li>
-<li><p>在启动类前面加@EnableCircuitBreaker</p>
-<pre><code>@EnableCircuitBreaker//启用断路器hystrix
-</code></pre></li>
-<li><p>在Controller方法前使用@HystrixCommand指定延迟或异常后调用的方法</p>
-<pre><code>@RestController
-public class VideoController {
-
-    @Autowired
-    private VideoService videoService;
-
-    @HystrixCommand(fallbackMethod=&quot;defaultLoad&quot;)
-    @GetMapping(&quot;/video/{id}&quot;)
-    public OvlsResult load(@PathVariable(&quot;id&quot;)int id){
-        return videoService.load(id);
-    }
-
-    public OvlsResult defaultLoad(int id){
-        ReturnResult result = new OvlsResult();
-        result.setStatus(OvlsConstant.ERROR1);
-        result.setMsg(OvlsConstant.SELECT_EMPTY_MSG);
-        return result;
-    }
-
-}
-</code></pre><p> 提示：默认超时设置为1秒，超过一秒就调用fallbackMethod处理。</p>
-</li>
-</ol>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/springCloud/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>springCloud</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/01/30/hello-world/">
-      Hello World
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-01-30</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2023,8 +1913,14 @@ public class VideoController {
             </a>
           
           <p class="current">
-            3 / 3
+            3 / 4
           </p>
+          
+            <a class="next" rel="next" href="/page/4/">
+              <section class="post next">
+                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </section>
+            </a>
           
         </div>
       </div>

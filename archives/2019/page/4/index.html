@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: spark | YMLiang</title>
+  <title>Archives: 2019 | YMLiang</title>
   
   
   <meta name="description" content="YMLiang's blog">
@@ -216,18 +216,16 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class="l_main">
-  
-    
-      
+      <div class="l_main">
+	
+		
   <section class="post-list">
+    
     
       
         
-          
-            <div class="post-wrapper">
-              <article class="post reveal ">
+          <div class="post-wrapper">
+            <article class="post reveal ">
   
 
 
@@ -238,8 +236,8 @@
       
         
   <h2 class="title">
-    <a href="/2019/05/23/spark知识梳理/">
-      spark知识梳理
+    <a href="/2019/01/31/SpringCloud搭建/">
+      SpringCloud搭建
     </a>
   </h2>
 
@@ -267,7 +265,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-23</p>
+    <p>2019-01-31</p>
   </a>
 </div>
 
@@ -275,14 +273,6 @@
         
           
             
-  
-  <div class="new-meta-item category">
-    <a href="/categories/spark/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>spark</p>
-    </a>
-  </div>
-
 
           
         
@@ -293,13 +283,6 @@
         
           
             
-  <div class="new-meta-item top-post">
-    <a class="notlink">
-      <i class="fas fa-angle-double-up" aria-hidden="true"></i>
-      <p>置顶</p>
-    </a>
-  </div>
-
 
           
         
@@ -313,45 +296,319 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="Spark定义"><a href="#Spark定义" class="headerlink" title="Spark定义:"></a>Spark定义:</h3><p>Spark编程始于数据集，而数据集往往存放在分布式持久化存储之上，比如Hadoop分布式文件系统HDFS</p>
-<p>编写Spark 程序通常包括一系列相关步骤。</p>
-<pre><code>• 在输入数据集上定义一组转换。
-• 调用 action，用以将转换后的数据集保存到持久存储上，或者把结果返回到驱动程序的
-本地内存。
-• 运行本地计算，本地计算处理分布式计算的结果。本地计算有助于你确定下一步的转换
-和 action。
-</code></pre>
-      
-        <div class="readmore">
-          <a href="/2019/05/23/spark知识梳理/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
+      <h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><p>SpringBoot+SpringCloud应用，实现微服务架构。</p>
+<p>SpringBoot:快速开发SpringMVC服务API</p>
+<p>SpringCloud:服务管理，例如服务注册、服务查找、服务调用、集群、容错机制、监控、统一配置、消息总线等。</p>
+<hr>
+<p><img src="SpringCloud搭建/boot_cloud.png" alt></p>
+<h2 id="搭建SpringCloud中心"><a href="#搭建SpringCloud中心" class="headerlink" title="搭建SpringCloud中心"></a>搭建SpringCloud中心</h2><p>SpringBoot 2.0.1和SpringCloud Finchley.RELEASE</p>
+<ol>
+<li>在pom.xml添加eureka-server包定义</li>
+</ol>
+<ul>
+<li><p>org.springframework.boot spring-boot-starter-parent 2.0.1.RELEASE </p>
+<pre><code>&lt;properties&gt;
+&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+&lt;java.version&gt;1.8&lt;/java.version&gt;
+&lt;/properties&gt;
+
+&lt;dependencies&gt;
+    &lt;!-- eureka-server --&gt;
+    &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;!-- spring-cloud-parent --&gt;
+        &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+        &lt;version&gt;Finchley.RELEASE&lt;/version&gt;
+        &lt;type&gt;pom&lt;/type&gt;
+        &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre></li>
+</ul>
+<ol start="2">
+<li><p>在application.properties定义eureka参数</p>
+<pre><code>server.port=1111
+eureka.client.registerWithEureka=false
+eureka.client.fetchRegistry=false
+eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka
+</code></pre></li>
+<li><p>编写启动类，追加启动注解标记</p>
+<pre><code>@EnableEurekaServer
+@SpringBootApplication
+public class EurekaBootApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaBootApplication.class, args);
+    }
+}
+</code></pre></li>
+<li><p>启动应用，打开浏览器测试</p>
+<pre><code>http://localhost:1111
+</code></pre></li>
+</ol>
+<h2 id="Eureka服务中心-将服务注册到Eureka中心"><a href="#Eureka服务中心-将服务注册到Eureka中心" class="headerlink" title="Eureka服务中心(将服务注册到Eureka中心)"></a>Eureka服务中心(将服务注册到Eureka中心)</h2><ol>
+<li><p>在pom.xml追加eureka-client定义</p>
+<pre><code>&lt;dependencies&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;!-- spring-cloud-parent --&gt;
+        &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+        &lt;version&gt;Finchley.RELEASE&lt;/version&gt;
+        &lt;type&gt;pom&lt;/type&gt;
+        &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre></li>
+<li><p>在application.properties定义eureka参数</p>
+<pre><code>spring.application.name=USER-SERVICE
+eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka
+</code></pre></li>
+<li><p>在启动类前，追加启动标记</p>
+<pre><code>@EnableDiscoveryClient//这是启动标记
+@SpringBootApplication
+@MapperScan(basePackages={&quot;cn.yixue.user.dao&quot;})
+@ServletComponentScan
+public class UserBootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(UserBootApplication.class, args);
+    }
+
+}
+</code></pre></li>
+</ol>
+<h2 id="Ribbon负载均衡-查找Eureka服务调用"><a href="#Ribbon负载均衡-查找Eureka服务调用" class="headerlink" title="Ribbon负载均衡(查找Eureka服务调用)"></a>Ribbon负载均衡(查找Eureka服务调用)</h2><p>采用集群部署服务时，需要使用ribbon负载均衡调用机制。SpringCloud提供的ribbon默认机制为轮询模式。此外还支持随机、权重等模式。</p>
+<p>ribbon可以和RestTemplate结合，也可以和feign接口模式结合。</p>
+<ol>
+<li><p>采用RestTemplate模式</p>
+<ul>
+<li><p>在pom.xml添加netflix-ribbon负载定义</p>
+   <dependency><br>       <groupid>org.springframework.cloud</groupid><br>       <artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br>   </dependency>
+</li>
+<li><p>在SpringBootApplication中创建RestTemplate对象时追加@LoadBalaced</p>
+<p>   @Bean<br>   @LoadBalanced//启用ribbon负载<br>   public RestTemplate restTemplate(){</p>
+<pre><code>return new RestTemplate();
+</code></pre><p>   }</p>
+</li>
+<li><p>使用RestTemplate调用远程服务</p>
+<p>   String url = “<a href="http://YIXUE-USER/user/ticket&quot;" target="_blank" rel="noopener">http://YIXUE-USER/user/ticket&quot;</a>;<br>   MultiValueMap&lt;String, Object&gt; params = </p>
+<pre><code>new LinkedMultiValueMap&lt;&gt;();
+</code></pre><p>   params.set(“userId”, userId);<br>   params.set(“ticket”, ticket);<br>   OvlsResult result = restTemplate.postForObject(</p>
+<pre><code>url, params, ReturnResult.class);
+</code></pre></li>
+</ul>
+</li>
+<li><p>采用Feign远程接口模式(Fegin接口调用)</p>
+<p> ribbon完全内置，jar包内部依赖，自动作用接口。</p>
+<ul>
+<li><p>在pom.xml添加openfeign定义</p>
+   <dependency><br>       <groupid>org.springframework.cloud</groupid><br>       <artifactid>spring-cloud-starter-netflix-ribbon</artifactid><br>   </dependency><br>   <dependency><br>       <groupid>org.springframework.cloud</groupid><br>       <artifactid>spring-cloud-starter-openfeign</artifactid><br>   </dependency>
+</li>
+<li><p>编写远程服务的Remote接口(定义Fegin接口)</p>
+<p>   @FeignClient(name=”YIXUE-USER”)<br>   public interface UserRemote {</p>
+<pre><code>@PostMapping(&quot;/user/ticket&quot;)
+public OvlsResult checkTicket(
+        @RequestParam(name=&quot;userId&quot;,required=false)String userId,
+        @RequestParam(name=&quot;ticket&quot;,required=false)String token);
+</code></pre><p>   }</p>
+<p>   注意：参数多余一个，一定要使用@RequestParam标记</p>
+</li>
+<li><p>注入Remote接口对象使用(注入Feigin接口对象，实现远程服务调用)</p>
+<p>   @Autowired<br>   private UserRemote userRemote;</p>
+<p>   //Feign接口调用模式<br>   ReturnResult result = userRemote.ticket(Integer.parseInt(userId), ticket);</p>
+</li>
+<li><p>在启动类前添加@EnableFeignClients标记</p>
+<p>   @EnableFeignClients//启用feign<br>   @EnableDiscoveryClient//Eureka服务中心启动标记<br>   @SpringBootApplication<br>   @MapperScan(basePackages={“cn.yixue.video.dao”})<br>   @ServletComponentScan<br>   public class VideoBootApplication {</p>
+<pre><code>public static void main(String[] args) {
+    SpringApplication.run(VideoBootApplication.class, args);
+}
+</code></pre><p>   }</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Hystrix断路器"><a href="#Hystrix断路器" class="headerlink" title="Hystrix断路器"></a>Hystrix断路器</h2><p>SpringCloud提供了一个hystrix套件，俗称断路器，可以在服务间调用，被调用方处理缓慢或瘫痪，对调用者提供保护机制。</p>
+<ol>
+<li><p>在pom.xml中添加hystrix工具包</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre></li>
+<li><p>在启动类前面加@EnableCircuitBreaker</p>
+<pre><code>@EnableCircuitBreaker//启用断路器hystrix
+</code></pre></li>
+<li><p>在Controller方法前使用@HystrixCommand指定延迟或异常后调用的方法</p>
+<pre><code>@RestController
+public class VideoController {
+
+    @Autowired
+    private VideoService videoService;
+
+    @HystrixCommand(fallbackMethod=&quot;defaultLoad&quot;)
+    @GetMapping(&quot;/video/{id}&quot;)
+    public OvlsResult load(@PathVariable(&quot;id&quot;)int id){
+        return videoService.load(id);
+    }
+
+    public OvlsResult defaultLoad(int id){
+        ReturnResult result = new OvlsResult();
+        result.setStatus(OvlsConstant.ERROR1);
+        result.setMsg(OvlsConstant.SELECT_EMPTY_MSG);
+        return result;
+    }
+
+}
+</code></pre><p> 提示：默认超时设置为1秒，超过一秒就调用fallbackMethod处理。</p>
+</li>
+</ol>
+
       
     </div>
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/spark/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>spark</a>
+          <a href="/tags/springCloud/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>springCloud</a>
         
       </div>
     
   </section>
 </article>
 
-            </div>
-          
+          </div>
         
       
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
     
     
+    <div class="meta" id="header-meta">
       
+        
+  <h2 class="title">
+    <a href="/2019/01/30/hello-world/">
+      Hello World
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-01-30</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
         
       
     
   </section>
   
+    
+      <br>
+      <div class="prev-next">
+        <div class="prev-next">
+          
+            <a class="prev" rel="prev" href="/archives/2019/page/3/">
+              <section class="post prev">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+              </section>
+            </a>
+          
+          <p class="current">
+            4 / 4
+          </p>
+          
+        </div>
+      </div>
+
     
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
@@ -360,8 +617,7 @@
   
 
 
-    
-  
+	
 </div>
 <aside class="l_side">
   
@@ -625,287 +881,12 @@
 <script>setLoadingBarProgress(80);</script>
 
 
-      <script>setLoadingBarProgress(60);</script>
-    </div>
-    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-
-  <script>
-    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
-    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
-    var ALGOLIA_API_KEY = "";
-    var ALGOLIA_APP_ID = "";
-    var ALGOLIA_INDEX_NAME = "";
-    var AZURE_SERVICE_NAME = "";
-    var AZURE_INDEX_NAME = "";
-    var AZURE_QUERY_KEY = "";
-    var BAIDU_API_ID = "";
-    var SEARCH_SERVICE = "hexo" || "hexo";
-    var ROOT = "/"||"/";
-    if(!ROOT.endsWith('/'))ROOT += '/';
-  </script>
-
-<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
 
 
-  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
-  <script type="text/javascript">
-    $(function() {
-      const $reveal = $('.reveal');
-      if ($reveal.length === 0) return;
-      const sr = ScrollReveal({ distance: 0 });
-      sr.reveal('.reveal');
-    });
-  </script>
+	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+	
 
-
-  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
-  <script type="text/javascript">
-    $(function() {
-      Waves.attach('.flat-btn', ['waves-button']);
-      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
-      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
-      Waves.attach('.flat-box', ['waves-block']);
-      Waves.attach('.float-box', ['waves-block', 'waves-float']);
-      Waves.attach('.waves-image');
-      Waves.init();
-    });
-  </script>
-
-
-  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
-
-
-
-
-  
-  
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
-    <script type="text/javascript">
-      $(function(){
-        if ('.cover') {
-          $('.cover').backstretch(
-          ["/images/lunbo.jpg", "/images/lunbo2.jpg", "/images/lunbo3.jpg", "/images/lunbo4.jpg", "/images/lunbo5.jpg", "/images/lunbo6.jpg", "/images/lunbo7.jpg", "https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
-          {
-            duration: "5000",
-            fade: "2500"
-          });
-        } else {
-          $.backstretch(
-          ["/images/lunbo.jpg", "/images/lunbo2.jpg", "/images/lunbo3.jpg", "/images/lunbo4.jpg", "/images/lunbo5.jpg", "/images/lunbo6.jpg", "/images/lunbo7.jpg", "https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
-          {
-            duration: "5000",
-            fade: "2500"
-          });
-        }
-      });
-    </script>
-  
-
-
-
-
-
-
-
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
-
-
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
-
-
-
-
-<!-- 复制 -->
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
-  /*页面载入完成后，创建复制按钮*/
-  !function (e, t, a) {
-    /* code */
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-
-      clipboard.on('success', function(e) {
-        //您可以加入成功提示
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-        success_prompt(COPY_SUCCESS);
-        e.clearSelection();
-      });
-      clipboard.on('error', function(e) {
-        //您可以加入失败提示
-        console.error('Action:', e.action);
-        console.error('Trigger:', e.trigger);
-        fail_prompt(COPY_FAILURE);
-      });
-    }
-    initCopyCode();
-
-  }(window, document);
-
-  /**
-   * 弹出式提示框，默认1.5秒自动消失
-   * @param message 提示信息
-   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
-   * @param time 消失时间
-   */
-  var prompt = function (message, style, time)
-  {
-      style = (style === undefined) ? 'alert-success' : style;
-      time = (time === undefined) ? 1500 : time*1000;
-      $('<div>')
-          .appendTo('body')
-          .addClass('alert ' + style)
-          .html(message)
-          .show()
-          .delay(time)
-          .fadeOut();
-  };
-
-  // 成功提示
-  var success_prompt = function(message, time)
-  {
-      prompt(message, 'alert-success', time);
-  };
-
-  // 失败提示
-  var fail_prompt = function(message, time)
-  {
-      prompt(message, 'alert-danger', time);
-  };
-
-  // 提醒
-  var warning_prompt = function(message, time)
-  {
-      prompt(message, 'alert-warning', time);
-  };
-
-  // 信息提示
-  var info_prompt = function(message, time)
-  {
-      prompt(message, 'alert-info', time);
-  };
-
-</script>
-
-
-<!-- fancybox -->
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script>
-  let LAZY_LOAD_IMAGE = "";
-  $(".article-entry").find("fancybox").find("img").each(function () {
-      var element = document.createElement("a");
-      $(element).attr("data-fancybox", "gallery");
-      $(element).attr("href", $(this).attr("src"));
-      /* 图片采用懒加载处理时,
-       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
-       * 那么此处将原本的属性名src替换为对应属性名data-original,
-       * 修改如下
-       */
-       if (LAZY_LOAD_IMAGE) {
-         $(element).attr("href", $(this).attr("data-original"));
-       }
-      $(this).wrap(element);
-  });
-</script>
-
-
-
-
-
-  <script>setLoadingBarProgress(100);</script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":350,"height":450},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-<!--动态线条背景-->
-<script type="text/javascript"
-color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
-</script>
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/love.js"></script>
-</html>
-<!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
-opacity：表示线条透明度（0~1），默认：0.5
-count：表示线条的总数量，默认：150
-zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->"https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
-  <div class="aplayer" data-theme="#1BCDFC" data-mode="circulation" data-server="netease" data-type="playlist" data-id="2615636388" data-volume="0.7">
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
-
-
-    </div>
-  </section>
-
-
-          
-        
-      
-    
-
-  
-</aside>
-
-<footer id="footer" class="clearfix">
-  
-  
-    <div class="social-wrapper">
-      
-        
-          <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
-      
-        
-          <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
-      
-        
-          <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
-      
-        
-          <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
-      
-    </div>
-  
-  <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
-</div>
-  <div>
-    本站使用
-    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    作为主题
-    
-      ，
-      总访问量为
-      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
-    
-    。
-  </div>
-</footer>
-<script>setLoadingBarProgress(80);</script>
+	
 
 
       <script>setLoadingBarProgress(60);</script>
