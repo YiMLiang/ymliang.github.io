@@ -309,8 +309,11 @@
           <h2 id="Go开发入门"><a href="#Go开发入门" class="headerlink" title="Go开发入门"></a>Go开发入门</h2><h3 id="变量的定义，赋值"><a href="#变量的定义，赋值" class="headerlink" title="变量的定义，赋值"></a>变量的定义，赋值</h3><p>变量声明：Go的变量名首字母不能为数字</p>
 <ul>
 <li><p>未初始化的变量声明：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    var 变量名 变量类型</span><br><span class="line">	var a int               // 声明 int 类型的变量</span><br><span class="line">	var b [10] int          // 声明 int 类型数组</span><br><span class="line">	var c []int             // 声明 int 类型的切片 [] 内赋初值是数组，不赋值是切片</span><br><span class="line">	var d *int              // 声明 int 类型的指针</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">    打印结果为</span><br><span class="line"></span><br><span class="line">    //a=&#123;0&#125;,b=&#123;[0 0 0 0 0 0 0 0 0 0]&#125;,c=&#123;[]&#125;,d=&#123;&lt;nil&gt;&#125;</span><br><span class="line"></span><br><span class="line">    那么未初始化的变量默认值为：</span><br><span class="line"></span><br><span class="line">    整型和浮点型变量： 0</span><br><span class="line">    字符串： 0</span><br><span class="line">    布尔： false</span><br><span class="line">    函数，指针： nil</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   var 变量名 变量类型</span><br><span class="line">var a int               // 声明 int 类型的变量</span><br><span class="line">var b [10] int          // 声明 int 类型数组</span><br><span class="line">var c []int             // 声明 int 类型的切片 [] 内赋初值是数组，不赋值是切片</span><br><span class="line">var d *int              // 声明 int 类型的指针</span><br><span class="line">   打印结果为</span><br><span class="line"></span><br><span class="line">   //a=&#123;0&#125;,b=&#123;[0 0 0 0 0 0 0 0 0 0]&#125;,c=&#123;[]&#125;,d=&#123;&lt;nil&gt;&#125;</span><br><span class="line"></span><br><span class="line">   那么未初始化的变量默认值为：</span><br><span class="line"></span><br><span class="line">   整型和浮点型变量： 0</span><br><span class="line">   字符串： 0</span><br><span class="line">   布尔： false</span><br><span class="line">   函数，指针： nil</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>初始化的变量声明：</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var 变量名 变量类型 = 表达式</span><br><span class="line">var a int = 10</span><br><span class="line"></span><br><span class="line">//编译器自动推断格式</span><br><span class="line">var 变量名 = 表达式</span><br><span class="line"></span><br><span class="line">//简短声明格式(短变量声明格式)</span><br><span class="line">变量名 := 表达式</span><br><span class="line"></span><br><span class="line">:= 可以高效的创建新变量，在内存中开辟空间</span><br><span class="line">var 省略</span><br><span class="line">编译器自动推断类型</span><br><span class="line">声明变量首选这种形式</span><br><span class="line">只能用在函数体内，不能作为全局变量来声明</span><br><span class="line">变量名不能是被定义过的，不然会报错</span><br></pre></td></tr></table></figure>
 </li>
@@ -369,10 +372,10 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-04T18:18:21+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-05T18:49:08+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 2019年6月4日</p>
+    <p>最后更新于 2019年6月5日</p>
   </a>
 </div>
 
@@ -389,7 +392,12 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/06/04/Go开发基础入门/&title=Go开发基础入门 | YMLiang&summary=">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/06/04/Go开发基础入门/&title=Go开发基础入门 | YMLiang&summary=Go开发入门变量的定义，赋值变量声明：Go的变量名首字母不能为数字
+
+未初始化的变量声明：
+  123456789101112131415   var 变量名 变量类型var a int               // 声明 int 类型的变量var b [10] int          // 声明 int 类型数组var c []int             // 声明 int 类型的切片 [] 内赋初值是数组，不赋值是切片var d *int              // 声明 int 类型的指针   打印结果为   //a=&#123;0&#125;,b=&#123;[0 0 0 0 0 0 0 0 0 0]&#125;,c=&#123;[]&#125;,d=&#123;&lt;nil&gt;&#125;   那么未初始化的变量默认值为：   整型和浮点型变量： 0   字符串： 0   布尔： false   函数，指针： nil
+
+">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -397,7 +405,12 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/06/04/Go开发基础入门/&title=Go开发基础入门 | YMLiang&summary=">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/06/04/Go开发基础入门/&title=Go开发基础入门 | YMLiang&summary=Go开发入门变量的定义，赋值变量声明：Go的变量名首字母不能为数字
+
+未初始化的变量声明：
+  123456789101112131415   var 变量名 变量类型var a int               // 声明 int 类型的变量var b [10] int          // 声明 int 类型数组var c []int             // 声明 int 类型的切片 [] 内赋初值是数组，不赋值是切片var d *int              // 声明 int 类型的指针   打印结果为   //a=&#123;0&#125;,b=&#123;[0 0 0 0 0 0 0 0 0 0]&#125;,c=&#123;[]&#125;,d=&#123;&lt;nil&gt;&#125;   那么未初始化的变量默认值为：   整型和浮点型变量： 0   字符串： 0   布尔： false   函数，指针： nil
+
+">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -405,7 +418,12 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/06/04/Go开发基础入门/&title=Go开发基础入门 | YMLiang&summary=">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/06/04/Go开发基础入门/&title=Go开发基础入门 | YMLiang&summary=Go开发入门变量的定义，赋值变量声明：Go的变量名首字母不能为数字
+
+未初始化的变量声明：
+  123456789101112131415   var 变量名 变量类型var a int               // 声明 int 类型的变量var b [10] int          // 声明 int 类型数组var c []int             // 声明 int 类型的切片 [] 内赋初值是数组，不赋值是切片var d *int              // 声明 int 类型的指针   打印结果为   //a=&#123;0&#125;,b=&#123;[0 0 0 0 0 0 0 0 0 0]&#125;,c=&#123;[]&#125;,d=&#123;&lt;nil&gt;&#125;   那么未初始化的变量默认值为：   整型和浮点型变量： 0   字符串： 0   布尔： false   函数，指针： nil
+
+">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           
