@@ -236,6 +236,185 @@
       
         
   <h2 class="title">
+    <a href="/2019/01/31/Scala最全笔记/">
+      Scala最全笔记
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-01-31</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h1 id="Scala语言的特点："><a href="#Scala语言的特点：" class="headerlink" title="Scala语言的特点："></a>Scala语言的特点：</h1><ul>
+<li>基于JVM（可以重用类库）</li>
+<li>简洁优雅</li>
+<li>面向对象 + 函数式编程（FP）</li>
+</ul>
+<img src="/2019/01/31/Scala最全笔记/scala简介.png" title="scala简介">
+<p>函数式编程的数学基础是 : λ演算<br>函数式编程中，所有的数据都是不可变的，不同的函数之间通过数据流来交换信息，函数作为FP中的一等公民，享有跟数据一样的地位，可以作为参数传递给下一个函数，同时也可以作为返回值。</p>
+<h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="Scala基础"><a href="#Scala基础" class="headerlink" title="Scala基础"></a>Scala基础</h2><ul>
+<li>程序文件的名称可以不与对象名称完全匹配；</li>
+<li>程序从main()方法开始，<strong>main 方法应该在object中</strong>；</li>
+<li>$字符是Scala中的保留关键字；</li>
+<li>语句在单行上分号可省略；</li>
+<li>操作符是方法，<strong>没有提供 ++、–操作符；</strong></li>
+<li><strong>使用val声明不可变的值，使用var声明可变的变量；鼓励使用val，避免使用var；</strong></li>
+<li>需要给出值或者变量的类型，scala可以做自动类型推断。必要时可以指定类型；</li>
+<li>拥有和java一样的数据类型，和java的数据类型的内存布局、精度完全一致;</li>
+</ul>
+<h2 id="控制结构和函数"><a href="#控制结构和函数" class="headerlink" title="控制结构和函数"></a>控制结构和函数</h2><ul>
+<li><strong>if 语句有返回值；</strong></li>
+<li><strong>基础类型都继承自AnyVal，应用类型都继承自AnyRef，AnyVal 与 AnyRef 继承自Any；</strong></li>
+<li>块语句是一个包含于{}中的语句序列，<strong>块中最后一个表达式的值就是块的值</strong>；</li>
+<li><strong>字符串插值器：s、raw、f；</strong></li>
+<li>for循环中：to、until；很方便的写多重循环；<br>  for (i &lt;-1 to 3; j&lt;-1 to 3[;] if i != j) print((10*i+j) + “ “ )</li>
+<li>for循环中的守卫语句（guard 语句）；for推导式（yield）；</li>
+<li>Range对象：1 to 100 by 2; Range(1, 100, 2); (1 to 100).toArray;</li>
+<li>只要函数不是递归的，不需要指定返回类型。Scala可以进行自动类型推断；函数的定义：<br>  def funcname(x: Int, y: Int): Int = {<pre><code>x + y
+</code></pre>  }</li>
+<li>默认参数、带名参数、变长参数；</li>
+<li>懒值。当val被声明为lazy，它的初始化将被推迟，直到首次对它取值（只有val才能定义为lazy）</li>
+</ul>
+<h2 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h2><p>Array：长度固定、元素可变、可索引、存放相同类型的集合<br>ArryBuffer：长度可以变；要导包；打印方便<br>toArray / toBuffer<br>增加元素：+=、:+、+:<br>减元素：-=<br>增加一个数组: ++= ++</p>
+<p>map、foreach、reduce、flatMap<br>max、min、sorted、reverse<br>sum、product、size、length、indices<br>count、filter(Not)、distinct、take、takeRigth、takeWhile<br>drop、dropRigth、dropWhile<br>zip、unzip、head、tail、last、init<br>union、groupBy、contains</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>存放键值对的容器（集合）；<br>默认使用不可变的Map，这里的不可变是指值不可变；如果要给Map增加值应声明为var；<br>如果要使用可变的Map，要显示声明；import scala.collection.mutable.Map<br>getOrElse</p>
+<h2 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h2><p>可以存放不同类型的元素，元组是不可变的；最大的长度22；<br>访问使用x._1、x._2</p>
+<h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><p>大处使用面向对象；<br>小处使用函数式编程；（操作数据）</p>
+<p>用class声明类，用object声明单例对象；<br>用final阻止一个对象被继承；<br>用abstract阻止对象被实例化；<br>用this指代对象本身；<br>缺省的访问限定符为public；</p>
+<h2 id="类-amp-对象"><a href="#类-amp-对象" class="headerlink" title="类 &amp; 对象"></a>类 &amp; 对象</h2><p>定义类的成员变量访问属性：<br>class Student(var name: String, var age)<br>class Student(val name: String, val age)<br>class Student(private val name: String, val age)【示意】<br>class Student(private[this] val name: String, val age)【示意】<br>自定义getter、setter方法；<br>定义java风格的getter、setter方法；</p>
+<p>主构造函数：就是类体本身</p>
+<p>辅助构造函数：命名为this，跟不同的参数列表；第一行必须调用主构造器 或 其他辅助构造器；</p>
+<p>用来定义常量和工具方法；<br>实现单例类；<br>与java中的static 类与方法类似；<br>没有参数列表；其他的性质与class类似；</p>
+<p>程序的入口点，main方法定义在其中<br>apply方法也放在这里；</p>
+<h2 id="继承-amp-特质"><a href="#继承-amp-特质" class="headerlink" title="继承 &amp; 特质"></a>继承 &amp; 特质</h2><p>scala采用object关键字实现单例对象，具备和Java静态方法同样的功能；<br>object本质上可以拥有类的所有特性，除了不能提供构造器参数；<br>对于任何在Java中用单例对象的地方，在scala中都可以用object实现：</p>
+<ul>
+<li>作为存放工具函数或常量的地方</li>
+<li>高效地共享单个不可变实例</li>
+</ul>
+<p>当单例对象与某个类具有相同的名称时，它被称为这个类的“伴生对象”，类称为伴生类；<br>类和它的伴生对象必须存在于同一个文件中，而且可以相互访问私有成员（字段和方法）；<br>object的apply、unapply、update方法<br>定义伴生对象中的apply方法，主要用来解决简化对象的初始；</p>
+<p>trait（接口），是scala代码重用的基本单元，可以同时拥有抽象方法和具体方法；</p>
+<h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><h2 id="case-class-amp-case-object"><a href="#case-class-amp-case-object" class="headerlink" title="case class &amp; case object"></a>case class &amp; case object</h2><p>样例类是scala中特殊的类。当声明样例类时，如下事情会自动发生：</p>
+<ul>
+<li>构造器中每一个参数都成为val（不建议使用var）；</li>
+<li>提供apply方法；</li>
+<li>提供unapply方法；</li>
+<li>将生成toString、equals、hashCode和copy方法；</li>
+<li>继承了Product和Serializable；</li>
+</ul>
+<p>case class和其他类型完全一样，可以添加方法和字段，可以继承；<br>case class最大的用处是用于模式匹配；</p>
+<p>case class是多例的（后面要跟构造参数），case object是单例的</p>
+<h2 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h2><p>模式匹配使用 match… { case … }的语法结构，具有以下特点：</p>
+<ul>
+<li>match 语句有返回值；</li>
+<li>case分支语句不会贯穿到下一个case语句；</li>
+<li>如果没有任何一个模式匹配上，会抛出异常（MatchError）；</li>
+<li>通常最后一个语句与 _ 匹配；</li>
+</ul>
+<p>模式匹配无处不在；</p>
+<p><strong>## Option类型 ##</strong><br>Option是Scala编程中常用的一个类，用来避免指针异常；<br>包含两个实例：Some、None；<br>Option类型提供了getOrElse方法；<br>可将Option[T]看做是一个集合，这个集合只要么</p>
+<ul>
+<li>只包含一个元素（被包装在Some中）；</li>
+<li>要么就不存在元素（返回None）；</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p><strong>函数字面量：函数的值；(x, str) =&gt; { x + str.length }<br>函数的类型：(Int, String) =&gt; Int<br>匿名函数：即Lambda表达式，没有名称的函数；</strong><br>可使用下划线作为一个或多个参数的占位符，只要每个参数在函数字面量内仅出现一次。<br>多个下划线指代多个参数；</p>
+<p><strong>高阶函数：接收一个或多个函数作为输入 或 输出一个函数。<br>闭包是一种特殊函数，是在其上下文中引用了自由变量的函数；（闭包反映了一个从开放到封闭的过程）<br>柯里化：将原来接收两个参数的函数变成新的接收一个参数的函数的过程；<br>部分应用函数（偏应用函数）：是指缺少部分（甚至全部）参数的函数；<br>偏函数：只接受部分输入参数的函数；</strong></p>
+<p>在偏函数中只能使用 case 语句，整个函数必须用大括号包围；通常使用偏函数进行类型转换，拆解；</p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>Seq（序列）、Set（集）、map（映射）<br>集合的分类：有序、无序；可变、不可变；<br>默认提供不可变版本，使用可变版本需要显示声明；</p>
+<h3 id="Seq"><a href="#Seq" class="headerlink" title="Seq"></a>Seq</h3><p>Seq：具有一定长度的可迭代访问的对象，每个元素均带有一个从0开始计数的固定索引位置。<br>常见的Seq类型包括：List、Vector、String、Range、Queue、Stack；<br>List : 列表是不可变的（元素不能通过赋值改变）；结构是递归的；<br>List递归的表示 ：head :: tial<br>常用操作符 ：Nil、::、:::（++）<br>Vector是以树形结构的形式实现，每个节点可以有不超过32个子节点。（4层可存放100W个节点）；<br>Range通常表示一个整数序列；</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>与数学集合的概念较为类似。元素没有重复值，不保证元素的存放顺序；</p>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>flatMap、flatten、reduce<br>fold、foldLeft、foldRight<br>aggregate</p>
+<h2 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h2><p>隐式转换可以为现有的类库添加功能; 隐式转隐为隐藏了相应的细节;<br>隐式函数是指那种以implicit关键字声明的带有单个参数的函数;</p>
+<p>隐式转换规则：<br>1、源 或 目标类型 的伴生对象中的隐式函数<br>2、当前作用域的隐式函数</p>
+<p>隐式参数有点类似缺省参数，如果在调用方法时没有提供某个参数，编译器会在当前作用域查找是否有符合条件的 implicit 对象可以作为参数传入；</p>
+<h2 id="Ordered、Ordering"><a href="#Ordered、Ordering" class="headerlink" title="Ordered、Ordering"></a>Ordered、Ordering</h2><p>Ordered 提供比较器模板，可以自定义多种比较方式（我们常用它来解决对象的排序问题）<br>Ordering 定义了相同类型间的比较方式【Ordering.Int、Ordering.String.reverse】</p>
+<p>sorted、sortWith、sortBy</p>
+<h2 id="函数式编程的特点"><a href="#函数式编程的特点" class="headerlink" title="函数式编程的特点"></a>函数式编程的特点</h2><p>不变性<br>函数式一等公民<br>递归和尾递归</p>
+<h2 id="函数式编程相关的技术"><a href="#函数式编程相关的技术" class="headerlink" title="函数式编程相关的技术"></a>函数式编程相关的技术</h2><p>少用循环和遍历，多使用 map 、 reduce等函数；<br>柯里化（currying）；<br>高阶函数（higher order function）；<br>递归（recursing）和尾递归<br>管道（pipeline）</p>
+<h2 id="函数-与-方法"><a href="#函数-与-方法" class="headerlink" title="函数 与 方法"></a>函数 与 方法</h2><p>使用 def 定义的是方法；使用 val 定义的是函数；<br>二者在大多数情况下可以认为是相等的；</p>
+<p>方法是类的组成部分，不能单独存在；<br>函数是一个完整的对象，可以独立存在；<br>方法可以转化为函数；</p>
+<p>下划线的用法：<br>导包<br>类成员变量赋值<br>可变参数<br>类型通配符<br>模式匹配<br>Tuple访问<br>简化函数字面量<br>定义setter方法<br>部分应用函数<br>方法转换为函数</p>
+<p>+:、:+、++、::、:::</p>
+<p>type：声明类型，提供可读性</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/scala/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>scala</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/01/31/SpringCloud搭建/">
       SpringCloud搭建
     </a>
@@ -1098,13 +1277,19 @@ public class VideoController {
   <script>setLoadingBarProgress(100);</script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":350,"height":450},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <!--动态线条背景-->
-<script type="text/javascript"
-color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
-</script>
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/love.js"></script>
-</html>
 <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
 opacity：表示线条透明度（0~1），默认：0.5
 count：表示线条的总数量，默认：150
 zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
+<script type="text/javascript"
+color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/love.js"></script>
+</html> -->
+
+<!-- 添加鼠标点击烟花爆炸效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>

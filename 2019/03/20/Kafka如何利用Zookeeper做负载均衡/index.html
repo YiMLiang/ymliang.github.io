@@ -1009,13 +1009,19 @@
   <script>setLoadingBarProgress(100);</script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":350,"height":450},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <!--动态线条背景-->
-<script type="text/javascript"
-color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
-</script>
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/love.js"></script>
-</html>
 <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
 opacity：表示线条透明度（0~1），默认：0.5
 count：表示线条的总数量，默认：150
 zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
+<script type="text/javascript"
+color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/love.js"></script>
+</html> -->
+
+<!-- 添加鼠标点击烟花爆炸效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>

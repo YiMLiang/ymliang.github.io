@@ -277,10 +277,6 @@
           
         
           
-        
-          
-        
-          
             
               <div class="post-wrapper">
                 <article class="post reveal ">
@@ -404,9 +400,105 @@
         
           
         
+          
+        
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/06/Go开发基础入门——5/">
+      Go开发基础入门——5
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="条件语句-select"><a href="#条件语句-select" class="headerlink" title="条件语句 select"></a>条件语句 select</h3><pre><code>select 语句
+select 语句类似于 switch 语句，但是select会随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。
+
+select 是Go中的一个控制结构，类似于用于通信的switch语句。每个case必须是一个通信操作，要么是发送要么是接收。
+select 随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。一个默认的子句应该总是可运行的。
+</code></pre><p>语法：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select &#123;</span><br><span class="line">    case communication clause  :</span><br><span class="line">    statement(s);      </span><br><span class="line">    case communication clause  :</span><br><span class="line">    statement(s);</span><br><span class="line">    /* 你可以定义任意数量的 case */</span><br><span class="line">    default : /* 可选 */</span><br><span class="line">    statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class="post-wrapper">
@@ -1195,116 +1287,6 @@ $ git config --global user.email &quot;18135479521@163.com&quot;
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/05/06/leetCode-155-最小栈/">
-      leetCode 155 最小栈
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-06</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/leetcode/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>leetcode</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <pre><code>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
-
-push(x) -- 将元素 x 推入栈中。
-pop() -- 删除栈顶的元素。
-top() -- 获取栈顶元素。
-getMin() -- 检索栈中的最小元素。
-</code></pre>
-      
-        <div class="readmore">
-          <a href="/2019/05/06/leetCode-155-最小栈/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1806,13 +1788,19 @@ getMin() -- 检索栈中的最小元素。
   <script>setLoadingBarProgress(100);</script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":350,"height":450},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <!--动态线条背景-->
-<script type="text/javascript"
-color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
-</script>
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/love.js"></script>
-</html>
 <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
 opacity：表示线条透明度（0~1），默认：0.5
 count：表示线条的总数量，默认：150
 zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
+<script type="text/javascript"
+color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/love.js"></script>
+</html> -->
+
+<!-- 添加鼠标点击烟花爆炸效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
