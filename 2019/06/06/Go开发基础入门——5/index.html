@@ -313,7 +313,9 @@ select 是Go中的一个控制结构，类似于用于通信的switch语句。�
 select 随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。一个默认的子句应该总是可运行的。
 </code></pre><p>语法：</p>
 <pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select &#123;</span><br><span class="line">    case communication clause  :</span><br><span class="line">    statement(s);      </span><br><span class="line">    case communication clause  :</span><br><span class="line">    statement(s);</span><br><span class="line">    /* 你可以定义任意数量的 case */</span><br><span class="line">    default : /* 可选 */</span><br><span class="line">    statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+</code></pre><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>方法只要记住有method 和 receiver即可</p>
+<p>receiver可以是值也可以是指针</p>
+
         </div>
         
           
@@ -324,10 +326,10 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-06T17:57:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-10T15:10:45+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 2019年6月6日</p>
+    <p>最后更新于 2019年6月10日</p>
   </a>
 </div>
 
@@ -504,7 +506,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#条件语句-select"><span class="toc-text">条件语句 select</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#条件语句-select"><span class="toc-text">条件语句 select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li></ol>
     </div>
   </section>
 
@@ -715,6 +717,24 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
     
     。
   </div>
+  <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/01/2019 19:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
 </footer>
 <script>setLoadingBarProgress(80);</script>
 
