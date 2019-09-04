@@ -283,6 +283,12 @@
           
         
           
+        
+          
+        
+          
+        
+          
             
               <div class="post-wrapper">
                 <article class="post reveal ">
@@ -310,7 +316,7 @@
           
             
   <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
+    <a href="http://ymliang.com" rel="nofollow">
       
         <i class="fas fa-user" aria-hidden="true"></i>
       
@@ -406,6 +412,8 @@
         
           
         
+          
+        
       
     
     
@@ -423,8 +431,8 @@
       
         
   <h2 class="title">
-    <a href="/2019/06/06/Go开发基础入门——5/">
-      Go开发基础入门——5
+    <a href="/2019/07/26/Go爬虫/">
+      Go爬虫(持续更新)
     </a>
   </h2>
 
@@ -437,7 +445,7 @@
           
             
   <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
+    <a href="http://ymliang.com" rel="nofollow">
       
         <i class="fas fa-user" aria-hidden="true"></i>
       
@@ -452,7 +460,134 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-06-06</p>
+    <p>2019-07-26</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/go/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>go</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <ul>
+<li><p>regexp  api:</p>
+<pre><code>re := regexp.MustCompile(reStr) ： reStr代表正则表达式 ，这个方法表示按照这个正则去匹配
+re.FindAllStringSubmatch(srcStr,-1)  ： -1表示所有全查到    （1或2或3表示取1个2个3个）
+</code></pre></li>
+<li><p>一些常用的正则符号</p>
+<pre><code>(） ： 标识分组
+\w : 字母数字下划线
+\d ： 数字
+\D ：字母
+\s\S ： 任意字符
+\s ： 空白字符(小写s)
+\S ： 非空白字符(大写S)
+re1 | re2 ： re1 或 re2 所表示的片段
+regexp*+?  | regexp+? 分别表示1到多次 | 或0到多次   ？表示非贪婪，也就是匹配到？后面的东西为止
+{n,m}  |  {n,}  表示 n个到m个 |  或至少是n个
+[\w\.] 表示出现任意字母数字下划线或者 . 都是ok的
+</code></pre></li>
+</ul>
+<ul>
+<li><p>举例：</p>
+<pre><code>[\s\S]+?href   这段正则中： 
+    [\s\S] 表示任意字符
+    + 表示 0个或1个
+    ？表示不会隔过 href
+</code></pre></li>
+</ul>
+<ul>
+<li>爬虫获取html界面内容</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">func GetHtml(url string) string &#123;</span><br><span class="line">	//控制超时</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), time.Second*60)</span><br><span class="line">	defer cancel()</span><br><span class="line"></span><br><span class="line">	var html string</span><br><span class="line">	done := make(chan int, 1)</span><br><span class="line">	go func() &#123;</span><br><span class="line">		resp, err := http.Get(url)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			logs.Info(&quot;http get failed, err = &quot;, err)</span><br><span class="line">		&#125;</span><br><span class="line">		defer resp.Body.Close()</span><br><span class="line"></span><br><span class="line">		bytes, _ := ioutil.ReadAll(resp.Body)</span><br><span class="line">		html = string(bytes)</span><br><span class="line">		time.Sleep(1 * time.Second)</span><br><span class="line">		done &lt;- 1</span><br><span class="line">	&#125;()</span><br><span class="line">	select &#123;</span><br><span class="line">	case &lt;-done:</span><br><span class="line">		fmt.Println(&quot;work done on time&quot;)</span><br><span class="line">		return html</span><br><span class="line">	case &lt;-ctx.Done():</span><br><span class="line">		// timeout</span><br><span class="line">		fmt.Println(&quot;爬取超时：err= &quot;, ctx.Err())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return html</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/21/经济学词汇/">
+      经济学词汇(持续更新)
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-21</p>
   </a>
 </div>
 
@@ -483,6 +618,957 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
+      <p>###</p>
+<p>名义GDP：名义GDP是指以现行市场价格计算的既定时期国内总产品和服务的价格总和。</p>
+
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/11/Go开发进阶——6/">
+      Go开发进阶——6
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-11</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/go/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>go</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>本章来讲什么是并发，了解并发的意义才能会用它</p>
+<p>首先了解进程和线程<br>进程是资源分配的最小单位，线程是程序执行的最小单位。<br>进程是程序在操作系统中的一次执行过程，系统进行资源分配和调度的一个独立单位。<br>线程是进程的一个执行实体,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位。<br>一个进程可以创建和撤销多个线程;同一个进程中的多个线程之间可以并发执行。</p>
+<p>并发和并行</p>
+<p>并发的关键是你有处理多个任务的能力，不一定要同时。<br>并行的关键是你有同时处理多个任务的能力。<br>所以我认为它们最关键的点就是：是否是同时。</p>
+<h3 id="goroutine的定义"><a href="#goroutine的定义" class="headerlink" title="goroutine的定义"></a>goroutine的定义</h3><p>任何函数只需加上go就能发送给调度器运行<br>不需要在定义时区分是否异步函数<br>调度器在合适的点进行切换</p>
+<h3 id="chan"><a href="#chan" class="headerlink" title="chan"></a>chan</h3><p>channel 是 CSP 模式的具体实现，用于多个 goroutine 通讯。<br>其内部实现了同步，确保并发安全。多个goroutine同时访问，不需要加锁。</p>
+<p>由于管道容量是5，开启go写入10个数据，再写入5个数据，会阻塞，然而read每秒会读取一个，然后在会写入一个数据。make(chan int,5)即给它一个5个大小的缓冲区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func write(ch chan int) &#123;</span><br><span class="line">	for i := 0; i &lt; 10; i++ &#123;</span><br><span class="line">		ch &lt;- i</span><br><span class="line">		fmt.Println(&quot;put data:&quot;, i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func read(ch chan int) &#123;</span><br><span class="line">	for &#123;</span><br><span class="line">		var b int</span><br><span class="line">		b = &lt;-ch</span><br><span class="line">		fmt.Println(b)</span><br><span class="line">		time.Sleep(time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	intChan := make(chan int, 5)</span><br><span class="line">	go write(intChan)</span><br><span class="line">	go read(intChan)</span><br><span class="line"></span><br><span class="line">	time.Sleep(10 * time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="WaitGroup"><a href="#WaitGroup" class="headerlink" title="WaitGroup"></a>WaitGroup</h3><p>Golang 在语言层面对并发编程提供支持，一种类似协程，称作 goroutine 的机制。</p>
+<p>只需在函数调用语句前添加 go 关键字，就可创建并发执行单元。开发人员无需了解任何执行细节，调度器会自动将其安排到合适的系统线程上执行。goroutine 是一种非常轻量级的实现，可在单个进程里执行成千上万的并发任务。</p>
+<p>WaitGroup有三个方法</p>
+<p>Add:添加或者减少等待goroutine的数量</p>
+<p>Done:相当于Add(-1)</p>
+<p>Wait:执行阻塞，直到所有的WaitGroup数量变成0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;sync&quot;</span><br><span class="line">	&quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func work(wg *sync.WaitGroup, i int) &#123;</span><br><span class="line">	fmt.Println(&quot;work:&quot;, i)</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">	wg.Done()</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	wg := sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line">	for i := 0; i &lt; 10; i++ &#123;</span><br><span class="line">		wg.Add(1)</span><br><span class="line">		go work(&amp;wg,i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	wg.Wait()</span><br><span class="line">	fmt.Println(&quot;goroutine finished&quot;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="go-defer"><a href="#go-defer" class="headerlink" title="go defer()"></a>go defer()</h3><p>go defer (go延迟函数)<br>defer语句调用一个函数，这个函数执行会推迟，直到外围的函数返回，或者外围函数运行到最后，或者相应的goroutine panic</p>
+<h3 id="context"><a href="#context" class="headerlink" title="context"></a>context</h3><p>上下文管理<br>使用context保存上下文，比如你可以保存session,user_id,password到你的上下文中</p>
+<p>ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)</p>
+<p>ctx.Done()   //代表超时</p>
+<p>适用于：任何请求的超时都可以用 ctx来控制</p>
+<p>ctx也可以控制一个goroutine的生命周期</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/11/Go中一些常见包的使用-永不完结/">
+      Go中一些常见包的使用(永不完结)
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-11</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/go/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>go</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="regexp包"><a href="#regexp包" class="headerlink" title="regexp包"></a>regexp包</h3><pre><code>------------------------------------------------------------
+
+// 判断在 b 中能否找到正则表达式 pattern 所匹配的子串
+// pattern：要查找的正则表达式
+// b：要在其中进行查找的 []byte
+// matched：返回是否找到匹配项
+// err：返回查找过程中遇到的任何错误
+// 此函数通过调用 Regexp 的方法实现
+func Match(pattern string, b []byte) (matched bool, err error)
+
+func main() {
+    fmt.Println(regexp.Match(&quot;H.* &quot;, []byte(&quot;Hello World!&quot;)))
+    // true 
+}
+
+------------------------------------------------------------
+
+// 判断在 r 中能否找到正则表达式 pattern 所匹配的子串
+// pattern：要查找的正则表达式
+// r：要在其中进行查找的 RuneReader 接口
+// matched：返回是否找到匹配项
+// err：返回查找过程中遇到的任何错误
+// 此函数通过调用 Regexp 的方法实现
+func MatchReader(pattern string, r io.RuneReader) (matched bool, err error)
+
+func main() {
+    r := bytes.NewReader([]byte(&quot;Hello World!&quot;))
+    fmt.Println(regexp.MatchReader(&quot;H.* &quot;, r))
+    // true 
+}
+
+------------------------------------------------------------
+
+// 判断在 s 中能否找到正则表达式 pattern 所匹配的子串
+// pattern：要查找的正则表达式
+// r：要在其中进行查找的字符串
+// matched：返回是否找到匹配项
+// err：返回查找过程中遇到的任何错误
+// 此函数通过调用 Regexp 的方法实现
+func MatchString(pattern string, s string) (matched bool, err error)
+
+func main() {
+    fmt.Println(regexp.Match(&quot;H.* &quot;, &quot;Hello World!&quot;))
+    // true 
+}
+
+------------------------------------------------------------
+
+// QuoteMeta 将字符串 s 中的“特殊字符”转换为其“转义格式”
+// 例如，QuoteMeta（`[foo]`）返回`\[foo\]`。
+// 特殊字符有：\.+*?()|[]{}^$
+// 这些字符用于实现正则语法，所以当作普通字符使用时需要转换
+func QuoteMeta(s string) string
+
+func main() {
+    fmt.Println(regexp.QuoteMeta(&quot;(?P:Hello) [a-z]&quot;))
+    // \(\?P:Hello\) \[a-z\]
+}
+
+------------------------------------------------------------
+
+// Regexp 结构表示一个编译后的正则表达式
+// Regexp 的公开接口都是通过方法实现的
+// 多个 goroutine 并发使用一个 RegExp 是安全的
+type Regexp struct {
+    // 私有字段
+}
+
+// 通过 Complite、CompilePOSIX、MustCompile、MustCompilePOSIX 
+// 四个函数可以创建一个 Regexp 对象
+
+------------------------------------------------------------
+
+// Compile 用来解析正则表达式 expr 是否合法，如果合法，则返回一个 Regexp 对象
+// Regexp 对象可以在任意文本上执行需要的操作
+func Compile(expr string) (*Regexp, error)
+
+func main() {
+    reg, err := regexp.Compile(`\w+`)
+    fmt.Printf(&quot;%q,%v\n&quot;, reg.FindString(&quot;Hello World!&quot;), err)
+    // &quot;Hello&quot;,
+}
+
+------------------------------------------------------------
+
+// CompilePOSIX 的作用和 Compile 一样
+// 不同的是，CompilePOSIX 使用 POSIX 语法，
+// 同时，它采用最左最长方式搜索，
+// 而 Compile 采用最左最短方式搜索
+// POSIX 语法不支持 Perl 的语法格式：\d、\D、\s、\S、\w、\W
+func CompilePOSIX(expr string) (*Regexp, error)
+
+func main() {
+    reg, err := regexp.CompilePOSIX(`[[:word:]]+`)
+    fmt.Printf(&quot;%q,%v\n&quot;, reg.FindString(&quot;Hello World!&quot;), err)
+    // &quot;Hello&quot;
+}
+
+------------------------------------------------------------
+
+// MustCompile 的作用和 Compile 一样
+// 不同的是，当正则表达式 str 不合法时，MustCompile 会抛出异常
+// 而 Compile 仅返回一个 error 值
+func MustCompile(str string) *Regexp
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Println(reg.FindString(&quot;Hello World!&quot;))
+    // Hello
+}
+
+------------------------------------------------------------
+
+// MustCompilePOSIX 的作用和 CompilePOSIX 一样
+// 不同的是，当正则表达式 str 不合法时，MustCompilePOSIX 会抛出异常
+// 而 CompilePOSIX 仅返回一个 error 值
+func MustCompilePOSIX(str string) *Regexp
+
+func main() {
+    reg := regexp.MustCompilePOSIX(`[[:word:]].+ `)
+    fmt.Printf(&quot;%q\n&quot;, reg.FindString(&quot;Hello World!&quot;))
+    // &quot;Hello &quot;
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回第一个匹配的内容
+func (re *Regexp) Find(b []byte) []byte
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Printf(&quot;%q&quot;, reg.Find([]byte(&quot;Hello World!&quot;)))
+    // &quot;Hello&quot;
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回第一个匹配的内容
+func (re *Regexp) FindString(s string) string
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Println(reg.FindString(&quot;Hello World!&quot;))
+    // &quot;Hello&quot;
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回所有匹配的内容
+// {{匹配项}, {匹配项}, ...}
+// 只查找前 n 个匹配项，如果 n &lt; 0，则查找所有匹配项
+func (re *Regexp) FindAll(b []byte, n int) [][]byte
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Printf(&quot;%q&quot;, reg.FindAll([]byte(&quot;Hello World!&quot;), -1))
+    // [&quot;Hello&quot; &quot;World&quot;]
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回所有匹配的内容
+// {匹配项, 匹配项, ...}
+// 只查找前 n 个匹配项，如果 n &lt; 0，则查找所有匹配项
+func (re *Regexp) FindAllString(s string, n int) []string
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Printf(&quot;%q&quot;, reg.FindAllString(&quot;Hello World!&quot;, -1))
+    // [&quot;Hello&quot; &quot;World&quot;]
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回第一个匹配的位置
+// {起始位置, 结束位置}
+func (re *Regexp) FindIndex(b []byte) (loc []int)
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Println(reg.FindIndex([]byte(&quot;Hello World!&quot;)))
+    // [0 5]
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回第一个匹配的位置
+// {起始位置, 结束位置}
+func (re *Regexp) FindStringIndex(s string) (loc []int)
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Println(reg.FindStringIndex(&quot;Hello World!&quot;))
+    // [0 5]
+}
+
+------------------------------------------------------------
+
+// 在 r 中查找 re 中编译好的正则表达式，并返回第一个匹配的位置
+// {起始位置, 结束位置}
+func (re *Regexp) FindReaderIndex(r io.RuneReader) (loc []int)
+
+func main() {
+    r := bytes.NewReader([]byte(&quot;Hello World!&quot;))
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Println(reg.FindReaderIndex(r))
+    // [0 5]
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回所有匹配的位置
+// {{起始位置, 结束位置}, {起始位置, 结束位置}, ...}
+// 只查找前 n 个匹配项，如果 n &lt; 0，则查找所有匹配项
+func (re *Regexp) FindAllIndex(b []byte, n int) [][]int
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Println(reg.FindAllIndex([]byte(&quot;Hello World!&quot;), -1))
+    // [[0 5] [6 11]]
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回所有匹配的位置
+// {{起始位置, 结束位置}, {起始位置, 结束位置}, ...}
+// 只查找前 n 个匹配项，如果 n &lt; 0，则查找所有匹配项
+func (re *Regexp) FindAllStringIndex(s string, n int) [][]int
+
+func main() {
+    reg := regexp.MustCompile(`\w+`)
+    fmt.Println(reg.FindAllStringIndex(&quot;Hello World!&quot;, -1))
+    // [[0 5] [6 11]]
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回第一个匹配的内容
+// 同时返回子表达式匹配的内容
+// {{完整匹配项}, {子匹配项}, {子匹配项}, ...}
+func (re *Regexp) FindSubmatch(b []byte) [][]byte
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Printf(&quot;%q&quot;, reg.FindSubmatch([]byte(&quot;Hello World!&quot;)))
+    // [&quot;Hello&quot; &quot;H&quot; &quot;o&quot;]
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回第一个匹配的内容
+// 同时返回子表达式匹配的内容
+// {完整匹配项, 子匹配项, 子匹配项, ...}
+func (re *Regexp) FindStringSubmatch(s string) []string
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Printf(&quot;%q&quot;, reg.FindStringSubmatch(&quot;Hello World!&quot;))
+    // [&quot;Hello&quot; &quot;H&quot; &quot;o&quot;]
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回所有匹配的内容
+// 同时返回子表达式匹配的内容
+// {
+//     {{完整匹配项}, {子匹配项}, {子匹配项}, ...},
+//     {{完整匹配项}, {子匹配项}, {子匹配项}, ...},
+//     ...
+// }
+func (re *Regexp) FindAllSubmatch(b []byte, n int) [][][]byte
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Printf(&quot;%q&quot;, reg.FindAllSubmatch([]byte(&quot;Hello World!&quot;), -1))
+    // [[&quot;Hello&quot; &quot;H&quot; &quot;o&quot;] [&quot;World&quot; &quot;W&quot; &quot;d&quot;]]
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回所有匹配的内容
+// 同时返回子表达式匹配的内容
+// {
+//     {完整匹配项, 子匹配项, 子匹配项, ...},
+//     {完整匹配项, 子匹配项, 子匹配项, ...},
+//     ...
+// }
+// 只查找前 n 个匹配项，如果 n &lt; 0，则查找所有匹配项
+func (re *Regexp) FindAllStringSubmatch(s string, n int) [][]string
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Printf(&quot;%q&quot;, reg.FindAllStringSubmatch(&quot;Hello World!&quot;, -1))
+    // [[&quot;Hello&quot; &quot;H&quot; &quot;o&quot;] [&quot;World&quot; &quot;W&quot; &quot;d&quot;]]
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回第一个匹配的位置
+// 同时返回子表达式匹配的位置
+// {完整项起始, 完整项结束, 子项起始, 子项结束, 子项起始, 子项结束, ...}
+func (re *Regexp) FindSubmatchIndex(b []byte) []int
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Println(reg.FindSubmatchIndex([]byte(&quot;Hello World!&quot;)))
+    // [0 5 0 1 4 5]
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回第一个匹配的位置
+// 同时返回子表达式匹配的位置
+// {完整项起始, 完整项结束, 子项起始, 子项结束, 子项起始, 子项结束, ...}
+func (re *Regexp) FindStringSubmatchIndex(s string) []int
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Println(reg.FindStringSubmatchIndex(&quot;Hello World!&quot;))
+    // [0 5 0 1 4 5]
+}
+
+------------------------------------------------------------
+
+// 在 r 中查找 re 中编译好的正则表达式，并返回第一个匹配的位置
+// 同时返回子表达式匹配的位置
+// {完整项起始, 完整项结束, 子项起始, 子项结束, 子项起始, 子项结束, ...}
+func (re *Regexp) FindReaderSubmatchIndex(r io.RuneReader) []int
+
+func main() {
+    r := bytes.NewReader([]byte(&quot;Hello World!&quot;))
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Println(reg.FindReaderSubmatchIndex(r))
+    // [0 5 0 1 4 5]
+}
+
+------------------------------------------------------------
+
+// 在 b 中查找 re 中编译好的正则表达式，并返回所有匹配的位置
+// 同时返回子表达式匹配的位置
+// {
+//     {完整项起始, 完整项结束, 子项起始, 子项结束, 子项起始, 子项结束, ...}, 
+//     {完整项起始, 完整项结束, 子项起始, 子项结束, 子项起始, 子项结束, ...}, 
+//     ...
+// }
+// 只查找前 n 个匹配项，如果 n &lt; 0，则查找所有匹配项
+func (re *Regexp) FindAllSubmatchIndex(b []byte, n int) [][]int
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Println(reg.FindAllSubmatchIndex([]byte(&quot;Hello World!&quot;), -1))
+    // [[0 5 0 1 4 5] [6 11 6 7 10 11]]
+}
+
+------------------------------------------------------------
+
+// 在 s 中查找 re 中编译好的正则表达式，并返回所有匹配的位置
+// 同时返回子表达式匹配的位置
+// {
+//     {完整项起始, 完整项结束, 子项起始, 子项结束, 子项起始, 子项结束, ...}, 
+//     {完整项起始, 完整项结束, 子项起始, 子项结束, 子项起始, 子项结束, ...}, 
+//     ...
+// }
+// 只查找前 n 个匹配项，如果 n &lt; 0，则查找所有匹配项
+func (re *Regexp) FindAllStringSubmatchIndex(s string, n int) [][]int
+
+func main() {
+    reg := regexp.MustCompile(`(\w)(\w)+`)
+    fmt.Println(reg.FindAllStringSubmatchIndex(&quot;Hello World!&quot;, -1))
+    // [[0 5 0 1 4 5] [6 11 6 7 10 11]]
+}
+
+------------------------------------------------------------
+
+// 将 template 的内容经过处理后，追加到 dst 的尾部。
+// template 中要有 $1、$2、${name1}、${name2} 这样的“分组引用符”
+// match 是由 FindSubmatchIndex 方法返回的结果，里面存放了各个分组的位置信息
+// 如果 template 中有“分组引用符”，则以 match 为标准，
+// 在 src 中取出相应的子串，替换掉 template 中的 $1、$2 等引用符号。
+func (re *Regexp) Expand(dst []byte, template []byte, src []byte, match []int) []byte
+
+func main() {
+    reg := regexp.MustCompile(`(\w+),(\w+)`)
+    src := []byte(&quot;Golang,World!&quot;)           // 源文本
+    dst := []byte(&quot;Say: &quot;)                   // 目标文本
+    template := []byte(&quot;Hello $1, Hello $2&quot;) // 模板
+    match := reg.FindSubmatchIndex(src)      // 解析源文本
+    // 填写模板，并将模板追加到目标文本中
+    fmt.Printf(&quot;%q&quot;, reg.Expand(dst, template, src, match))
+    // &quot;Say: Hello Golang, Hello World&quot;
+}
+
+------------------------------------------------------------
+
+// 功能同 Expand 一样，只不过参数换成了 string 类型
+func (re *Regexp) ExpandString(dst []byte, template string, src string, match []int) []byte
+
+func main() {
+    reg := regexp.MustCompile(`(\w+),(\w+)`)
+    src := &quot;Golang,World!&quot;                    // 源文本
+    dst := []byte(&quot;Say: &quot;)                    // 目标文本（可写）
+    template := &quot;Hello $1, Hello $2&quot;          // 模板
+    match := reg.FindStringSubmatchIndex(src) // 解析源文本
+    // 填写模板，并将模板追加到目标文本中
+    fmt.Printf(&quot;%q&quot;, reg.ExpandString(dst, template, src, match))
+    // &quot;Say: Hello Golang, Hello World&quot;
+}
+
+------------------------------------------------------------
+
+// LiteralPrefix 返回所有匹配项都共同拥有的前缀（去除可变元素）
+// prefix：共同拥有的前缀
+// complete：如果 prefix 就是正则表达式本身，则返回 true，否则返回 false
+func (re *Regexp) LiteralPrefix() (prefix string, complete bool)
+
+func main() {
+    reg := regexp.MustCompile(`Hello[\w\s]+`)
+    fmt.Println(reg.LiteralPrefix())
+    // Hello false
+    reg = regexp.MustCompile(`Hello`)
+    fmt.Println(reg.LiteralPrefix())
+    // Hello true
+}
+
+------------------------------------------------------------
+
+// 切换到“贪婪模式”
+func (re *Regexp) Longest()
+
+func main() {
+    text := `Hello World, 123 Go!`
+    pattern := `(?U)H[\w\s]+o` // 正则标记“非贪婪模式”(?U)
+    reg := regexp.MustCompile(pattern)
+    fmt.Printf(&quot;%q\n&quot;, reg.FindString(text))
+    // Hello
+    reg.Longest() // 切换到“贪婪模式”
+    fmt.Printf(&quot;%q\n&quot;, reg.FindString(text))
+    // Hello Wo
+}
+
+------------------------------------------------------------
+
+// 判断在 b 中能否找到匹配项
+func (re *Regexp) Match(b []byte) bool
+
+func main() {
+    b := []byte(`Hello World`)
+    reg := regexp.MustCompile(`Hello\w+`)
+    fmt.Println(reg.Match(b))
+    // false
+    reg = regexp.MustCompile(`Hello[\w\s]+`)
+    fmt.Println(reg.Match(b))
+    // true
+}
+
+------------------------------------------------------------
+
+// 判断在 r 中能否找到匹配项
+func (re *Regexp) MatchReader(r io.RuneReader) bool
+
+func main() {
+    r := bytes.NewReader([]byte(`Hello World`))
+    reg := regexp.MustCompile(`Hello\w+`)
+    fmt.Println(reg.MatchReader(r))
+    // false
+    r.Seek(0, 0)
+    reg = regexp.MustCompile(`Hello[\w\s]+`)
+    fmt.Println(reg.MatchReader(r))
+    // true
+}
+
+------------------------------------------------------------
+
+// 判断在 s 中能否找到匹配项
+func (re *Regexp) MatchString(s string) bool
+
+func main() {
+    s := `Hello World`
+    reg := regexp.MustCompile(`Hello\w+`)
+    fmt.Println(reg.MatchString(s))
+    // false
+    reg = regexp.MustCompile(`Hello[\w\s]+`)
+    fmt.Println(reg.MatchString(s))
+    // true
+}
+
+------------------------------------------------------------
+
+// 统计正则表达式中的分组个数（不包括“非捕获的分组”）
+func (re *Regexp) NumSubexp() int
+
+func main() {
+    reg := regexp.MustCompile(`(?U)(?:Hello)(\s+)(\w+)`)
+    fmt.Println(reg.NumSubexp())
+    // 2
+}
+
+------------------------------------------------------------
+
+// 在 src 中搜索匹配项，并替换为 repl 指定的内容
+// 全部替换，并返回替换后的结果
+func (re *Regexp) ReplaceAll(src, repl []byte) []byte
+
+func main() {
+    b := []byte(&quot;Hello World, 123 Go!&quot;)
+    reg := regexp.MustCompile(`(Hell|G)o`)
+    rep := []byte(&quot;${1}ooo&quot;)
+    fmt.Printf(&quot;%q\n&quot;, reg.ReplaceAll(b, rep))
+    // &quot;Hellooo World, 123 Gooo!&quot;
+}
+
+------------------------------------------------------------
+
+// 在 src 中搜索匹配项，并替换为 repl 指定的内容
+// 全部替换，并返回替换后的结果
+func (re *Regexp) ReplaceAllString(src, repl string) string
+
+func main() {
+    s := &quot;Hello World, 123 Go!&quot;
+    reg := regexp.MustCompile(`(Hell|G)o`)
+    rep := &quot;${1}ooo&quot;
+    fmt.Printf(&quot;%q\n&quot;, reg.ReplaceAllString(s, rep))
+    // &quot;Hellooo World, 123 Gooo!&quot;
+}
+
+------------------------------------------------------------
+
+// 在 src 中搜索匹配项，并替换为 repl 指定的内容
+// 如果 repl 中有“分组引用符”（$1、$name），则将“分组引用符”当普通字符处理
+// 全部替换，并返回替换后的结果
+func (re *Regexp) ReplaceAllLiteral(src, repl []byte) []byte
+
+func main() {
+    b := []byte(&quot;Hello World, 123 Go!&quot;)
+    reg := regexp.MustCompile(`(Hell|G)o`)
+    rep := []byte(&quot;${1}ooo&quot;)
+    fmt.Printf(&quot;%q\n&quot;, reg.ReplaceAllLiteral(b, rep))
+    // &quot;${1}ooo World, 123 ${1}ooo!&quot;
+}
+
+------------------------------------------------------------
+
+// 在 src 中搜索匹配项，并替换为 repl 指定的内容
+// 如果 repl 中有“分组引用符”（$1、$name），则将“分组引用符”当普通字符处理
+// 全部替换，并返回替换后的结果
+func (re *Regexp) ReplaceAllLiteralString(src, repl string) string
+
+func main() {
+    s := &quot;Hello World, 123 Go!&quot;
+    reg := regexp.MustCompile(`(Hell|G)o`)
+    rep := &quot;${1}ooo&quot;
+    fmt.Printf(&quot;%q\n&quot;, reg.ReplaceAllLiteralString(s, rep))
+    // &quot;${1}ooo World, 123 ${1}ooo!&quot;
+}
+
+------------------------------------------------------------
+
+// 在 src 中搜索匹配项，然后将匹配的内容经过 repl 处理后，替换 src 中的匹配项
+// 如果 repl 的返回值中有“分组引用符”（$1、$name），则将“分组引用符”当普通字符处理
+// 全部替换，并返回替换后的结果
+func (re *Regexp) ReplaceAllFunc(src []byte, repl func([]byte) []byte) []byte
+
+func main() {
+    s := []byte(&quot;Hello World!&quot;)
+    reg := regexp.MustCompile(&quot;(H)ello&quot;)
+    rep := []byte(&quot;$0$1&quot;)
+    fmt.Printf(&quot;%s\n&quot;, reg.ReplaceAll(s, rep))
+    // HelloH World!
+
+    fmt.Printf(&quot;%s\n&quot;, reg.ReplaceAllFunc(s,
+        func(b []byte) []byte {
+            rst := []byte{}
+            rst = append(rst, b...)
+            rst = append(rst, &quot;$1&quot;...)
+            return rst
+        }))
+    // Hello$1 World!
+}
+k
+------------------------------------------------------------
+
+// 在 src 中搜索匹配项，然后将匹配的内容经过 repl 处理后，替换 src 中的匹配项
+// 如果 repl 的返回值中有“分组引用符”（$1、$name），则将“分组引用符”当普通字符处理
+// 全部替换，并返回替换后的结果
+func (re *Regexp) ReplaceAllStringFunc(src string, repl func(string) string) string
+
+func main() {
+    s := &quot;Hello World!&quot;
+    reg := regexp.MustCompile(&quot;(H)ello&quot;)
+    rep := &quot;$0$1&quot;
+    fmt.Printf(&quot;%s\n&quot;, reg.ReplaceAllString(s, rep))
+    // HelloH World!
+    fmt.Printf(&quot;%s\n&quot;, reg.ReplaceAllStringFunc(s,
+        func(b string) string {
+            return b + &quot;$1&quot;
+        }))
+    // Hello$1 World!
+}
+
+------------------------------------------------------------
+
+// 在 s 中搜索匹配项，并以匹配项为分割符，将 s 分割成多个子串
+// 最多分割出 n 个子串，第 n 个子串不再进行分割
+// 如果 n &lt; 0，则分割所有子串
+// 返回分割后的子串列表
+func (re *Regexp) Split(s string, n int) []string
+
+func main() {
+    s := &quot;Hello World\tHello\nGolang&quot;
+    reg := regexp.MustCompile(`\s`)
+    fmt.Printf(&quot;%q\n&quot;, reg.Split(s, -1))
+    // [&quot;Hello&quot; &quot;World&quot; &quot;Hello&quot; &quot;Golang&quot;]
+}
+
+------------------------------------------------------------
+
+// 返回 re 中的“正则表达式”字符串
+func (re *Regexp) String() string
+
+func main() {
+    re := regexp.MustCompile(&quot;Hello.*$&quot;)
+    fmt.Printf(&quot;%s\n&quot;, re.String())
+    // Hello.*$
+}
+
+------------------------------------------------------------
+
+// 返回 re 中的分组名称列表，未命名的分组返回空字符串
+// 返回值[0] 为整个正则表达式的名称
+// 返回值[1] 是分组 1 的名称
+// 返回值[2] 是分组 2 的名称
+// ……
+func (re *Regexp) SubexpNames() []string
+
+func main() {
+    re := regexp.MustCompile(&quot;(?PHello) (World)&quot;)
+    fmt.Printf(&quot;%q\n&quot;, re.SubexpNames())
+    // [&quot;&quot; &quot;Name1&quot; &quot;&quot;]
+}
+</code></pre><ul>
+<li>举个栗子</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">需要替换字符串中指定字符 将hello 中的e 替换成 a</span><br><span class="line"></span><br><span class="line">func main()&#123;</span><br><span class="line">    //正则匹配，匹配规则是： 包含e</span><br><span class="line">    reg, err := regexp.Compile(&quot;e&quot;)</span><br><span class="line"></span><br><span class="line">    if err != nil &#123;</span><br><span class="line">		fmt.Printf(&quot;Compile failed: %s&quot;, error)</span><br><span class="line">		os.Exit(1)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    //ReplaceAll： 第一个参数是需要替换的字符串，第二个是 替换的字符</span><br><span class="line">    output := string(reg.ReplaceAll([]byte(&quot;hello&quot;),[]byte(&quot;a&quot;)))</span><br><span class="line">    fmt.Println(output)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&gt; hallo</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/06/Go开发基础入门——5/">
+      Go开发基础入门——5
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/go/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>go</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
       <h3 id="条件语句-select"><a href="#条件语句-select" class="headerlink" title="条件语句 select"></a>条件语句 select</h3><pre><code>select 语句
 select 语句类似于 switch 语句，但是select会随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。
 
@@ -490,16 +1576,59 @@ select 是Go中的一个控制结构，类似于用于通信的switch语句。�
 select 随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。一个默认的子句应该总是可运行的。
 </code></pre><p>语法：</p>
 <pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select &#123;</span><br><span class="line">    case communication clause  :</span><br><span class="line">    statement(s);      </span><br><span class="line">    case communication clause  :</span><br><span class="line">    statement(s);</span><br><span class="line">    /* 你可以定义任意数量的 case */</span><br><span class="line">    default : /* 可选 */</span><br><span class="line">    statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>方法只要记住有method 和 receiver即可</p>
-<p>receiver可以是值也可以是指针</p>
-<p>定义方法：</p>
-<p>func (recevier  recevier’s type) methodName(参数列表)(返回值列表){}</p>
+</code></pre><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><pre><code>见Go开发基础入门——2
+</code></pre><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><pre><code>方法只要记住有method 和 receiver即可
+
+receiver可以是值也可以是指针
+
+定义方法：
+
+func (recevier  recevier&apos;s type) methodName(参数列表)(返回值列表){}
+
+我们来测试一下是否只可以用 recevier&apos;s type 类型来使用这个方法
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">func (t T) testT() &#123;</span><br><span class="line">	fmt.Println(&quot;类型 T 方法集包含全部 receiver T 方法&quot;)</span><br><span class="line">&#125;</span><br><span class="line">func (s *S) testS() &#123;</span><br><span class="line">	fmt.Println(&quot;类型 *S 方法集包含全部 receiver S + *S 方法&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type T struct &#123;</span><br><span class="line">	int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type S struct &#123;</span><br><span class="line">	int</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	a := T&#123;10&#125;</span><br><span class="line">	b := &amp;a</span><br><span class="line">	a.testT()</span><br><span class="line">	b.testT()</span><br><span class="line"></span><br><span class="line">	c := S&#123;20&#125;</span><br><span class="line">	d := &amp;c</span><br><span class="line">	c.testS()</span><br><span class="line">	d.testS()</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&gt;类型 T 方法集包含全部 receiver T 方法</span><br><span class="line">&gt;类型 T 方法集包含全部 receiver T 方法</span><br><span class="line">&gt;类型 *S 方法集包含全部 receiver S + *S 方法</span><br><span class="line">&gt;类型 *S 方法集包含全部 receiver S + *S 方法</span><br></pre></td></tr></table></figure>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><pre><code>变量存储的是一个地址，这个地址存储最终的值。内存通常在堆上分配。通过GC回收。
+获取指针类型所指向的值，使用：&quot; * &quot; 取值符号 。比如：var *p int, 使用*p获取p指向的值
+指针、slice、map、chan等都是引用类型
+
+new和make的区别
+make 用来创建map、slice、channel
+new 用来创建值类型
+
+new 和 make 均是用于分配内存：
+new 用于值类型和用户定义的类型，如自定义结构，make 用于内置引用类型（切片、map 和管道）。它们的用法就像是函数，但是将类型作为参数：new(type)、make(type)。new(T) 分配类型 T 的零值并返回其地址，也就是指向类型 T 的指针。它也可以被用于基本类型：v := new(int)。
+make(T) 返回类型 T 的初始化之后的值，因此它比 new 进行更多的工作。new() 是一个函数，不要忘记它的括号。
+</code></pre><h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><pre><code>golang slice data[:6:8] 两个冒号的理解
+
+常规slice , data[6:8]，从第6位到第8位（返回6， 7），长度len为2， 最大可扩充长度cap为4（6-9）
+
+另一种写法： data[:6:8] 每个数字前都有个冒号， slice内容为data从0到第6位，长度len为6，最大扩充项cap设置为8
+
+a[x:y:z] 切片内容 [x:y] 切片长度: y-x 切片容量:z-x
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">    slice := []int&#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&#125;</span><br><span class="line">    d1 := slice[6:8]</span><br><span class="line">    fmt.Println(d1, len(d1), cap(d1))</span><br><span class="line">    d2 := slice[:6:8]</span><br><span class="line">    fmt.Println(d2, len(d2), cap(d2))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[6 7] 2 4</span><br><span class="line">[0 1 2 3 4 5] 6 8</span><br></pre></td></tr></table></figure>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><pre><code>var map变量名 map[key] value
+其中：key为键类型，value为值类型
+例如：value不仅可以是标注数据类型，也可以是自定义数据类型
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">常用的初始化方法：</span><br><span class="line">make()</span><br><span class="line">Go语言提供的内置函数make()可以用于灵活地创建map。</span><br><span class="line">预先给 make 函数一个合理元素数量参数，有助于提升性能。因为事先申请一大块内存，可避免后续操作时频繁扩张</span><br><span class="line"></span><br><span class="line">type One struct &#123;</span><br><span class="line">	name string</span><br><span class="line">	age  int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main()&#123;</span><br><span class="line">    dataMap := make(map[string]One)</span><br><span class="line">    dataMap[&quot;1&quot;] = One&#123;&quot;liangfeifan&quot;,22&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">map[1:&#123;liangfeifan 22&#125;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">常规初始化方法：</span><br><span class="line"></span><br><span class="line">dataMap := map[string]One&#123;</span><br><span class="line">    &quot;3&quot;: &#123;&quot;liang&quot;, 22&#125;,</span><br><span class="line">    &quot;4&quot;: &#123;&quot;fei&quot;, 10&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br></pre></td><td class="code"><pre><span class="line">map操作：</span><br><span class="line">插入、更新、查找、删除、判断是否存在、求长度</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line"></span><br><span class="line">	m := map[string]string&#123;&quot;key0&quot;: &quot;value0&quot;, &quot;key1&quot;: &quot;value1&quot;&#125;</span><br><span class="line">	fmt.Printf(&quot;map m : %v\n&quot;, m)</span><br><span class="line">	//map插入</span><br><span class="line">	m[&quot;key2&quot;] = &quot;value2&quot;</span><br><span class="line">	fmt.Printf(&quot;inserted map m : %v\n&quot;, m)</span><br><span class="line">	//map修改</span><br><span class="line">	m[&quot;key0&quot;] = &quot;hello world!&quot;</span><br><span class="line">	fmt.Printf(&quot;updated map m : %v\n&quot;, m)</span><br><span class="line">	//map查找</span><br><span class="line">	val, ok := m[&quot;key0&quot;]</span><br><span class="line">	if ok &#123;</span><br><span class="line">		fmt.Printf(&quot;map&apos;s key0 is %v\n&quot;, val)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 长度：获取键值对数量。</span><br><span class="line">	len := len(m)</span><br><span class="line">	fmt.Printf(&quot;map&apos;s len is %v\n&quot;, len)</span><br><span class="line"></span><br><span class="line">	// cap 无效，error</span><br><span class="line">	// cap := cap(m)    //invalid argument m (type map[string]string) for cap</span><br><span class="line">	// fmt.Printf(&quot;map&apos;s cap is %v\n&quot;, cap)</span><br><span class="line"></span><br><span class="line">	// 判断 key 是否存在。</span><br><span class="line">	if val, ok = m[&quot;key&quot;]; !ok &#123;</span><br><span class="line">		fmt.Println(&quot;map&apos;s key is not existence&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 删除，如果 key 不存在，不会出错。</span><br><span class="line">	if val, ok = m[&quot;key1&quot;]; ok &#123;</span><br><span class="line">		delete(m, &quot;key1&quot;)</span><br><span class="line">		fmt.Printf(&quot;deleted key1 map m : %v\n&quot;, m)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">map m : map[key0:value0 key1:value1]</span><br><span class="line">inserted map m : map[key0:value0 key1:value1 key2:value2]</span><br><span class="line">updated map m : map[key0:hello world! key1:value1 key2:value2]</span><br><span class="line">map&apos;s key0 is hello world!</span><br><span class="line">map&apos;s len is 3</span><br><span class="line">map&apos;s key is not existence</span><br><span class="line">deleted key1 map m : map[key0:hello world! key2:value2]</span><br><span class="line">map遍历：</span><br><span class="line"></span><br><span class="line">不能保证迭代返回次序，通常是随机结果，具体和版本实现有关。</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	m := make(map[int]int)</span><br><span class="line">	for i := 0; i &lt; 10; i++ &#123;</span><br><span class="line">		m[i] = i</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(m)</span><br><span class="line">	fmt.Println(m)</span><br><span class="line"></span><br><span class="line">	for j := 0; j &lt; 2; j++ &#123;</span><br><span class="line">		fmt.Println(&quot;---------------------&quot;)</span><br><span class="line">		for k, v := range m &#123;</span><br><span class="line">			fmt.Printf(&quot;key -&gt; value : %v -&gt; %v\n&quot;, k, v)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">map[6:6 8:8 2:2 1:1 3:3 4:4 5:5 7:7 9:9 0:0]</span><br><span class="line">map[2:2 6:6 8:8 5:5 7:7 9:9 0:0 1:1 3:3 4:4]</span><br><span class="line">---------------------</span><br><span class="line">key -&gt; value : 2 -&gt; 2</span><br><span class="line">key -&gt; value : 6 -&gt; 6</span><br><span class="line">key -&gt; value : 8 -&gt; 8</span><br><span class="line">key -&gt; value : 9 -&gt; 9</span><br><span class="line">key -&gt; value : 0 -&gt; 0</span><br><span class="line">key -&gt; value : 1 -&gt; 1</span><br><span class="line">key -&gt; value : 3 -&gt; 3</span><br><span class="line">key -&gt; value : 4 -&gt; 4</span><br><span class="line">key -&gt; value : 5 -&gt; 5</span><br><span class="line">key -&gt; value : 7 -&gt; 7</span><br><span class="line">---------------------</span><br><span class="line">key -&gt; value : 8 -&gt; 8</span><br><span class="line">key -&gt; value : 2 -&gt; 2</span><br><span class="line">key -&gt; value : 6 -&gt; 6</span><br><span class="line">key -&gt; value : 3 -&gt; 3</span><br><span class="line">key -&gt; value : 4 -&gt; 4</span><br><span class="line">key -&gt; value : 5 -&gt; 5</span><br><span class="line">key -&gt; value : 7 -&gt; 7</span><br><span class="line">key -&gt; value : 9 -&gt; 9</span><br><span class="line">key -&gt; value : 0 -&gt; 0</span><br><span class="line">key -&gt; value : 1 -&gt; 1</span><br><span class="line">slice与map操作（slice of map）</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	items := make([]map[int]int, 5)</span><br><span class="line">	for i := 0; i &lt; 5; i++ &#123;</span><br><span class="line">		items[i] = make(map[int]int)</span><br><span class="line">	&#125;</span><br><span class="line">	items[0][0] = 0</span><br><span class="line">	items[1][2] = 3</span><br><span class="line">	fmt.Println(items)</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">[map[0:0] map[2:3] map[] map[] map[]]</span><br><span class="line">map排序：</span><br><span class="line"></span><br><span class="line">先获取所有key，把key进行排序，再按照排序好的key，进行遍历。</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;sort&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	m := map[string]string&#123;&quot;q&quot;: &quot;q&quot;, &quot;w&quot;: &quot;w&quot;, &quot;e&quot;: &quot;e&quot;, &quot;r&quot;: &quot;r&quot;, &quot;t&quot;: &quot;t&quot;, &quot;y&quot;: &quot;y&quot;&#125;</span><br><span class="line">	var slice []string</span><br><span class="line">	for k, _ := range m &#123;</span><br><span class="line">		slice = append(slice, k)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(&quot;clise string is : %v\n&quot;, slice)</span><br><span class="line">	sort.Strings(slice[:])</span><br><span class="line">	fmt.Printf(&quot;sorted slice string is : %v\n&quot;, slice)</span><br><span class="line">	for _, v := range slice &#123;</span><br><span class="line">		fmt.Println(m[v])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">clise string is : [e r t y q w]</span><br><span class="line">sorted slice string is : [e q r t w y]</span><br><span class="line">e</span><br><span class="line">q</span><br><span class="line">r</span><br><span class="line">t</span><br><span class="line">w</span><br><span class="line">y</span><br><span class="line">map反转：</span><br><span class="line">初始化另外一个map，把key、value互换即可.</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	m := map[int]string&#123;1: &quot;x&quot;, 2: &quot;w&quot;, 3: &quot;e&quot;, 4: &quot;r&quot;, 5: &quot;t&quot;, 6: &quot;y&quot;&#125;</span><br><span class="line">	fmt.Println(m)</span><br><span class="line">	m_rev := make(map[string]int)</span><br><span class="line">	for k, v := range m &#123;</span><br><span class="line">		m_rev[v] = k</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(m_rev)</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">map[3:e 4:r 5:t 6:y 1:x 2:w]</span><br><span class="line">map[r:4 t:5 y:6 x:1 w:2 e:3]</span><br><span class="line">从 map 中取回的是一个 value 临时复制品，对其成员的修改是没有任何意义的。</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	m := map[int]string&#123;1: &quot;x&quot;, 2: &quot;w&quot;&#125;</span><br><span class="line">	fmt.Println(m)</span><br><span class="line">	for k, v := range m &#123;</span><br><span class="line">		m[k] = v + v   //修改map的值</span><br><span class="line">		v = v + &quot;copy&quot; //临时复制品，修改无效</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(m)</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">容器和结构体（map and struct）</span><br><span class="line"></span><br><span class="line">语法比较：</span><br><span class="line">map[type]struct</span><br><span class="line">map[type]*struct</span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	type user struct&#123; name string &#125;</span><br><span class="line">	/*</span><br><span class="line">	   当 map 因扩张而重新哈希时，各键值项存储位置都会发生改变。</span><br><span class="line">	   因此，map 被设计成 not addressable。</span><br><span class="line">	   类似 m[1].name 这种期望透过原 value 指针修改成员的行为自然会被禁 。</span><br><span class="line">	*/</span><br><span class="line">	m := map[int]user&#123; //</span><br><span class="line"></span><br><span class="line">		1: &#123;&quot;user1&quot;&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	// m[1].name = &quot;Tom&quot;</span><br><span class="line">	// ./main.go:16:12: cannot assign to struct field m[1].name in map</span><br><span class="line">	fmt.Println(m)</span><br><span class="line"></span><br><span class="line">	// 正确做法是完整替换 value 或使用指针。</span><br><span class="line">	u := m[1]</span><br><span class="line">	u.name = &quot;Tom&quot;</span><br><span class="line">	m[1] = u // 替换 value。</span><br><span class="line"></span><br><span class="line">	m2 := map[int]*user&#123;</span><br><span class="line">		1: &amp;user&#123;&quot;user1&quot;&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	m2[1].name = &quot;Jack&quot; // 返回的是指针复制品。透过指针修改原对象是允许的。</span><br><span class="line">	fmt.Println(m2)</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">map[1:&#123;user1&#125;]</span><br><span class="line">map[1:0xc42000e1e0]</span><br><span class="line">可以在迭代时安全删除键值。但如果期间有新增操作，那么就不知道会有什么意外了。</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	for i := 0; i &lt; 5; i++ &#123;</span><br><span class="line">		m := map[int]string&#123;</span><br><span class="line">			0: &quot;a&quot;, 1: &quot;a&quot;, 2: &quot;a&quot;, 3: &quot;a&quot;, 4: &quot;a&quot;,</span><br><span class="line">			5: &quot;a&quot;, 6: &quot;a&quot;, 7: &quot;a&quot;, 8: &quot;a&quot;, 9: &quot;a&quot;,</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		for k := range m &#123;</span><br><span class="line">			m[k+k] = &quot;x&quot;</span><br><span class="line">			delete(m, k)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		fmt.Println(m)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">输出:</span><br><span class="line">//每次输出都会变化</span><br><span class="line"></span><br><span class="line">map[36:x 28:x 32:x 2:x 8:x 10:x 12:x]</span><br><span class="line">map[12:x 6:x 16:x 28:x 4:x 10:x 72:x]</span><br><span class="line">map[12:x 14:x 16:x 18:x 20:x]</span><br><span class="line">map[18:x 10:x 14:x 4:x 6:x 16:x 24:x]</span><br><span class="line">map[12:x 16:x 4:x 40:x 14:x 18:x]</span><br></pre></td></tr></table></figure>
+<h3 id="管道-channel"><a href="#管道-channel" class="headerlink" title="管道 (channel)"></a>管道 (channel)</h3><ul>
+<li>Golang 引用类型 channel 是 CSP 模式的具体实现，用于多个 goroutine 通讯。其内部实现了同步，确保并发安全。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">channel概念:</span><br><span class="line">    a. 类似unix中管道（pipe）</span><br><span class="line">    b. 先进先出</span><br><span class="line">    c. 线程安全，多个goroutine同时访问，不需要加锁</span><br><span class="line">    d. channel是有类型的，一个整数的channel只能存放整数</span><br><span class="line"></span><br><span class="line">channel声明:</span><br><span class="line">    var 变量名 chan 类型</span><br><span class="line"></span><br><span class="line">    package main</span><br><span class="line"></span><br><span class="line">    var ch0 chan int</span><br><span class="line">    var ch1 chan string</span><br><span class="line">    var ch2 chan map[string]string</span><br><span class="line"></span><br><span class="line">    type stu struct&#123;&#125;</span><br><span class="line"></span><br><span class="line">    var ch3 chan stu</span><br><span class="line">    var ch4 chan *stu</span><br><span class="line"></span><br><span class="line">    func main() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">channel初始化:</span><br><span class="line">使用make进行初始化，比如：</span><br><span class="line"></span><br><span class="line">ch := make(chan string,1)</span><br><span class="line">ch2 := make(chan string)</span><br><span class="line"></span><br><span class="line">上述两种：分别为 有缓冲，无缓冲</span><br><span class="line">无缓冲的与有缓冲channel有着重大差别，那就是一个是同步的 一个是非同步的。</span><br><span class="line"></span><br><span class="line">比如</span><br><span class="line"></span><br><span class="line">c1:=make(chan int) 无缓冲</span><br><span class="line"></span><br><span class="line">c2:=make(chan int,1) 有缓冲</span><br><span class="line"></span><br><span class="line">c1&lt;-1</span><br><span class="line"></span><br><span class="line">无缓冲： 不仅仅是向 c1 通道放 1，而是一直要等有别的携程 &lt;-c1 接手了这个参数，那么c1&lt;-1才会继续下去，要不然就一直阻塞着。</span><br><span class="line"></span><br><span class="line">有缓冲： c2&lt;-1 则不会阻塞，因为缓冲大小是1(其实是缓冲大小为0)，只有当放第二个值的时候，第一个还没被人拿走，这时候才会阻塞。</span><br><span class="line"></span><br><span class="line">缓冲区是内部属性，并非类型构成要素。</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>请关注我的<a href="https://ymliang.netlify.com/about/" target="_blank" rel="noopener">个人博客</a></p>
 </blockquote>
 
       
     </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+      </div>
     
   </section>
 </article>
@@ -534,7 +1663,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
           
             
   <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
+    <a href="http://ymliang.com" rel="nofollow">
       
         <i class="fas fa-user" aria-hidden="true"></i>
       
@@ -557,6 +1686,14 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
         
           
             
+  
+  <div class="new-meta-item category">
+    <a href="/categories/go/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>go</p>
+    </a>
+  </div>
+
 
           
         
@@ -598,6 +1735,12 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
       
     </div>
     
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+      </div>
+    
   </section>
 </article>
 
@@ -631,7 +1774,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
           
             
   <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
+    <a href="http://ymliang.com" rel="nofollow">
       
         <i class="fas fa-user" aria-hidden="true"></i>
       
@@ -654,6 +1797,14 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
         
           
             
+  
+  <div class="new-meta-item category">
+    <a href="/categories/go/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>go</p>
+    </a>
+  </div>
+
 
           
         
@@ -692,6 +1843,12 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
       
     </div>
     
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+      </div>
+    
   </section>
 </article>
 
@@ -725,7 +1882,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
           
             
   <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
+    <a href="http://ymliang.com" rel="nofollow">
       
         <i class="fas fa-user" aria-hidden="true"></i>
       
@@ -748,6 +1905,14 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
         
           
             
+  
+  <div class="new-meta-item category">
+    <a href="/categories/go/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>go</p>
+    </a>
+  </div>
+
 
           
         
@@ -783,6 +1948,12 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
       
     </div>
     
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+      </div>
+    
   </section>
 </article>
 
@@ -816,7 +1987,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
           
             
   <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
+    <a href="http://ymliang.com" rel="nofollow">
       
         <i class="fas fa-user" aria-hidden="true"></i>
       
@@ -914,7 +2085,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
           
             
   <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
+    <a href="http://ymliang.com" rel="nofollow">
       
         <i class="fas fa-user" aria-hidden="true"></i>
       
@@ -963,336 +2134,6 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
       
       
     </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/05/30/beego框架搭建踩坑/">
-      beego框架搭建踩坑
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-30</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/go/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>go</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h3 id="什么是beego"><a href="#什么是beego" class="headerlink" title="什么是beego"></a>什么是beego</h3><pre><code>一个框架：可以理解为Golang的MVC框架
-四个特点：简单化、智能化、模块化、高性能
-具体好处去官网自行浏览
-</code></pre><p><a href="https://beego.me/" target="_blank" rel="noopener">官网传送门</a></p>
-      
-        <div class="readmore">
-          <a href="/2019/05/30/beego框架搭建踩坑/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
-        
-          <a href="/tags/beego/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>beego</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/05/21/redis取经之路/">
-      redis取经之路
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-21</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/redis/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>redis</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h3 id="redis基本数据结构"><a href="#redis基本数据结构" class="headerlink" title="redis基本数据结构"></a>redis基本数据结构</h3><p>Redis使用的是自己构建的简单动态字符串(SDS)[simple dynamic string,SDS]的抽象类型，并将SDS用做Rdis的默认字符串表示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SET msg &quot;hello&quot;</span><br><span class="line">Ok</span><br></pre></td></tr></table></figure></p>
-<p>redis的Key-Value的存储方式</p>
-<pre><code>key是一个字符串对象，对象的底层实现是一个保存着字符串&quot;msg&quot;的SDS
-value也是一个字符串对象，对象的底层实现是一个保存着字符串&quot;hello&quot;的SDS
-</code></pre><p>SDS除了用来保存数据库中的字符串值之外，还被用作缓冲区(Buffer):AOF模块中的AOF缓冲区<br>
-      
-        <div class="readmore">
-          <a href="/2019/05/21/redis取经之路/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </p></div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/redis/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>redis</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/05/16/Git配置SSH密钥/">
-      Git配置SSH密钥
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-16</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/git/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>git</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h3 id="配置用户名和邮箱"><a href="#配置用户名和邮箱" class="headerlink" title="配置用户名和邮箱"></a>配置用户名和邮箱</h3><pre><code>在随便一个文件夹空白处右击 点击 Git Bash Here
-初次安装git配置用户名和邮箱
-
-
-$ git config --global user.name &quot;yiming.liang&quot;
-$ git config --global user.email &quot;18135479521@163.com&quot;
-注意：（引号内请输入你自己设置的名字，和你自己的邮箱）此用户名和邮箱是git提交代码时用来显示你身份和联系方式的，并不是github用户名和邮箱
-</code></pre>
-      
-        <div class="readmore">
-          <a href="/2019/05/16/Git配置SSH密钥/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/git/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>git</a>
-        
-      </div>
     
   </section>
 </article>
@@ -1452,7 +2293,7 @@ $ git config --global user.email &quot;18135479521@163.com&quot;
         
           <li><a class="flat-box" title="/categories/git/" href="/categories/git/"><div class="name">git</div><div class="badge">(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class="name">go</div><div class="badge">(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class="name">go</div><div class="badge">(8)</div></a></li>
         
           <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class="name">kafka</div><div class="badge">(1)</div></a></li>
         
@@ -1501,7 +2342,7 @@ $ git config --global user.email &quot;18135479521@163.com&quot;
 </header>
 
     <div class="content pure">
-      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 24px; color: #555">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 17.33px; color: #828282">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 17.33px; color: #828282">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 20.67px; color: #6c6c6c">springCloud</a> <a href="/tags/springboot/" style="font-size: 17.33px; color: #828282">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
+      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 21.5px; color: #666">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 16.5px; color: #888">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 16.5px; color: #888">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 19px; color: #777">springCloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
     </div>
   </section>
 
