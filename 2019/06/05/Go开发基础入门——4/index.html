@@ -763,29 +763,29 @@ if
 <footer id="footer" class="clearfix">
   
   
-    <div class="social-wrapper">
+  <div class="social-wrapper">
+    
+    
+    <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
       
-        
-          <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
+    
+    <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
       
-        
-          <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
+    
+    <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
       
-        
-          <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
+    
+    <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
       
-        
-          <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
-          </a>
-        
-      
-    </div>
+  </div>
   
   <br>
   <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
@@ -795,39 +795,41 @@ if
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
     作为主题
     
-      ，
-      总访问量为
-      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+    ，
+    总访问量为
+    <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+    次
     
     。
   </div>
-  <div class="BbeiAn-info">
-    {{ __('京ICP备') }} -
-   <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#f0d784" rel="nofollow">19039949</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
- <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=19039949" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">{{ __('京公网安备 19039949') }}</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
-</div>
+
   <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
-<script>
-    var now = new Date(); 
-    function createtime() { 
-        var grt= new Date("03/01/2019 19:00:00");//在此处修改你的建站时间
-        now.setTime(now.getTime()+250); 
-        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
-        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
-        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
-        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
-        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
-        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
-        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
-    } 
-setInterval("createtime()",250);
-</script>
+  <script>
+    var now = new Date();
+    function createtime() {
+      var grt = new Date("03/01/2019 19:00:00");//在此处修改你的建站时间
+      now.setTime(now.getTime() + 250);
+      days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+      hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+      if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+      seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+      document.getElementById("timeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+      document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+  </script>
+  <div class="BbeiAn-info">
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#f0d784" rel="nofollow">京ICP备 - 19039949</a>
+    <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=19039949" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">京公网安备19039949号</a>
+    <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+  </div>
 
 </footer>
 <script>setLoadingBarProgress(80);</script>
-
 
       <script>setLoadingBarProgress(60);</script>
     </div>
