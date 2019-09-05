@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>SparkSQL分析 | YMLiang</title>
+  
+  
+  <meta name="description" content="YMLiang's blog">
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="YMLiang">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/images/erzi.png">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover post half">
+      
+        
+  <h1 class="title">YMLiang</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="你点我要干嘛！！">
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+      
+        <li>
+          <a class="nav home" href="/" id="home">
+            <i class="fas fa-rss fa-fw"></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/" rel="nofollow" id="friends">
+            <i class="fas fa-link fa-fw"></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/" rel="nofollow" id="about">
+            <i class="fas fa-info-circle fa-fw"></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          YMLiang
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;示例
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/" id="projects">
+								<i class="fas fa-code-branch fa-fw"></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+								<i class="fas fa-book fa-fw"></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/02/03/SparkSQL面试题/">
+        SparkSQL分析
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-02-03</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/sparkSql/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>sparkSql</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <blockquote>
+</blockquote>
+<p>SparkSql作为Spark的结构化数据处理模块，提供了非常强大的API，让分析人员用一次，就会为之倾倒，为之着迷，为之至死不渝。在内部，SparkSQL使用额外结构信息来执行额外的优化。在外部，可以使用SQL和DataSet 的API与之交互。<br><a id="more"></a></p>
+<h2 id="简单排名函数的使用"><a href="#简单排名函数的使用" class="headerlink" title="简单排名函数的使用"></a>简单排名函数的使用</h2><p>昨天和今天都登录了的用户id<br>昨天登录了但是今天没有登录的用户id</p>
+<pre><code>--ds1 中的数据代表昨天登录的用户id
+--ds2 中的数据代表今天登录的用户id
+--准备数据
+
+val ds1 = spark.range(0,20)
+val ds2 = spark.range(10,30)
+ds1.createOrReplaceTempView(&quot;t1&quot;)
+ds2.createOrReplaceTempView(&quot;t2&quot;)
+
+--求：
+--1. 昨天和今天都登录了的用户id
+--2. 昨天登录了但是今天没有登录的用户id
+
+--1. 这里用的是简单的表连接求交集,比较简单,如果看不懂可以把sql语句拆开看效果
+sql(&quot;&quot;&quot;
+select id1 from(
+select t1.id as id1,if(isnull(t2.id),&apos;未出现&apos;,t2.id) as id2 from t1 left join t2 on t1.id = t2.id
+)where id1 = id2
+&quot;&quot;&quot;).show
++---+
+|id1|
++---+
+| 10|
+| 11|
+| 12|
+| 13|
+| 14|
+| 15|
+| 16|
+| 17|
+| 18|
+| 19|
++---+
+
+--2. 在1的基础上稍微变一下,因为求第一天出现第二天没出线时只需要满足第二天的=未出现即可,
+
+sql(&quot;&quot;&quot;
+select id1 from(
+select t1.id as id1,if(isnull(t2.id),&apos;未出现&apos;,t2.id) as id2 from t1 left join t2 on t1.id = t2.id
+)where id2 = &apos;未出现&apos;
+&quot;&quot;&quot;).show
+
++---+     
+|id1|
++---+
+|  0|
+|  1|
+|  2|
+|  3|
+|  4|
+|  5|
+|  6|
+|  7|
+|  8|
+|  9|
++---+
+
+--3. 如果是求第二天出现第一天未出现的话t1 t2换个位置就好了
+
+sql(&quot;&quot;&quot;
+select id2 from(
+select if(isnull(t1.id),&apos;未出现&apos;,t1.id) as id1,t2.id as id2 from t1 right join t2 on t1.id = t2.id
+)where id1 = &apos;未出现&apos;
+&quot;&quot;&quot;).show
+
++---+
+|id2|
++---+
+| 20|
+| 21|
+| 22|
+| 23|
+| 24|
+| 25|
+| 26|
+| 27|
+| 28|
+| 29|
++---+
+</code></pre><blockquote>
+<p>这里如果对isnull函数不理解的话可以参考我写的,逻辑就是如果(if)字段为空isnull(字段),就替换为’未出现’ 否则还是原有字段,好像还有其他写法,大家自行百度吧,达到需求就可以了</p>
+</blockquote>
+<p><code>if(isnull(t1.id),&#39;未出现&#39;,t1.id)</code></p>
+<h2 id="每个部门工资最高的前3名"><a href="#每个部门工资最高的前3名" class="headerlink" title="每个部门工资最高的前3名"></a>每个部门工资最高的前3名</h2><pre><code>--这个数据表头是csv文件格式便于sparksql进行自动类型匹配
+EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO
+7369,SMITH,CLERK,7902,2001-01-02 22:12:13,800,,20
+7499,ALLEN,SALESMAN,7698,2002-01-02 22:12:13,1600,300,30
+7521,WARD,SALESMAN,7698,2003-01-02 22:12:13,1250,500,30
+7566,JONES,MANAGER,7839,2004-01-02 22:12:13,2975,,20
+7654,MARTIN,SALESMAN,7698,2005-01-02 22:12:13,1250,1400,30
+7698,BLAKE,MANAGER,7839,2005-04-02 22:12:13,2850,,30
+7782,CLARK,MANAGER,7839,2006-03-02 22:12:13,2450,,10
+7788,SCOTT,ANALYST,7566,2007-03-02 22:12:13,3000,,20
+7839,KING,PRESIDENT,,2006-03-02 22:12:13,5000,,10
+7844,TURNER,SALESMAN,7698,2009-07-02 22:12:13,1500,0,30
+7876,ADAMS,CLERK,7788,2010-05-02 22:12:13,1100,,20
+7900,JAMES,CLERK,7698,2011-06-02 22:12:13,950,,30
+7902,FORD,ANALYST,7566,2011-07-02 22:12:13,3000,,20
+7934,MILLER,CLERK,7782,2012-11-02 22:12:13,1300,,10
+
+--最后达到的要求
++------+----+----+----+
+|deptno|sal1|sal2|sal3|
++------+----+----+----+
+|    10|5000|2450|1300|
+|    20|3000|3000|2975|
+|    30|2850|1600|1500|
++------+----+----+----+
+
+--(&quot;header&quot;, true)表示如果这个是数据本身是有列名的就按第一行的列名去建表,列名就是这个文件的第一行的每个单词
+--(&quot;inferschema&quot;, true)表示自动类型推断,我们可以用df.printSchema来看spark给我们匹配的类型是什么
+--.csv(&quot;hdfs://master:9000/data/a.log&quot;)
+
+val df = spark.read.option(&quot;header&quot;,true).option(&quot;inferschema&quot;,true).csv(&quot;hdfs://master:9000/data/a.log&quot;)
+
+--建临时表
+df.createOrReplaceTempView(&quot;temp&quot;)
+</code></pre><p><code>row_number() over()</code> –&gt; <a href="https://www.cnblogs.com/liuzhenlei/p/8026278.html" target="_blank" rel="noopener">排名函数的用法</a></p>
+<pre><code>--这里我都是分布来算的,便于自己理清思路,同时用多层子查询时这样写思路会很清晰
+
+sql(&quot;&quot;&quot;
+select deptno,sal,row_number() over(partition by deptno order by sal desc) as salnum from temp having salnum &lt; 4
+&quot;&quot;&quot;).show
+
++------+----+------+                                                            
+|deptno| sal|salnum|
++------+----+------+
+|    20| 800|     1|
+|    20|1100|     2|
+|    20|2975|     3|
+|    10|1300|     1|
+|    10|2450|     2|
+|    10|5000|     3|
+|    30| 950|     1|
+|    30|1250|     2|
+|    30|1250|     3|
++------+----+------+
+</code></pre><p><code>collect_list(sal)</code> <a href="http://www.cnblogs.com/cc11001100/p/9043946.html" target="_blank" rel="noopener">列转行</a> 配合group by来使用</p>
+<pre><code>sql(&quot;&quot;&quot;
+select deptno,collect_list(sal) as sal from(
+select deptno,sal,row_number() over(partition by deptno order by sal desc) as salnum from temp having salnum &lt; 4)
+group by deptno
+order by deptno
+&quot;&quot;&quot;).show
+
++------+------------------+                                                     
+|deptno|               sal|
++------+------------------+
+|    10|[5000, 2450, 1300]|
+|    20|[3000, 3000, 2975]|
+|    30|[2850, 1600, 1500]|
++------+------------------+
+
+--sal[0],sal[1],sal[2]实质上类似于数组的取值,可以把sal看作是数组,这一步与求结果无关只是展示一下怎么取值
+
+sql(&quot;&quot;&quot;
+select deptno,sal[0],sal[1],sal[2] from(
+select deptno,collect_list(sal) as sal from(
+select deptno,sal,row_number() over(partition by deptno order by sal desc) as salnum from temp having salnum &lt; 4)
+group by deptno)
+order by deptno
+&quot;&quot;&quot;).show
++------+------+------+------+                                                   
+|deptno|sal[0]|sal[1]|sal[2]|
++------+------+------+------+
+|    10|  5000|  2450|  1300|
+|    20|  3000|  3000|  2975|
+|    30|  2850|  1600|  1500|
++------+------+------+------+
+
+
+--求每个部门的最高工资
+--first_value(sal)  sal中的第一个值
+
+sql(&quot;&quot;&quot;
+select distinct deptno,first from (
+select deptno,sal,first_value(sal) over(partition by deptno order by sal desc) as first from temp
+)order by deptno
+&quot;&quot;&quot;).show
+
++------+-----+                                                                  
+|deptno|first|
++------+-----+
+|    10| 5000|
+|    20| 3000|
+|    30| 2850|
++------+-----+
+
+--求每个部门的最低工资
+--求的时候order by 别加desc就好了
+sql(&quot;&quot;&quot;
+select distinct deptno,first from (
+select deptno,sal,first_value(sal) over(partition by deptno order by sal) as first from temp
+)order by deptno
+&quot;&quot;&quot;).show
+
++------+-----+                                                                  
+|deptno|first|
++------+-----+
+|    10| 1300|
+|    20|  800|
+|    30|  950|
++------+-----+
+</code></pre><h2 id="求NBA球队连冠记录是在哪年到哪年"><a href="#求NBA球队连冠记录是在哪年到哪年" class="headerlink" title="求NBA球队连冠记录是在哪年到哪年"></a>求NBA球队连冠记录是在哪年到哪年</h2><pre><code>--这个数据与上一题的数据格式一样的
+team,y
+活塞,1990
+公牛,1991
+公牛,1992
+公牛,1993
+火箭,1994
+火箭,1995
+公牛,1996
+公牛,1997
+公牛,1998
+马刺,1999
+湖人,2000
+湖人,2001
+湖人,2002
+马刺,2003
+活塞,2004
+马刺,2005
+热火,2006
+马刺,2007
+凯尔特人,2008
+湖人,2009
+湖人,2010
+
+--最终数据
++----+------+------+
+|team|min(y)|max(y)|
++----+------+------+
+|公牛|  1991|  1993|
+|火箭|  1994|  1995|
+|公牛|  1996|  1998|
+|湖人|  2000|  2002|
+|湖人|  2009|  2010|
++----+------+------+
+
+--做这个题的时候我们要清除题的要求,是求连冠的球队,连冠指的是中间不能有其他球队夺冠,必须&gt;=2才可以,而且年份要挨着
+
+val df2 = spark.read.
+option(&quot;header&quot;, true).
+option(&quot;inferschema&quot;, true).
+csv(&quot;hdfs://master:9000/data/team.log&quot;)
+df2.createOrReplaceTempView(&quot;t2&quot;)
+
+--这里我也是分步骤来求,便于理清思路
+--这里用了y-row_number(),为什么这么用,在于如果是连冠,row_number()加排名函数,按球队名称做partition by,用夺冠年份减去row_number得到的数就是相同的,这里比较难理解,如果搞懂这里题也就做完了
+
+-这里的a是分组排名的序号 aa也就是 y-a的值
+
+sql(&quot;&quot;&quot;
+select team,y,a,aa from (
+select team,y,row_number() over(partition by team order by y)as a,y-row_number() over(partition by team order by y)as aa from t2)
+&quot;&quot;&quot;).show
+
+
++----+----+---+----+  
+|team|   y|  a|  aa|
++----+----+---+----+
+|  热火|2006|  1|2005|
+|  活塞|1990|  1|1989|
+|  活塞|2004|  2|2002|
+|  火箭|1994|  1|1993|
+|  火箭|1995|  2|1993|
+|凯尔特人|2008|  1|2007|
+|  湖人|2000|  1|1999|
+|  湖人|2001|  2|1999|
+|  湖人|2002|  3|1999|
+|  湖人|2009|  4|2005|
+|  湖人|2010|  5|2005|
+|  公牛|1991|  1|1990|
+|  公牛|1992|  2|1990|
+|  公牛|1993|  3|1990|
+|  公牛|1996|  4|1992|
+|  公牛|1997|  5|1992|
+|  公牛|1998|  6|1992|
+|  马刺|1999|  1|1998|
+|  马刺|2003|  2|2001|
+|  马刺|2005|  3|2002|
++----+----+---+----+
+
+--只有重复出现的连续team,之后减去row_number()后才会有相同的aa列字段 此相同的aa字段代表在相同的字段下，球队是处于连冠状态
+
+--按球队和aa分组，如果不按aa分组 那么公牛的连冠记录中间隔的几年也会被算进去,这样处理完的数据就不算是连冠的数据
+
+sql(&quot;&quot;&quot;
+select team,min(y) miny,max(y) maxy from(
+select team,y,y-row_number() over(partition by team order by y)as aa from t2)
+group by team,aa
+&quot;&quot;&quot;).show
+
++----+----+----+
+|team|miny|maxy|
++----+----+----+
+|  热火|2006|2006|
+|  活塞|1990|1990|
+|  活塞|2004|2004|
+|  火箭|1994|1995|
+|凯尔特人|2008|2008|
+|  湖人|2000|2002|
+|  湖人|2009|2010|
+|  公牛|1991|1993|
+|  公牛|1996|1998|
+|  马刺|1999|1999|
+|  马刺|2003|2003|
+|  马刺|2005|2005|
+|  马刺|2007|2007|
++----+----+----+
+
+
+--判断最小值是否小于最大值，目的是为了排除单独一年获得冠军的球队即最小值=最大值，取出连冠过的球队
+--最终要尽可能的精简代码,这样会给面试官一个好印象(代码洁癖什么的???),也会显得自己sql写的很好
+
+sql(&quot;&quot;&quot;
+select team,min(y) miny,max(y) maxy from(
+select team,y,y-row_number() over(partition by team order by y)as aa from t2)
+group by team,aa
+having min(y)&lt;max(y)
+order by miny
+&quot;&quot;&quot;).show
+
+--  大功告成
++----+----+----+
+|team|miny|maxy|
++----+----+----+
+|  公牛|1991|1993|
+|  火箭|1994|1995|
+|  公牛|1996|1998|
+|  湖人|2000|2002|
+|  湖人|2009|2010|
++----+----+----+
+</code></pre><hr>
+<blockquote>
+<p>好啦大功告成！！！，有问题可以联系我我们一起交流<br>616581760 微信QQ同号</p>
+</blockquote>
+<hr>
+
+        </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-15T10:37:47+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>最后更新于 2019年5月15日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/sparkSql/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>sparkSql</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/02/03/SparkSQL面试题/&title=SparkSQL分析 | YMLiang&summary=
+
+SparkSql作为Spark的结构化数据处理模块，提供了非常强大的API，让分析人员用一次，就会为之倾倒，为之着迷，为之至死不渝。在内部，SparkSQL使用额外结构信息来执行额外的优化。在外部，可以使用SQL和DataSet 的API与之交互。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/02/03/SparkSQL面试题/&title=SparkSQL分析 | YMLiang&summary=
+
+SparkSql作为Spark的结构化数据处理模块，提供了非常强大的API，让分析人员用一次，就会为之倾倒，为之着迷，为之至死不渝。在内部，SparkSQL使用额外结构信息来执行额外的优化。在外部，可以使用SQL和DataSet 的API与之交互。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/02/03/SparkSQL面试题/&title=SparkSQL分析 | YMLiang&summary=
+
+SparkSql作为Spark的结构化数据处理模块，提供了非常强大的API，让分析人员用一次，就会为之倾倒，为之着迷，为之至死不渝。在内部，SparkSQL使用额外结构信息来执行额外的优化。在外部，可以使用SQL和DataSet 的API与之交互。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/2019/02/03/浅谈项目中用到redis的地方/" rel="prev" title="浅谈项目中用到redis的地方">
+                                  
+                                      浅谈项目中用到redis的地方
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/redis/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>redis</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/02/02/SQL求K线波峰波谷/" rel="prev" title="SQL求K线波峰波谷">
+                                    
+                                        SQL求K线波峰波谷
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/SparkSql/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>SparkSql</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'SparkSQL分析',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+        
+          
+          
+            <section class="widget author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="/images/toux.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单排名函数的使用"><span class="toc-text">简单排名函数的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#每个部门工资最高的前3名"><span class="toc-text">每个部门工资最高的前3名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求NBA球队连冠记录是在哪年到哪年"><span class="toc-text">求NBA球队连冠记录是在哪年到哪年</span></a></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/material-x/" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          主题文档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/git/" href="/categories/git/"><div class="name">git</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class="name">go</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class="name">kafka</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/leetcode/" href="/categories/leetcode/"><div class="name">leetcode</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class="name">linux</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/maven/" href="/categories/maven/"><div class="name">maven</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class="name">redis</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/spark/" href="/categories/spark/"><div class="name">spark</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/sparkSql/" href="/categories/sparkSql/"><div class="name">sparkSql</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/springCloud/" href="/categories/springCloud/"><div class="name">springCloud</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/springboot/" href="/categories/springboot/"><div class="name">springboot</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/sql/" href="/categories/sql/"><div class="name">sql</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/面经/" href="/categories/面经/"><div class="name">面经</div><div class="badge">(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 21.5px; color: #666">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 16.5px; color: #888">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 16.5px; color: #888">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 19px; color: #777">springCloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class="widget music">
+    
+<header class="pure">
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn" rel="external nofollow noopener noreferrer" target="_blank" href="https://music.163.com/#/user/home?id=63035382" title="https://music.163.com/#/user/home?id=63035382">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer" data-theme="#1BCDFC" data-mode="circulation" data-server="netease" data-type="playlist" data-id="2615636388" data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <div class="social-wrapper">
+    
+    
+    <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+  </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+    ，
+    总访问量为
+    <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+    次
+    
+    。
+  </div>
+
+  Copyright <i class="far fa-copyright"></i> 2018-2019
+  <a href="http://ymliang.com/" target="_blank"> YMLiang&#39;BLOG </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@2.0.4/images/icp.png">
+  <a target="_blank" href="https://icp.sojson.com/search1_ymliang.com.html" style="color:#f0d784" rel="nofollow">京ICP备 - 19039949</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+  <script>
+    var now = new Date();
+    function createtime() {
+      var grt = new Date("03/01/2019 19:00:00");//在此处修改你的建站时间
+      now.setTime(now.getTime() + 250);
+      days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+      hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+      if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+      seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+      document.getElementById("timeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+      document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+  </script>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["/images/lunbo.jpg", "/images/lunbo2.jpg", "/images/lunbo3.jpg", "/images/lunbo4.jpg", "/images/lunbo5.jpg", "/images/lunbo6.jpg", "/images/lunbo7.jpg", "https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "5000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["/images/lunbo.jpg", "/images/lunbo2.jpg", "/images/lunbo3.jpg", "/images/lunbo4.jpg", "/images/lunbo5.jpg", "/images/lunbo6.jpg", "/images/lunbo7.jpg", "https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "5000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+    
+      <script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1.0/js/volantis.min.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "twPU2mub1jrsQ8rQ0f34LRTY-gzGzoHsz",
+    appKey: "EGVeDfztsyWzqsNMb1DKQM03",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":350,"height":450},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!--动态线条背景-->
+<!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
+opacity：表示线条透明度（0~1），默认：0.5
+count：表示线条的总数量，默认：150
+zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
+<script type="text/javascript"
+color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/love.js"></script>
+</html> -->
+
+<!-- 添加鼠标点击烟花爆炸效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>

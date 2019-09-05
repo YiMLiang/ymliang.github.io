@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Spark访问数据库的几种方法 | YMLiang</title>
+  
+  
+  <meta name="description" content="YMLiang's blog">
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="YMLiang">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/images/erzi.png">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover post half">
+      
+        
+  <h1 class="title">YMLiang</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="你点我要干嘛！！">
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+      
+        <li>
+          <a class="nav home" href="/" id="home">
+            <i class="fas fa-rss fa-fw"></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/" rel="nofollow" id="friends">
+            <i class="fas fa-link fa-fw"></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/" rel="nofollow" id="about">
+            <i class="fas fa-info-circle fa-fw"></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          YMLiang
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;示例
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/" id="projects">
+								<i class="fas fa-code-branch fa-fw"></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+								<i class="fas fa-book fa-fw"></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/02/08/Spark访问数据库的几种方法/">
+        Spark访问数据库的几种方法
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-02-08</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/数据库/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>数据库</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p>这篇文章涵盖了spark与常用关系型数据库交互的所有内容(oracle,sqlserver与mysql类似这里就不详细说明了)，这也是我项目中用到最常用的几种，应该可以帮助大家快速开发项目<br><a id="more"></a></p>
+<h2 id="Spark访问Hive数据库"><a href="#Spark访问Hive数据库" class="headerlink" title="Spark访问Hive数据库"></a>Spark访问Hive数据库</h2><h3 id="spark访问hive数据库有两种方式"><a href="#spark访问hive数据库有两种方式" class="headerlink" title="spark访问hive数据库有两种方式"></a>spark访问hive数据库有两种方式</h3><ol>
+<li><p>第一种是原始的jdbc访问hive数据库</p>
+<pre><code>import java.sql.DriverManager
+
+object HiveJDBC {
+    def main(args: Array[String]): Unit = {
+        //1. 利用反射机制获取数据库驱动类
+        val driver = &quot;org.apache.hive.jdbc.HiveDriver&quot;
+        Class.forName(driver)
+        //2. 声明hive数据库的url,username,password
+        val (url,username,password) = (&quot;jdbc:hive2://master:10000&quot;,&quot;spark&quot;,&quot;&quot;)
+        //2.1 获取数据库连接对象 
+        val connection = DriverManager.getConnection(url,username,password)
+        //2.2 编写sql语句
+        val sql = &quot;select count(*) as count from sogou.sogou500w_ext&quot;
+        //3. 执行sql语句
+        val statement = connection.prepareStatement(sql)
+        //4. 处理结果集
+        val result = statement.executeQuery()
+        //4. 循环打印结果
+        while(result.next()){
+        println(s&quot;${result.getString(&quot;mycount&quot;)}&quot;)
+        }
+        //5. 关闭连接
+        result.close()
+        statement.close()
+        connection.close()
+    }
+}
+</code></pre></li>
+<li><p>第二种是通过spark自带的访问数据库的方法，在配置sparkSession时引入<code>enableHiveSupport()</code>支持hive的访问</p>
+<pre><code>import org.apache.log4j.{Level, Logger}
+import org.apache.spark.sql.SparkSession
+object ReadHive {
+//隐藏打印的配置信息
+Logger.getLogger(&quot;org&quot;).setLevel(Level.ERROR)
+def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder()
+    .appName(&quot;Spark Hive Demo&quot;)
+    .master(&quot;local&quot;)
+    .enableHiveSupport()//支持hive，这个是关键，没有不行！
+    .getOrCreate()
+    //spark.sparkContext.addJar(&quot;/home/ymliang/ReadHive.jar&quot;)
+    //利用sparksql访问hive数据库，本质是编写sql语句
+    spark.sql(&quot;use sogou&quot;)
+    //show-&gt;spark的action算子，打印结果，默认20行数据
+    spark.sql(&quot;select * from sogou.sogou500w_ext&quot;).show()
+    spark.stop()
+}
+}
+</code></pre></li>
+</ol>
+<h2 id="Spark访问MySql数据库"><a href="#Spark访问MySql数据库" class="headerlink" title="Spark访问MySql数据库"></a>Spark访问MySql数据库</h2><h3 id="spark访问mysql数据库的三种方式"><a href="#spark访问mysql数据库的三种方式" class="headerlink" title="spark访问mysql数据库的三种方式"></a>spark访问mysql数据库的三种方式</h3><ol>
+<li><p>用jdbc方式访问mysql数据库</p>
+<pre><code>/**
+* 读取数据库中的数据
+* 备注：
+* 1、将jdbc驱动拷贝到$SPARK_HOME/conf目录下，是最简单的做法；
+* 2、明白每一个参数的意思，一个参数不对整个结果出不来；
+* 3、从数据库从读大量的数据进行分析，不推荐；读取少量的数据是可以接受的，也是常见的做法。
+*/
+object MySqlJDBC {
+    def main(args: Array[String]): Unit = {
+        val spark = SparkSession.builder()
+        .master(&quot;local&quot;)
+        .appName(s&quot;${this.getClass.getCanonicalName}&quot;)
+        .getOrCreate()
+        /**
+        * 配置jdbc参数
+        * url : mysql的url
+        * driver : mysql的数据库驱动类
+        * dbtable : 表名
+        * user : 用户名
+        * password : 密码
+        * load() : 加载
+        */
+        val jdbcDF = spark.read.format(&quot;jdbc&quot;)
+        .option(&quot;url&quot;,&quot;jdbc:mysql://master:3306/spark&quot;)
+        .option(&quot;driver&quot;,&quot;com.mysql.jdbc.Driver&quot;)
+        .option(&quot;dbtable&quot;,&quot;student&quot;)
+        .option(&quot;user&quot;,&quot;spark&quot;)
+        .option(&quot;password&quot;,&quot;spark&quot;)
+        .load()
+        //将读出的数据库信息创建临时表，常用方法是createOrReplaceTempView(创建,如果存在则重新创建视图)
+        jdbcDF.createTempView(&quot;tmp&quot;)
+        //格式化打印表内容
+        spark.sql(&quot;select * from tmp&quot;).show()
+        //打印列的Schema属性
+        jdbcDF.printSchema
+    }
+}
+</code></pre></li>
+<li><p>创建一个数据库工具类(使用事务和批处理，提高性能)</p>
+<ul>
+<li>首先为什么要使用批处理？</li>
+<li>批处理时：数据累积到一定数量，再一次性提交到数据库，减少了与数据库的交互次数，所以效率会大大提高</li>
+<li><p>事务：事务指逻辑上的一组操作，组成这组操作的各个单元，要不全部成功，要不全部不成功，默认是关闭事务的。</p>
+<pre><code>import java.sql.{Connection, DriverManager, PreparedStatement, ResultSet}
+
+/**
+*  既用事务，也用批处理；（建议在处理大批量的数据时，同时使用批处理和事务）
+*/
+object MySqlUtils {
+/**
+* 获取一个数据库连接对象
+*
+* @return Connection
+*/
+def getConnect(): Connection = {
+    var conn: Connection = null
+    var psts: PreparedStatement = null
+    try {
+    Class.forName(&quot;com.mysql.jdbc.Driver&quot;)
+    conn = DriverManager.getConnection(&quot;jdbc:mysql://master:3306/spark&quot;, &quot;spark&quot;, &quot;spark&quot;)
+    conn.setAutoCommit(false)//将自动提交关闭
+    } catch {
+    case e:Exception =&gt; e.printStackTrace()
+    }
+    conn
+}
+
+/**
+    * 关闭连接 con,psts,res Object
+    */
+//Connection conn, ResultSet rs, Statement st
+def closeRes(con: Connection, rs: ResultSet, psts: PreparedStatement): Unit = {
+    if (con != null) {
+        try {
+            con.close()
+        } catch {
+            case e: Exception =&gt; e.printStackTrace()
+        }
+    }
+    if (rs != null) {
+        try {
+            rs.close()
+        } catch {
+            case e: Exception =&gt; e.printStackTrace()
+        }
+    }
+    if (psts != null) {
+        try {
+            psts.close()
+        } catch {
+            case e: Exception =&gt; e.printStackTrace()
+        }
+    }
+}
+}
+</code></pre></li>
+<li><p>具体使用这个工具类时，调用方法获取连接关闭链接即可，这里举一个之前做的小demo</p>
+<pre><code>import java.sql.{Connection, PreparedStatement}
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.{SparkConf, SparkContext}
+
+object LogTest1 {
+//隐藏打印信息
+Logger.getLogger(&quot;org&quot;).setLevel(Level.ERROR)
+def main(args: Array[String]): Unit = {
+    val conf = new SparkConf()
+    .setAppName(this.getClass.getCanonicalName)
+    .setMaster(&quot;local&quot;)
+    val sc = new SparkContext(conf)
+    //读文件
+    val file = sc.textFile(&quot;hdfs://master:9000/sparkTest01.log&quot;)
+    //处理文件
+    //数据文件大致内容如下:
+    //192.168.88.1 - - [30/Jul/2017:12:53:43 +0800] &quot;GET /MyDemoWeb/ HTTP/1.1&quot; 200 259
+    //192.168.88.1 - - [30/Jul/2017:12:53:43 +0800] &quot;GET /MyDemoWeb/head.jsp HTTP/1.1&quot; 200 713
+    //192.168.88.1 - - [30/Jul/2017:12:53:43 +0800] &quot;GET /MyDemoWeb/body.jsp HTTP/1.1&quot; 200 240
+    //192.168.88.1 - - [30/Jul/2017:12:54:37 +0800] &quot;GET /MyDemoWeb/oracle.jsp HTTP/1.1&quot; 200 242
+    //192.168.88.1 - - [30/Jul/2017:12:54:38 +0800] &quot;GET /MyDemoWeb/hadoop.jsp HTTP/1.1&quot; 200 242
+    //192.168.88.1 - - [30/Jul/2017:12:54:38 +0800] &quot;GET /MyDemoWeb/java.jsp HTTP/1.1&quot; 200 240
+    val data = file.map(x =&gt; {
+        //按&quot;切分
+        val line = x.split(&quot;\&quot;&quot;)
+        //切分开取第二个数据，再按/切分
+        val line2 = line(1).split(&quot;/&quot;)
+        //取切分后的第三个个数据再按空格切分后取第一个数据即head.jsp
+        //变为tuple形式(xx,1)返回
+        (line2(2).split(&quot;\\s+&quot;)(0), 1)
+    }).collect.filter(_._1 != &quot;&quot;)
+    //filter即取出数据为不为空的信息，起到过滤的作用
+    //做wordCount
+    val data2 = data.groupBy(_._1).map(x =&gt; {
+    //map后数据类型是
+    //x.1-&gt;String
+    //x.2是Array(String,Int)
+    //所以对x.2再遍历求和即得到出现的次数
+    (x._1, x._2.map(x =&gt; x._2).sum)
+    }).toArray
+    //返回的是数组形式
+
+    //JDBC访问mysql数据库，调用了MysqlUtils类获取连接和关闭链接
+    //并使用了批处理executeBatch(),addBatch()
+    //相比于executeUpdate()效率更高
+
+    var conn: Connection = null
+    var psts: PreparedStatement = null
+    //jdbc
+    try {
+        //调用getConnect()获取链接
+        conn = MySqlUtils.getConnect()
+        //执行sql语句
+        val psts = conn.prepareStatement(&quot;insert into test01 values(?,?)&quot;)
+        for (i &lt;- 0 to data2.length - 1) {
+            psts.setString(1, s&quot;${data2(i)._1}&quot;)
+            psts.setInt(2, data2(i)._2)
+            // 这样，更新10000条数据，就得访问数据库10000次,造成io的负载，数据量一大会明显察觉速度变慢
+            psts.executeUpdate()
+            //psts.setString(1, s&quot;${data2(i)._1}&quot;)
+            //psts.setInt(2, data2(i)._2)
+            //psts.addBatch()//添加到同一个批处理中
+        }
+        //批处理 executeBatch() 批量写入，降低IO，提高性能
+        //psts.executeBatch()//执行批处理
+        conn.commit(); //执行完后，手动提交事务
+        conn.setAutoCommit(true); //在把自动提交打开
+    } catch {
+        case e: Exception =&gt; e.printStackTrace()
+    } finally {
+        //调用closeRes()关闭链接
+        MySqlUtils.closeRes(conn, null, psts)
+    }
+}
+}
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>用spark方式链接mysql，前提是必须创建dataFrame(df)，这里以hive写入mysql为例，将hive同mysql整合起来，也是平常非常常用的一种技术</p>
+<p> import java.util.Properties<br> import org.apache.log4j.{Level, Logger}<br> import org.apache.spark.sql.{SaveMode, SparkSession}</p>
+<p> /**</p>
+<ul>
+<li><p>spark将最后一条sql语句的查询结果保存到mysql数据库中<br>*/<br>object HiveToMySql {<br>  Logger.getLogger(“org”).setLevel(Level.ERROR)</p>
+<p>  def main(args: Array[String]): Unit = {</p>
+<pre><code>val spark = SparkSession.builder()
+.appName(&quot;Spark Hive Demo&quot;)
+.master(&quot;spark://master:7077&quot;)
+.enableHiveSupport() //支持hive，这个是关键，没有不行！
+.getOrCreate()
+//读取hive数据库内容
+spark.sql(&quot;use sogou&quot;)
+//获取dataFrame
+val df = spark.sql(&quot;select count(*) as mycount from sogou.sogou500w_ext&quot;)
+//创建properties对象，注入mysql配置
+val prop = new Properties()
+prop.put(&quot;user&quot;, &quot;spark&quot;)
+prop.put(&quot;password&quot;, &quot;spark&quot;)
+prop.put(&quot;driver&quot;, &quot;com.mysql.jdbc.Driver&quot;)
+//写入数据时字段名要对应上，顺序可以不与实际的表对应也就是mysql与hive的表列字段要一致
+df.write
+.mode(SaveMode.Overwrite)
+.jdbc(&quot;jdbc:mysql://master:3306/spark&quot;, &quot;spark.bb&quot;, prop)
+//写入mysql时可以配置mode(插入)，overwrite(覆盖)，append(追加)，ignore(忽略)，error(默认表存在报错)常用是mode和overwrite
+//resultDF.write.mode(SaveMode.Overwrite).jdbc(&quot;jdbc:mysql://192.168.200.150:3306/spark&quot;,&quot;student&quot;,prop)
+</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>以上涵盖了spark与常用关系型数据库交互的所有内容(oracle,sqlserver与mysql类似这里就不详细说明了)，希望对大家有所帮助，这也是我项目中用到最常用的几种，应该可以帮助大家快速开发项目</p>
+</blockquote>
+
+        </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-03-27T15:51:06+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>最后更新于 2019年3月27日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/sparkSql/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>sparkSql</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/02/08/Spark访问数据库的几种方法/&title=Spark访问数据库的几种方法 | YMLiang&summary=这篇文章涵盖了spark与常用关系型数据库交互的所有内容(oracle,sqlserver与mysql类似这里就不详细说明了)，这也是我项目中用到最常用的几种，应该可以帮助大家快速开发项目">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/02/08/Spark访问数据库的几种方法/&title=Spark访问数据库的几种方法 | YMLiang&summary=这篇文章涵盖了spark与常用关系型数据库交互的所有内容(oracle,sqlserver与mysql类似这里就不详细说明了)，这也是我项目中用到最常用的几种，应该可以帮助大家快速开发项目">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/02/08/Spark访问数据库的几种方法/&title=Spark访问数据库的几种方法 | YMLiang&summary=这篇文章涵盖了spark与常用关系型数据库交互的所有内容(oracle,sqlserver与mysql类似这里就不详细说明了)，这也是我项目中用到最常用的几种，应该可以帮助大家快速开发项目">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/2019/02/22/Leetcode-177-第N高的薪水/" rel="prev" title="Leetcode 177 第N高的薪水">
+                                  
+                                      Leetcode 177 第N高的薪水
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/leetcode/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>leetcode</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/02/08/Hbase之HMaster启动后经常掉的解决方案/" rel="prev" title="Hbase之HMaster启动后经常掉的解决方案">
+                                    
+                                        Hbase之HMaster启动后经常掉的解决方案
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Hbase/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>Hbase</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Spark访问数据库的几种方法',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+        
+          
+          
+            <section class="widget author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="/images/toux.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spark访问Hive数据库"><span class="toc-text">Spark访问Hive数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spark访问hive数据库有两种方式"><span class="toc-text">spark访问hive数据库有两种方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spark访问MySql数据库"><span class="toc-text">Spark访问MySql数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spark访问mysql数据库的三种方式"><span class="toc-text">spark访问mysql数据库的三种方式</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/material-x/" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          主题文档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/git/" href="/categories/git/"><div class="name">git</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class="name">go</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/kafka/" href="/categories/kafka/"><div class="name">kafka</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/leetcode/" href="/categories/leetcode/"><div class="name">leetcode</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class="name">linux</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/maven/" href="/categories/maven/"><div class="name">maven</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/redis/" href="/categories/redis/"><div class="name">redis</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/spark/" href="/categories/spark/"><div class="name">spark</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/sparkSql/" href="/categories/sparkSql/"><div class="name">sparkSql</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/springCloud/" href="/categories/springCloud/"><div class="name">springCloud</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/springboot/" href="/categories/springboot/"><div class="name">springboot</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/sql/" href="/categories/sql/"><div class="name">sql</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/面经/" href="/categories/面经/"><div class="name">面经</div><div class="badge">(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 21.5px; color: #666">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 16.5px; color: #888">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 16.5px; color: #888">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 19px; color: #777">springCloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class="widget music">
+    
+<header class="pure">
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn" rel="external nofollow noopener noreferrer" target="_blank" href="https://music.163.com/#/user/home?id=63035382" title="https://music.163.com/#/user/home?id=63035382">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer" data-theme="#1BCDFC" data-mode="circulation" data-server="netease" data-type="playlist" data-id="2615636388" data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <div class="social-wrapper">
+    
+    
+    <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="/18135479521@163.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="https://github.com/YiMLiang" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+    
+    <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+    </a>
+    
+      
+  </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+    ，
+    总访问量为
+    <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+    次
+    
+    。
+  </div>
+
+  Copyright <i class="far fa-copyright"></i> 2018-2019
+  <a href="http://ymliang.com/" target="_blank"> YMLiang&#39;BLOG </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@2.0.4/images/icp.png">
+  <a target="_blank" href="https://icp.sojson.com/search1_ymliang.com.html" style="color:#f0d784" rel="nofollow">京ICP备 - 19039949</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+  <script>
+    var now = new Date();
+    function createtime() {
+      var grt = new Date("03/01/2019 19:00:00");//在此处修改你的建站时间
+      now.setTime(now.getTime() + 250);
+      days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+      hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+      if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+      seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+      document.getElementById("timeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+      document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+  </script>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["/images/lunbo.jpg", "/images/lunbo2.jpg", "/images/lunbo3.jpg", "/images/lunbo4.jpg", "/images/lunbo5.jpg", "/images/lunbo6.jpg", "/images/lunbo7.jpg", "https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "5000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["/images/lunbo.jpg", "/images/lunbo2.jpg", "/images/lunbo3.jpg", "/images/lunbo4.jpg", "/images/lunbo5.jpg", "/images/lunbo6.jpg", "/images/lunbo7.jpg", "https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "5000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+    
+      <script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1.0/js/volantis.min.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+      path: "/wiki/material-x/",
+    
+    appId: "twPU2mub1jrsQ8rQ0f34LRTY-gzGzoHsz",
+    appKey: "EGVeDfztsyWzqsNMb1DKQM03",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":350,"height":450},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!--动态线条背景-->
+<!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
+opacity：表示线条透明度（0~1），默认：0.5
+count：表示线条的总数量，默认：150
+zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
+<script type="text/javascript"
+color="0,0,0" opacity='0.5' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/love.js"></script>
+</html> -->
+
+<!-- 添加鼠标点击烟花爆炸效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
