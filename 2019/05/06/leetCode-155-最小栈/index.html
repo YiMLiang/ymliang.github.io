@@ -3,6 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="WpHIYBuKnuiZj1YRpOvxdEtx34tPeUT2NCrdeUoy6ws">
   
   <title>leetCode 155 最小栈 | YMLiang</title>
   
@@ -332,7 +333,7 @@ minStack.pop();
 minStack.top();      --&gt; 返回 0.
 minStack.getMin();   --&gt; 返回 -2.
 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">class MinStack &#123;</span><br><span class="line">    //声明栈</span><br><span class="line">    private Stack&lt;Integer&gt; stack;</span><br><span class="line">    //声明初始最小值为Integer.MAX_VALUE保证第一个push的值必定毕它小则可以设定第一个push的值为最小值</span><br><span class="line">    private int min = Integer.MAX_VALUE;</span><br><span class="line">    /** initialize your data structure here. */</span><br><span class="line"></span><br><span class="line">    public MinStack() &#123;</span><br><span class="line">        //新建栈</span><br><span class="line">        stack = new Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void push(int x) &#123;</span><br><span class="line">        //判断如果push的值小于等于min值则将之前的最小值入栈，min设置为当前最小值，之后将当前最小值入栈</span><br><span class="line">        // &gt;= 中的 等于是为了避免出现相同值的情况 比如 0,1,0</span><br><span class="line">        if(min&gt;=x)&#123;</span><br><span class="line">            stack.push(min);</span><br><span class="line">            min = x;</span><br><span class="line">        &#125;</span><br><span class="line">        stack.push(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void pop() &#123;</span><br><span class="line">        //判断pop的值是否和当前最小值相等，如果相等则将上一次push的值设为最小值(因为pop后栈顶元素为上一次入栈的最小值)，整体思路就是每次遇到最小值时将上一次的最小值push，之后push当前最小值，pop的时候也是同样，如果pop的值等于最小值则将最小值设置为上一次push入的值，注意pop的时候，只要执行了pop()方法，栈顶元素就出栈了，则当前最小值出栈，此时栈顶元素为上一次push的最小值，所以可以直接设置为最小值(即 min = stack.pop())</span><br><span class="line">        if(stack.pop() == min)&#123;</span><br><span class="line">            min = stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int top() &#123;</span><br><span class="line">        //打印栈顶元素</span><br><span class="line">        return stack.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getMin() &#123;</span><br><span class="line">        //直接返回设定的最小值</span><br><span class="line">        return min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 忽略这段</span><br><span class="line">* Your MinStack object will be instantiated and called as such:</span><br><span class="line">* MinStack obj = new MinStack();</span><br><span class="line">* obj.push(x);</span><br><span class="line">* obj.pop();</span><br><span class="line">* int param_3 = obj.top();</span><br><span class="line">* int param_4 = obj.getMin();</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://ymliang.com/2019/04/10/含有重复字符的最长子串/">leetcode-含有重复字符的最长子串</a></li><li><a href="http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/">leetcode 1013:总持续时间可被60整除的歌曲</a></li><li><a href="http://ymliang.com/2019/02/22/Leetcode-177-第N高的薪水/">Leetcode 177 第N高的薪水</a></li><li><a href="http://fja0kl.github.io/2019/04/27/LeetCode-Group-Anagrams/">[leetcode]Group Anagrams</a></li></ul></div>
         </div>
         
           
@@ -558,6 +559,20 @@ getMin() -- 检索栈中的最小元素。
           
           
             
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         

@@ -3,6 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="WpHIYBuKnuiZj1YRpOvxdEtx34tPeUT2NCrdeUoy6ws">
   
   <title>redis取经之路 | YMLiang</title>
   
@@ -422,7 +423,7 @@ value：商品订购数量
 
 设置两个有序集合，分别为：调度有序集合，延时有序集合，调度顾名思义调度，延时则是设置了指定数据航的缓存需要每隔多少秒更新一次
 如果数据行记录的是特价促销商品的剩余数量，并且参与促销活动的用户非常多的话，那么我们最好每隔几秒更新一次数据行缓存；另一方面，如果数据并不经常改变，或者商品缺货是可以接受的，那么我们可以将更新缓存的时间变长
-</code></pre><h3 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h3><h3 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h3>
+</code></pre><h3 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h3><h3 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h3><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://ymliang.com/2019/02/03/浅谈项目中用到redis的地方/">浅谈项目中用到redis的地方</a></li></ul></div>
         </div>
         
           
@@ -652,8 +653,8 @@ SDS除了用来保存数据库中的字符串值之外，还被用作缓冲区(B
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis基本数据结构"><span class="toc-text">redis基本数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的特性"><span class="toc-text">redis的特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景一：登录和cookie缓存"><span class="toc-text">场景一：登录和cookie缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景二：购物车"><span class="toc-text">场景二：购物车</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页缓存"><span class="toc-text">网页缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据行缓存"><span class="toc-text">数据行缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页分析"><span class="toc-text">网页分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis事务"><span class="toc-text">redis事务</span></a></li></ol>
-    </div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis基本数据结构"><span class="toc-text">redis基本数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的特性"><span class="toc-text">redis的特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景一：登录和cookie缓存"><span class="toc-text">场景一：登录和cookie缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景二：购物车"><span class="toc-text">场景二：购物车</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页缓存"><span class="toc-text">网页缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据行缓存"><span class="toc-text">数据行缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页分析"><span class="toc-text">网页分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis事务"><span class="toc-text">redis事务</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a>
+    </li></div>
   </section>
 
 

@@ -3,6 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="WpHIYBuKnuiZj1YRpOvxdEtx34tPeUT2NCrdeUoy6ws">
   
   <title>springCloud多模块打包时报错问题 | YMLiang</title>
   
@@ -335,7 +336,7 @@ yixue（父类工程，定义各模块，指定模块依赖jar版本）
 <pre><code>common项目中除了必要的依赖包以外，maven打包的插件不要再添加一遍了，因为这个SpringBoot插件会在Maven的package后进行二次打包，目的为了生成可执行jar包，如果C中定义了这个插件，会报错提示没有找到main函数
 
 简单来说，如果你的root：`&lt;parent&gt;&lt;/parent&gt;`项目已经添加了`spring-boot-maven-plugin`插件，那么common就别依赖root了，自己包含一些必要的依赖包，之后别手动添加打包插件即可，如果打包还是失败的话，对root项目clean再install一下，之后应该没有什么问题了
-</code></pre>
+</code></pre><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://ymliang.com/2019/01/31/SpringCloud搭建/">SpringCloud搭建</a></li><li><a href="http://ymliang.com/2019/04/17/springboot踩坑出坑记/">springboot踩坑出坑记</a></li></ul></div>
         </div>
         
           
@@ -549,6 +550,20 @@ repackage failed: Unable to find main class">
           
           
             
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">推荐文章（由hexo文章推荐插件驱动）</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         
