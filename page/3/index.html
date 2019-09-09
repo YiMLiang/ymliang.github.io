@@ -193,6 +193,116 @@
       
         
   <h2 class="title">
+    <a href="/2019/04/10/含有重复字符的最长子串/">
+      leetcode-含有重复字符的最长子串
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-04-10</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/leetcode/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>leetcode</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <pre><code>* 给定一个字符串，请你找出其中不含有重复字符的最长子串的长度。
+*
+* 示例 1:
+* 输入: &quot;abcabcbb&quot;
+* 输出: 3
+* 解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。
+</code></pre>
+      
+        <div class="readmore">
+          <a href="/2019/04/10/含有重复字符的最长子串/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/leetcode/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>leetcode</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/03/25/慢SQL优化解决方案-看这一篇就够了/">
       慢SQL优化解决方案(看这一篇就够了)
     </a>
@@ -476,8 +586,14 @@
 输入：[60,60,60]
 输出：3
 解释：所有三对的总持续时间都是 120，可以被 60 整数。
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">方法1：时间复杂度O(n^2)，效率奇低</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int resutl = 0;</span><br><span class="line">        for(int i = 0;i&lt;time.length-1;i++)&#123;</span><br><span class="line">            for (int j = i+1; j &lt; time.length; j++) &#123;</span><br><span class="line">                if(time[i]+time[j]%60==0)&#123;</span><br><span class="line">                    result++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">方法2：</span><br><span class="line">    利用数组，将每个数对60取模后的值当作新数组的下标，并记录次数</span><br><span class="line">    接着遇到连续多个都能整出60的数，则此时 arr[0]的值应该会++多次</span><br><span class="line">    若arr[0]=3 即有3个60，他们两两组合则可以组合的数量为(n(n-1))/2 result = (3*2)/2 = 3</span><br><span class="line">    同理，取mode后的值为30也是特殊情况，则组合的方法和0的一样，接着下面写就可以了</span><br><span class="line">    排除了特殊情况后，正常情况就是20  40,   10   50之类的相加为60的数，这些数2 2 组合直接乘就可以了</span><br><span class="line">    </span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        int[] res = new int[60];</span><br><span class="line">        for(int i:time)&#123;</span><br><span class="line">            res[i%60]++;</span><br><span class="line">        &#125;</span><br><span class="line">        result += (res[0] * (res[0]-1))/2;</span><br><span class="line">        result += (res[30] * (res[30]-1))/2;</span><br><span class="line">        //正常情况，相加为60证明一定能被60整除</span><br><span class="line">        for(int i = 1;i&lt;30;i++)&#123;</span><br><span class="line">            result += (res[i] * res[60-i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://ymliang.com/2019/04/10/含有重复字符的最长子串/">leetcode-含有重复字符的最长子串</a></li><li><a href="http://ymliang.com/2019/05/06/leetCode-155-最小栈/">leetCode 155 最小栈</a></li><li><a href="http://ymliang.com/2019/02/22/Leetcode-177-第N高的薪水/">Leetcode 177 第N高的薪水</a></li><li><a href="http://fja0kl.github.io/2019/04/27/LeetCode-Group-Anagrams/">[leetcode]Group Anagrams</a></li></ul></div>
+</code></pre>
+      
+        <div class="readmore">
+          <a href="/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
       
     </div>
     
@@ -574,32 +690,16 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="Kafka与Zookeeper"><a href="#Kafka与Zookeeper" class="headerlink" title="Kafka与Zookeeper"></a>Kafka与Zookeeper</h3><ul>
-<li><p>Kafka如何利用zookeeper做负载均衡</p>
-<pre><code>Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡。
-</code></pre><ul>
-<li><p>broker在zk中注册</p>
-<p>  kafka的每个broker（相当于一个节点，相当于一个机器）在启动时，都会在zk中注册，告诉zk其brokerid，在整个的集群中，<code>broker.id/brokers/ids</code>，当节点失效时，zk就会删除该节点，就很方便的监控整个集群broker的变化，及时调整负载均衡。</p>
-</li>
-<li><p>topic在zk中注册</p>
-<p>  在kafka中可以定义很多个topic，每个topic又被分为很多个分区。一般情况下，每个分区独立在存在一个broker上，所有的这些topic和broker的对应关系都有zk进行维护</p>
-</li>
-<li><p>consumer(消费者)在zk中注册</p>
-<ul>
-<li><p>注册新的消费者，当有新的消费者注册到zk中，zk会创建专用的节点来保存相关信息，路径<code>ls /consumers/{group_id}/  [ids,owners,offset]</code>，Ids:记录该消费分组有几个正在消费的消费者，Owmners：记录该消费分组消费的topic信息，Offset：记录topic每个分区中的每个offset</p>
-</li>
-<li><p>监听消费者分组中消费者的变化 ,监听/consumers/{group_id}/ids的子节点的变化，一旦发现消费者新增或者减少及时调整消费者的负载均衡。</p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>  转载<br>  作者：SmartBrain<br>  原文：<a href="https://blog.csdn.net/Peter_Changyb/article/details/81562855" target="_blank" rel="noopener">https://blog.csdn.net/Peter_Changyb/article/details/81562855</a> </p>
-</li>
-</ul>
-
+      <h3 id="Kafka与Zookeeper"><a href="#Kafka与Zookeeper" class="headerlink" title="Kafka与Zookeeper"></a>Kafka与Zookeeper</h3><p>  Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡<br>
       
-    </div>
+        <div class="readmore">
+          <a href="/2019/03/20/Kafka如何利用Zookeeper做负载均衡/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </p></div>
     
       <div class="full-width auto-padding tags">
         
@@ -696,99 +796,14 @@
     <div class="article-entry" itemprop="articleBody">
       <h2 id="Maven-pom-xml-中元素解析"><a href="#Maven-pom-xml-中元素解析" class="headerlink" title="Maven-pom.xml-中元素解析"></a>Maven-pom.xml-中元素解析</h2><h3 id="modules"><a href="#modules" class="headerlink" title="modules"></a>modules</h3><pre><code>模块
 用处：项目规模比较大，模块较为复杂，目的是为了聚合，一次性构建全部模块
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">代码：</span><br><span class="line">&lt;modules&gt;</span><br><span class="line">　　　 &lt;!-- 模块都写在此处 --&gt;</span><br><span class="line">      &lt;module&gt;admin-register&lt;/module&gt;</span><br><span class="line">      &lt;module&gt;admin-login&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="dependencyManagement"><a href="#dependencyManagement" class="headerlink" title="dependencyManagement"></a>dependencyManagement</h3><pre><code>依赖管理
-用处：管理maven依赖
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">代码：</span><br><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.yixue.sms&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;sms-dubbo-api&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="parent"><a href="#parent" class="headerlink" title="parent"></a>parent</h3><pre><code>继承
-用处：类似与java中的继承，如果每个子模块都用了相同的依赖包，则配置父模块，子模块继承父模块则代表继承了父模块的依赖包
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">代码：</span><br><span class="line">父：</span><br><span class="line"></span><br><span class="line">&lt;modules&gt;</span><br><span class="line">　　　 &lt;!-- 模块都写在此处 --&gt;</span><br><span class="line">      &lt;module&gt;admin-register&lt;/module&gt;</span><br><span class="line">      &lt;module&gt;admin-login&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependencies&gt; &lt;!-- 配置共有依赖 --&gt;</span><br><span class="line">    &lt;!-- spring 依赖 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;4.0.2.RELEASE&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;4.0.2.RELEASE&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;4.0.2.RELEASE&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;4.0.2.RELEASE&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">子：</span><br><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;com.admin.user&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;admin-login&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt; </span><br><span class="line">    &lt;!-- 与不配置一样，默认就是寻找上级目录下得pom.xml --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line">&lt;!-- 配置自己独有依赖 --&gt;</span><br><span class="line">&lt;dependencies&gt;   </span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;javax.mail&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mail&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.4.3&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.icegreen&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;greenmail&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.4.1&lt;/version&gt;</span><br><span class="line">        &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<pre><code>假设将来需要添加一个新的子模块admin-util，该模块只是提供一些简单的帮助工具，不需要依赖spring那么我们可以用dependencyManagement既能让子模块继承到父模块的依赖配置，又能保证子模块依赖使用的灵活性
-
-在dependencyManagement元素下得依赖声明不会引入实际的依赖，不过它能够约束dependencies下的依赖使用
-
-父POM使用dependencyManagement能够统一项目范围中依赖的版本
-
-当依赖版本在父POM中声明后，子模块在使用依赖的时候就无须声明版本，也就不会发生多个子模块使用版本不一致的情况，帮助降低依赖冲突的几率
-</code></pre><h3 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h3><pre><code>自定义一个或者多个Maven属性，然后再POM的其他地方使用${属性名}的方式引用该属性
-作用：消除重复，统一管理
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">用法</span><br><span class="line">&lt;properties&gt;</span><br><span class="line">    &lt;!-- 定义 spring版本号 --&gt;</span><br><span class="line">    &lt;spring.version&gt;4.0.2.RELEASE&lt;/spring.version&gt;</span><br><span class="line">    &lt;junit.version&gt;4.7&lt;/junit.version&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">这里我记录了一些pom的属性：</span><br><span class="line"></span><br><span class="line">用户可以使用该类属性引用POM文件中对应元素的值。如：</span><br><span class="line"></span><br><span class="line">       $&#123;project.artifactId&#125;就对应了&lt;project&gt; &lt;artifactId&gt;元素的值，常用的POM属性包括：</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.build.sourceDirectory&#125;:项目的主源码目录，默认为src/main/java/</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.build.testSourceDirectory&#125;:项目的测试源码目录，默认为src/test/java/</span><br><span class="line"></span><br><span class="line">       $&#123;project.build.sourceEncoding&#125;表示主源码的编码格式;</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.build.directory&#125; ： 项目构建输出目录，默认为target/</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.outputDirectory&#125; : 项目主代码编译输出目录，默认为target/classes/</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.testOutputDirectory&#125;：项目测试主代码输出目录，默认为target/testclasses/</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.groupId&#125;：项目的groupId</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.artifactId&#125;：项目的artifactId</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.version&#125;：项目的version,与$&#123;version&#125; 等价</span><br><span class="line"></span><br><span class="line">　　　　$&#123;project.build.finalName&#125;：项目打包输出文件的名称，默认为$&#123;project.artifactId&#125;-$&#123;project.version&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Exclusions"><a href="#Exclusions" class="headerlink" title="Exclusions"></a>Exclusions</h3><pre><code>排除依赖
-用法：来排除一些不需要同时下载的依赖jar
-举例：B项目中需要导入A项目的Maven依赖，通过依赖传递，会将A中的Jar包传递进来，如果B中不需要A中的某个jar包就可以使用exclusions标签
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">用法：</span><br><span class="line">&lt;dependency&gt; </span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt; &lt;artifactId&gt;spring-core&lt;/artifactId&gt; </span><br><span class="line">    &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt; </span><br><span class="line">    &lt;exclusions&gt; </span><br><span class="line">        &lt;exclusion&gt; </span><br><span class="line">            &lt;artifactId&gt;commons-logging&lt;/artifactId&gt; </span><br><span class="line">            &lt;groupId&gt;commons-logging&lt;/groupId&gt; </span><br><span class="line">        &lt;/exclusion&gt; </span><br><span class="line">    &lt;/exclusions&gt; </span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="环境变量属性"><a href="#环境变量属性" class="headerlink" title="环境变量属性"></a>环境变量属性</h3><pre><code>所有环境变量属性都可以使用以env. 开头的Maven属性引用，如${env.JAVA_HOME}指代了JAVA_HOME环境变量的的值
-
-beta:软件的验收测试
-
-如果配置了&lt;env&gt;beta&lt;/env&gt;
-
-${env} = beta
-</code></pre><h3 id="内置属性"><a href="#内置属性" class="headerlink" title="内置属性"></a>内置属性</h3><pre><code>(Maven预定义,用户可以直接使用)
-
-${basedir}表示项目根目录,即包含pom.xml文件的目录;
-
-${version}表示项目版本;
-
-${project.basedir}同${basedir};
-
-${project.baseUri}表示项目文件地址;
-
-${maven.build.timestamp}表示项目构件开始时间;
-
-${maven.build.timestamp.format}表示属性${maven.build.timestamp}的展示格式,默认值为yyyyMMdd-HHmm,可自定义其格式,其类型可参考java.text.SimpleDateFormat。用法如下：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">&lt;maven.build.timestamp.format&gt;yyyy-MM-dd HH:mm:ss&lt;/maven.build.timestamp.format&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="build"><a href="#build" class="headerlink" title="build"></a>build</h3><pre><code>在Maven的pom.xml文件中，存在如下两种&lt;build&gt;：
-
-（1）全局配置（project build）
-
-        针对整个项目的所有情况都有效
-
-（2）配置（profile build）
-
-        针对不同的profile配置
-
-共用的基本build元素:
-
-defaultGoal，执行构建时默认的goal或phase，如jar:jar或者package等
-directory，构建的结果所在的路径，默认为${basedir}/target目录
-finalName，构建的最终结果的名字，该名字可能在其他plugin中被改变
-
-
-&lt;build&gt;
-    &lt;filters&gt;
-        &lt;filter&gt;../config/filters-${env}.properties&lt;/filter&gt;
-    &lt;/filters&gt;
-    &lt;resources&gt;
-        &lt;resource&gt;
-            &lt;directory&gt;src/main/resources/&lt;/directory&gt;
-            &lt;excludes&gt;
-                &lt;exclude&gt;test/*&lt;/exclude&gt;
-                &lt;exclude&gt;beta/*&lt;/exclude&gt;
-                &lt;exclude&gt;online/*&lt;/exclude&gt;
-            &lt;/excludes&gt;
-            &lt;!-- 是否使用过滤器 --&gt;
-            &lt;filtering&gt;true&lt;/filtering&gt;
-        &lt;/resource&gt;
-        &lt;resource&gt;
-            &lt;directory&gt;src/main/resources/${profiles.active}&lt;/directory&gt;
-        &lt;/resource&gt;
-    &lt;/resources&gt;
-&lt;/build&gt;
-
-
-resources，build过程中涉及的资源文件
-targetPath，资源文件的目标路径
-filtering，构建过程中是否对资源进行过滤，默认false
-directory，资源文件的路径，默认位于${basedir}/src/main/resources/目录下
-includes，一组文件名的匹配模式，被匹配的资源文件将被构建过程处理
-excludes，一组文件名的匹配模式，被匹配的资源文件将被构建过程忽略。同时被includes和excludes匹配的资源文件，将被忽略。
-
-filters，给出对资源文件进行过滤的属性文件的路径，默认位于${basedir}/src/main/filters/目录下。属性文件中定义若干键值对。在构建过程中，对于资源文件中出现的变量（键），将使用属性文件中该键对应的值替换。
-testResources，test过程中涉及的资源文件，默认位于${basedir}/src/test/resources/目录下。这里的资源文件不会被构建到目标构件中
-</code></pre><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://www.hui-wang.info/2013/10/25/Maven中的传递依赖/">Maven中的传递依赖</a></li></ul></div>
+</code></pre>
+      
+        <div class="readmore">
+          <a href="/2019/03/19/maven之pom-xml中的元素解析/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
       
     </div>
     
@@ -894,54 +909,16 @@ testResources，test过程中涉及的资源文件，默认位于${basedir}/src/
 | 2  | 200    |
 | 3  | 300    |
 +----+--------+
-</code></pre></li>
-<li><p>例如上述 Employee 表，n = 2 时，应返回第二高的薪水 200。如果不存在第 n 高的薪水，那么查询应返回 null。</p>
-<pre><code>+------------------------+
-| getNthHighestSalary(2) |
-+------------------------+
-| 200                    |
-+------------------------+
-</code></pre></li>
-<li><p>首先拿到题直接思考使用分析函数了,是使用<code>row_number()</code>还是<code>dense_rank()</code></p>
-<ul>
-<li><p>row_number() over()是无论值是否相同值始终递增</p>
-<pre><code>100 1
-200 2
-200 3
-300 4
-</code></pre></li>
-<li><p>dense_rank() over()是重复的值显示的排名都相同，但其后的值跟着上一个值递增，不跳跃</p>
-<pre><code>100 1
-200 2
-200 2
-300 3
-</code></pre></li>
-<li><p>rank() over()则是重复值的排名相同，但其后的值从重复行数开始递增，跳跃式</p>
-<pre><code>100 1
-200 2
-200 2
-300 4
-</code></pre></li>
-</ul>
-</li>
-<li><p>题解</p>
-<pre><code>CREATE FUNCTION getNthHighestSalary(N IN NUMBER) RETURN NUMBER IS
-result NUMBER;
-BEGIN
-    /* Write your PL/SQL query statement below */
-    SELECT a.salary into result from 
-        (
-            select dense_rank() over(order by Salary desc) as rank,Salary from Employee
-        )a
-    where  a.rank = N;
-
-    RETURN result;
-END;
-</code></pre></li>
-</ul>
-<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://ymliang.com/2019/04/10/含有重复字符的最长子串/">leetcode-含有重复字符的最长子串</a></li><li><a href="http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/">leetcode 1013:总持续时间可被60整除的歌曲</a></li><li><a href="http://ymliang.com/2019/05/06/leetCode-155-最小栈/">leetCode 155 最小栈</a></li><li><a href="http://fja0kl.github.io/2019/04/27/LeetCode-Group-Anagrams/">[leetcode]Group Anagrams</a></li></ul></div>
+</code></pre>
       
-    </div>
+        <div class="readmore">
+          <a href="/2019/02/22/Leetcode-177-第N高的薪水/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </li></ul></div>
     
       <div class="full-width auto-padding tags">
         
@@ -1139,38 +1116,16 @@ SLF4J: Found binding in [jar:file:/home/xdl/hadoop-2.5.2/share/hadoop/common/lib
 SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
 2018-10-19 05:31:49,934 WARN  [main] util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 --以上是因为Hadoop的依赖包与hbase的依赖包中的jar包相同，不影响启动关键在于下面的异常：
-</code></pre></li>
-<li><p>服务起不来，看一下具体报错</p>
-<pre><code>ERROR: org.apache.hadoop.hbase.ipc.ServerNotRunningYetException: Server is not running yet
-Server is not running yet 服务起不来
---第一个想到的方法是关闭hbase重新启动
-stop-hbase.sh
-start-hbase.sh
-</code></pre><p>  果然是没卵用的</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>网上还有说是让关闭hadoop的安全模式<br>  查看hadoop的安全模式状态：</p>
-<pre><code>hadoop dfsadmin -safemode get
-Safe mode is OFF
-</code></pre><p>  OFF：表示安全模式关闭状态，如果是ON则可以用<br>  <code>hadoop dfsadmin -safemode leave</code> 命令来关闭安全模式</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>果然第二个方法也没用，那换第三个方法，网上还有说是hbase的依赖包与hadoop的依赖包重复让删除hbase中的重复的依赖包：</p>
-<pre><code>slf4j-log4j12-1.6.4.jar
-slf4j-api-1.6.4.jar
-</code></pre><p>  果然删了以后还是没卵用<br>  那么list后出现的ERROR最有用的是 ZOOKEEPER的问题：<br>  <code>ERROR:can&#39;t get master address from ZooKeeper; znode data == null</code><br>  那我们就从这里入手，从zookeeper的data路径： (三个节点都删)(这里以三个节点(1主2从)为例)<br>  <code>/home/zkpk/zookeeper-3.4.5/data</code> 下的 <code>myid zookeeper_server.pid</code> 除了myid以外的其他文件都删掉<br>  然后重启zookeeper ： <code>zkServer.sh restart</code> (三个节点都重启zookeeper)<br>  这时候应该不会报:<code>ERROR:can&#39;t get master address from ZooKeeper; znode data == null</code>这个错误了<br>  而且HMaster也应该不会掉了(其实我的HMaster在我每次进入hbase shell 后 list 后就掉了…)<br>  但当你再进入 hbase shell 再 list时还可能报：<code>ERROR: org.apache.hadoop.hbase.ipc.ServerNotRunningYetException: Server is not running yet</code> 这个错误<br>  解决方法就是：格式化namenode (我就是这样好的)，如何格式化？<br> <code>hadoop namenode -format</code><br>  然后启动Hadoop集群(<code>start-all.sh</code>)，zookeeper(前面重启过zookeeper，这里就不用重启了)，hbase(<code>start-hbase.sh</code>{这里说一嘴，关闭hbase时从节点上的HRegionServer关不掉可以直接KILL -9 掉它})<br>  再进入<code>hbase shell</code>中去测试吧，应该没问题了！！</p>
-</li>
-</ul>
-<blockquote>
-<p>总结一下，出了错不要总是在Hbase上找问题，关键要去集群环境，zookeeper环境上寻找，最坏的做法就是格式化集群，这样会导致hdfs上的文件清空，还有就是zookeeper文件夹下的data文件夹里面的内容除了配置的myid不需要删以外，其他的都删掉，你下次再启动zookeeper后会自动生成所以不太影响，但问题往往会出在这里，多试一些方法，解决问题最重要</p>
-</blockquote>
-
+</code></pre>
       
-    </div>
+        <div class="readmore">
+          <a href="/2019/02/08/Hbase之HMaster启动后经常掉的解决方案/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </li></ul></div>
     
       <div class="full-width auto-padding tags">
         
@@ -1273,32 +1228,14 @@ slf4j-api-1.6.4.jar
 3       liang   18      male
 
 所以，结构化的数据的存储和排列是很有规律的，这对查询和修改等操作很有帮助。但是，显然，它的扩展性不好（比如，我希望增加一个字段，怎么办？）。
-</code></pre><p>(2)半结构化数据</p>
-<pre><code>半结构化数据是结构化数据的一种形式，它并不符合关系型数据库或其他数据表的形式关联起来的数据模型结构，但包含相关标记，用来分隔语义元素以及对记录和字段进行分层。因此，它也被称为自描述的结构。
-
-半结构化数据，属于同一类实体可以有不同的属性，即使他们被组合在一起，这些属性的顺序并不重要。
-
-常见的半结构数据有XML和JSON，对于对于两个XML文件，第一个可能有
-
-&lt;person&gt;
-    &lt;name&gt;A&lt;/name&gt;
-    &lt;age&gt;13&lt;/age&gt;
-    &lt;gender&gt;female&lt;/gender&gt;
-&lt;/person&gt;
-
-第二个可能为：
-
-&lt;person&gt;
-    &lt;name&gt;B&lt;/name&gt;
-    &lt;gender&gt;male&lt;/gender&gt;
-&lt;/person&gt;
-
-从上面的例子中，属性的顺序是不重要的，不同的半结构化数据的属性的个数是不一定一样的。有些人说半结构化数据是以树或者图的数据结构存储的数据，怎么理解呢？
-上面的例子中，&lt;person&gt;标签是树的根节点，&lt;name&gt;和&lt;gender&gt;标签是子节点。通过这样的数据格式，可以自由地表达很多有用的信息，包括自我描述信息（元数据）。
-所以，半结构化数据的扩展性是很好的。
-</code></pre><p>(3)非结构化数据</p>
-<pre><code>顾名思义，就是没有固定结构的数据。各种文档、图片、视频/音频等都属于非结构化数据。对于这类数据，我们一般直接整体进行存储，而且一般存储为二进制的数据格式。
 </code></pre>
+      
+        <div class="readmore">
+          <a href="/2019/02/07/结构化数据、半结构化数据和非结构化数据/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
       
     </div>
     
@@ -1307,157 +1244,6 @@ slf4j-api-1.6.4.jar
           <a href="/tags/面试题/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>面试题</a>
         
       </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/02/03/如何实现单点登录验证功能/">
-      如何实现单点登录验证功能
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://ymliang.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-02-03</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="单点登录-SSO-gt-Single-Sign-On"><a href="#单点登录-SSO-gt-Single-Sign-On" class="headerlink" title="单点登录(SSO =&gt; Single Sign On)"></a>单点登录(SSO =&gt; Single Sign On)</h2><blockquote>
-<p>单点登录SSO是指Single Sign On 从一个系统登录，其他系统免登录，在一个系统用户增多，架构完善之后为了方便运营人员登录多个系统而不需要每次都输入用户名密码，所以实现单点登录显得尤为重要，这里分享一下我在项目中如何用单点登录实现用户登录一次即可访问其他相互信任的系统</p>
-</blockquote>
-<ol>
-<li>首先我们的认证系统是独立的一个模块，即我们在用户登录后，会调用认证系统的方法来生成用户唯一的session并进行保存，认证系统返回给客户端一个唯一的登录凭证，用这个登录凭证即可直接访问其他的子系统不用再进行登录了</li>
-</ol>
-<img src="/2019/02/03/如何实现单点登录验证功能/SSO.jpg" title="SSO单点登录">
-<ol start="2">
-<li><p>在进行登录认证返回登录凭证后，我们还需要配置一个拦截器，用于拦截服务的请求，即我们需要哪些请求要验证这个登录凭证才能访问我们的其他服务，这样写可能不是很清楚，举个栗子</p>
-<ul>
-<li>用户A登录网站，以post请求访问/xxx/login，再登录的同时去注册验证系统，返回一个登录状态(成功登录or失败)并附带一个登录验证后的凭证，这个凭证代表A可以访问其他的子服务</li>
-<li><p>当用户A访问B服务时拦截器起作用，拦截器控制如果想访问B服务，需要验证这个凭证是否生效，如果生效则放行，这就是单点登录如何通过配置拦截器控制访问的实现流程</p>
-<pre><code>public class CheckInterceptor implements HandlerInterceptor {
-
-    //发请求 restTemplate
-    //专门调rest服务的对象
-    @Autowired
-    private RestTemplate restTemplate;
-
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
-
-        //截取请求中的userId,ticket
-        //ticket为凭证,这里凭证已经通过登录系统保存至浏览器,我们直接取即可
-        String userId = request.getParameter(&quot;userId&quot;);
-        String ticket = request.getParameter(&quot;ticket&quot;);
-        // 将userId,ticket发给/user/ticket检测
-        //返回结果是ReturnResult对象
-        if(userId!=null&amp;&amp;ticket!=null){
-            //这里是拦截器需要访问这个请求,并设置参数进行验证
-            String url = &quot;http://localhost:7001/user/ticket&quot;;
-            MultiValueMap&lt;String, Object&gt; params = new LinkedMultiValueMap&lt;&gt;();
-            params.set(&quot;userId&quot;, userId);
-            params.set(&quot;ticket&quot;, ticket);
-            ReturnResult result = restTemplate.postForObject(url, params, ReturnResult.class);
-            //返回结果的判断
-            if(result.getStatus()==yixueConstant.SUCCESS){
-                //校验正确,放行
-                return true;
-            }
-        }
-        //校验失败,拦截请求,给用户返回一个json结果
-        response.setContentType(&quot;text/html;Charset=UTF-8&quot;);
-        PrintWriter out = response.getWriter();
-        out.print(&quot;{\&quot;status\&quot;:-2,\&quot;msg\&quot;:\&quot;令牌凭证无效\&quot;}&quot;);
-        out.flush();
-        return false;
-    }
-}
-</code></pre></li>
-<li><p>有了拦截器，我们还要把拦截器加入配置，使其生效</p>
-<pre><code>@Component
-public class CheckInterceptorConfiguration implements WebMvcConfigurer {
-    @Autowired
-    private CheckInterceptor checkInterceptor;
-
-    public void addInterceptors(InterceptorRegistry registry) {
-        //添加要拦截的请求地址url，在我们访问视频模块时，需要先拦截请求，在拦截器中验证，如果返回结果为true则放行
-        String[] urls = {&quot;/course/chapter&quot;};
-        registry.addInterceptor(checkInterceptor).addPathPatterns(urls);
-    }
-}
-</code></pre></li>
-</ul>
-</li>
-</ol>
-<p>具体的完整流程（凭证的生成及存储）请参考我的<a href="https://ymliang.netlify.com/2019/02/03/%E6%B5%85%E8%B0%88%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%94%A8%E5%88%B0redis%E7%9A%84%E5%9C%B0%E6%96%B9/" target="_blank" rel="noopener">另外一篇文章</a></p>
-<p>这里我分享另外一篇技术博客给大家方便大家理解<a href="https://blog.csdn.net/qq_39089301/article/details/80615348" target="_blank" rel="noopener">单点登录</a></p>
-
-      
-    </div>
     
   </section>
 </article>

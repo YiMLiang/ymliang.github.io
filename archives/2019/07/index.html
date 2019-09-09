@@ -311,37 +311,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <ul>
-<li><p>regexp  api:</p>
-<pre><code>re := regexp.MustCompile(reStr) ： reStr代表正则表达式 ，这个方法表示按照这个正则去匹配
-re.FindAllStringSubmatch(srcStr,-1)  ： -1表示所有全查到    （1或2或3表示取1个2个3个）
-</code></pre></li>
-<li><p>一些常用的正则符号</p>
-<pre><code>(） ： 标识分组
-\w : 字母数字下划线
-\d ： 数字
-\D ：字母
-\s\S ： 任意字符
-\s ： 空白字符(小写s)
-\S ： 非空白字符(大写S)
-re1 | re2 ： re1 或 re2 所表示的片段
-regexp*+?  | regexp+? 分别表示1到多次 | 或0到多次   ？表示非贪婪，也就是匹配到？后面的东西为止
-{n,m}  |  {n,}  表示 n个到m个 |  或至少是n个
-[\w\.] 表示出现任意字母数字下划线或者 . 都是ok的
-</code></pre></li>
-</ul>
-<ul>
-<li><p>举例：</p>
-<pre><code>[\s\S]+?href   这段正则中： 
-    [\s\S] 表示任意字符
-    + 表示 0个或1个
-    ？表示不会隔过 href
-</code></pre></li>
-</ul>
-<ul>
-<li>爬虫获取html界面内容</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">func GetHtml(url string) string &#123;</span><br><span class="line">	//控制超时</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), time.Second*60)</span><br><span class="line">	defer cancel()</span><br><span class="line"></span><br><span class="line">	var html string</span><br><span class="line">	done := make(chan int, 1)</span><br><span class="line">	go func() &#123;</span><br><span class="line">		resp, err := http.Get(url)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			logs.Info(&quot;http get failed, err = &quot;, err)</span><br><span class="line">		&#125;</span><br><span class="line">		defer resp.Body.Close()</span><br><span class="line"></span><br><span class="line">		bytes, _ := ioutil.ReadAll(resp.Body)</span><br><span class="line">		html = string(bytes)</span><br><span class="line">		time.Sleep(1 * time.Second)</span><br><span class="line">		done &lt;- 1</span><br><span class="line">	&#125;()</span><br><span class="line">	select &#123;</span><br><span class="line">	case &lt;-done:</span><br><span class="line">		fmt.Println(&quot;work done on time&quot;)</span><br><span class="line">		return html</span><br><span class="line">	case &lt;-ctx.Done():</span><br><span class="line">		// timeout</span><br><span class="line">		fmt.Println(&quot;爬取超时：err= &quot;, ctx.Err())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return html</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://ymliang.com/2019/06/06/Go开发基础入门——5/">Go开发基础入门——5</a></li><li><a href="http://ymliang.com/2019/05/30/beego框架搭建踩坑/">beego框架搭建踩坑</a></li><li><a href="http://ymliang.com/2019/06/05/Go开发基础入门——4/">Go开发基础入门——4</a></li><li><a href="www.chunlife.top/2019/06/07/MongoDB命令一览/">MongoDB命令一览</a></li></ul></div>
+      <blockquote>
+<p>之前学习了一段时间go之后想写一点小的项目，上网查询了一些资料，做了一些小的demo，今天将我最近写的小项目分享给大家：利用go实现单任务版爬虫和并发爬虫，因为go对并发支持的很好，所以我们只需要提前将goroutine和channl学好，就很好理解了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">项目结构：</span><br><span class="line">1.带有简单的日志收集，打印的日志写到/logs目录下，可配置写到文件中还是输出到控制台，或者都输出</span><br><span class="line">2.简单的正则匹配，上下文控制超时，chan控制并发数量，goroutine并发下载等知识点</span><br><span class="line">3.简单的乱码处理，简单的随机数处理，图片下载，图片名称替换等</span><br><span class="line">项目难度 ❤</span><br></pre></td></tr></table></figure>
+      
+        <div class="readmore">
+          <a href="/2019/07/26/Go爬虫/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
       
     </div>
     

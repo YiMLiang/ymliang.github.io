@@ -312,38 +312,16 @@ SLF4J: Found binding in [jar:file:/home/xdl/hadoop-2.5.2/share/hadoop/common/lib
 SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
 2018-10-19 05:31:49,934 WARN  [main] util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 --以上是因为Hadoop的依赖包与hbase的依赖包中的jar包相同，不影响启动关键在于下面的异常：
-</code></pre></li>
-<li><p>服务起不来，看一下具体报错</p>
-<pre><code>ERROR: org.apache.hadoop.hbase.ipc.ServerNotRunningYetException: Server is not running yet
-Server is not running yet 服务起不来
---第一个想到的方法是关闭hbase重新启动
-stop-hbase.sh
-start-hbase.sh
-</code></pre><p>  果然是没卵用的</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>网上还有说是让关闭hadoop的安全模式<br>  查看hadoop的安全模式状态：</p>
-<pre><code>hadoop dfsadmin -safemode get
-Safe mode is OFF
-</code></pre><p>  OFF：表示安全模式关闭状态，如果是ON则可以用<br>  <code>hadoop dfsadmin -safemode leave</code> 命令来关闭安全模式</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>果然第二个方法也没用，那换第三个方法，网上还有说是hbase的依赖包与hadoop的依赖包重复让删除hbase中的重复的依赖包：</p>
-<pre><code>slf4j-log4j12-1.6.4.jar
-slf4j-api-1.6.4.jar
-</code></pre><p>  果然删了以后还是没卵用<br>  那么list后出现的ERROR最有用的是 ZOOKEEPER的问题：<br>  <code>ERROR:can&#39;t get master address from ZooKeeper; znode data == null</code><br>  那我们就从这里入手，从zookeeper的data路径： (三个节点都删)(这里以三个节点(1主2从)为例)<br>  <code>/home/zkpk/zookeeper-3.4.5/data</code> 下的 <code>myid zookeeper_server.pid</code> 除了myid以外的其他文件都删掉<br>  然后重启zookeeper ： <code>zkServer.sh restart</code> (三个节点都重启zookeeper)<br>  这时候应该不会报:<code>ERROR:can&#39;t get master address from ZooKeeper; znode data == null</code>这个错误了<br>  而且HMaster也应该不会掉了(其实我的HMaster在我每次进入hbase shell 后 list 后就掉了…)<br>  但当你再进入 hbase shell 再 list时还可能报：<code>ERROR: org.apache.hadoop.hbase.ipc.ServerNotRunningYetException: Server is not running yet</code> 这个错误<br>  解决方法就是：格式化namenode (我就是这样好的)，如何格式化？<br> <code>hadoop namenode -format</code><br>  然后启动Hadoop集群(<code>start-all.sh</code>)，zookeeper(前面重启过zookeeper，这里就不用重启了)，hbase(<code>start-hbase.sh</code>{这里说一嘴，关闭hbase时从节点上的HRegionServer关不掉可以直接KILL -9 掉它})<br>  再进入<code>hbase shell</code>中去测试吧，应该没问题了！！</p>
-</li>
-</ul>
-<blockquote>
-<p>总结一下，出了错不要总是在Hbase上找问题，关键要去集群环境，zookeeper环境上寻找，最坏的做法就是格式化集群，这样会导致hdfs上的文件清空，还有就是zookeeper文件夹下的data文件夹里面的内容除了配置的myid不需要删以外，其他的都删掉，你下次再启动zookeeper后会自动生成所以不太影响，但问题往往会出在这里，多试一些方法，解决问题最重要</p>
-</blockquote>
-
+</code></pre>
       
-    </div>
+        <div class="readmore">
+          <a href="/2019/02/08/Hbase之HMaster启动后经常掉的解决方案/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </li></ul></div>
     
       <div class="full-width auto-padding tags">
         

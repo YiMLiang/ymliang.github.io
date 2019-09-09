@@ -330,7 +330,8 @@
 输入：[60,60,60]
 输出：3
 解释：所有三对的总持续时间都是 120，可以被 60 整数。
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">方法1：时间复杂度O(n^2)，效率奇低</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int resutl = 0;</span><br><span class="line">        for(int i = 0;i&lt;time.length-1;i++)&#123;</span><br><span class="line">            for (int j = i+1; j &lt; time.length; j++) &#123;</span><br><span class="line">                if(time[i]+time[j]%60==0)&#123;</span><br><span class="line">                    result++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">方法1：时间复杂度O(n^2)，效率奇低</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int resutl = 0;</span><br><span class="line">        for(int i = 0;i&lt;time.length-1;i++)&#123;</span><br><span class="line">            for (int j = i+1; j &lt; time.length; j++) &#123;</span><br><span class="line">                if(time[i]+time[j]%60==0)&#123;</span><br><span class="line">                    result++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">方法2：</span><br><span class="line">    利用数组，将每个数对60取模后的值当作新数组的下标，并记录次数</span><br><span class="line">    接着遇到连续多个都能整出60的数，则此时 arr[0]的值应该会++多次</span><br><span class="line">    若arr[0]=3 即有3个60，他们两两组合则可以组合的数量为(n(n-1))/2 result = (3*2)/2 = 3</span><br><span class="line">    同理，取mode后的值为30也是特殊情况，则组合的方法和0的一样，接着下面写就可以了</span><br><span class="line">    排除了特殊情况后，正常情况就是20  40,   10   50之类的相加为60的数，这些数2 2 组合直接乘就可以了</span><br><span class="line">    </span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int numPairsDivisibleBy60(int[] time) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        int[] res = new int[60];</span><br><span class="line">        for(int i:time)&#123;</span><br><span class="line">            res[i%60]++;</span><br><span class="line">        &#125;</span><br><span class="line">        result += (res[0] * (res[0]-1))/2;</span><br><span class="line">        result += (res[30] * (res[30]-1))/2;</span><br><span class="line">        //正常情况，相加为60证明一定能被60整除</span><br><span class="line">        for(int i = 1;i&lt;30;i++)&#123;</span><br><span class="line">            result += (res[i] * res[60-i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="http://ymliang.com/2019/04/10/含有重复字符的最长子串/">leetcode-含有重复字符的最长子串</a></li><li><a href="http://ymliang.com/2019/05/06/leetCode-155-最小栈/">leetCode 155 最小栈</a></li><li><a href="http://ymliang.com/2019/02/22/Leetcode-177-第N高的薪水/">Leetcode 177 第N高的薪水</a></li><li><a href="http://fja0kl.github.io/2019/04/27/LeetCode-Group-Anagrams/">[leetcode]Group Anagrams</a></li></ul></div>
         </div>
         
@@ -342,10 +343,10 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-03T15:52:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-09T18:11:53+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 2019年6月3日</p>
+    <p>最后更新于 2019年9月9日</p>
   </a>
 </div>
 
@@ -365,7 +366,22 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/&title=leetcode 1013:总持续时间可被60整除的歌曲 | YMLiang&summary=">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/&title=leetcode 1013:总持续时间可被60整除的歌曲 | YMLiang&summary=leetcode 1013:总持续时间可被 60 整除的歌曲
+在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字  i &lt; j 且有 (time[i] + time[j]) % 60 == 0。
+
+示例 1：
+输入：[30,20,150,100,40]
+输出：3
+解释：这三对的总持续时间可被 60 整数：
+(time[0] = 30, time[2] = 150): 总持续时间 180
+(time[1] = 20, time[3] = 100): 总持续时间 120
+(time[1] = 20, time[4] = 40): 总持续时间 60
+
+示例 2：
+输入：[60,60,60]
+输出：3
+解释：所有三对的总持续时间都是 120，可以被 60 整数。
+">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -373,7 +389,22 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/&title=leetcode 1013:总持续时间可被60整除的歌曲 | YMLiang&summary=">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/&title=leetcode 1013:总持续时间可被60整除的歌曲 | YMLiang&summary=leetcode 1013:总持续时间可被 60 整除的歌曲
+在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字  i &lt; j 且有 (time[i] + time[j]) % 60 == 0。
+
+示例 1：
+输入：[30,20,150,100,40]
+输出：3
+解释：这三对的总持续时间可被 60 整数：
+(time[0] = 30, time[2] = 150): 总持续时间 180
+(time[1] = 20, time[3] = 100): 总持续时间 120
+(time[1] = 20, time[4] = 40): 总持续时间 60
+
+示例 2：
+输入：[60,60,60]
+输出：3
+解释：所有三对的总持续时间都是 120，可以被 60 整数。
+">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -381,7 +412,22 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/&title=leetcode 1013:总持续时间可被60整除的歌曲 | YMLiang&summary=">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/03/20/leetcode-1013-总持续时间可被-60-整除的歌曲/&title=leetcode 1013:总持续时间可被60整除的歌曲 | YMLiang&summary=leetcode 1013:总持续时间可被 60 整除的歌曲
+在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字  i &lt; j 且有 (time[i] + time[j]) % 60 == 0。
+
+示例 1：
+输入：[30,20,150,100,40]
+输出：3
+解释：这三对的总持续时间可被 60 整数：
+(time[0] = 30, time[2] = 150): 总持续时间 180
+(time[1] = 20, time[3] = 100): 总持续时间 120
+(time[1] = 20, time[4] = 40): 总持续时间 60
+
+示例 2：
+输入：[60,60,60]
+输出：3
+解释：所有三对的总持续时间都是 120，可以被 60 整数。
+">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           

@@ -315,30 +315,31 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <h3 id="Kafka与Zookeeper"><a href="#Kafka与Zookeeper" class="headerlink" title="Kafka与Zookeeper"></a>Kafka与Zookeeper</h3><ul>
+          <h3 id="Kafka与Zookeeper"><a href="#Kafka与Zookeeper" class="headerlink" title="Kafka与Zookeeper"></a>Kafka与Zookeeper</h3><p>  Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡<br><a id="more"></a></p>
+<ul>
 <li><p>Kafka如何利用zookeeper做负载均衡</p>
 <pre><code>Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡。
-</code></pre><ul>
-<li><p>broker在zk中注册</p>
-<p>  kafka的每个broker（相当于一个节点，相当于一个机器）在启动时，都会在zk中注册，告诉zk其brokerid，在整个的集群中，<code>broker.id/brokers/ids</code>，当节点失效时，zk就会删除该节点，就很方便的监控整个集群broker的变化，及时调整负载均衡。</p>
-</li>
-<li><p>topic在zk中注册</p>
-<p>  在kafka中可以定义很多个topic，每个topic又被分为很多个分区。一般情况下，每个分区独立在存在一个broker上，所有的这些topic和broker的对应关系都有zk进行维护</p>
-</li>
-<li><p>consumer(消费者)在zk中注册</p>
-<ul>
-<li><p>注册新的消费者，当有新的消费者注册到zk中，zk会创建专用的节点来保存相关信息，路径<code>ls /consumers/{group_id}/  [ids,owners,offset]</code>，Ids:记录该消费分组有几个正在消费的消费者，Owmners：记录该消费分组消费的topic信息，Offset：记录topic每个分区中的每个offset</p>
-</li>
-<li><p>监听消费者分组中消费者的变化 ,监听/consumers/{group_id}/ids的子节点的变化，一旦发现消费者新增或者减少及时调整消费者的负载均衡。</p>
-</li>
+</code></pre></li>
 </ul>
-</li>
-</ul>
-<hr>
-<p>  转载<br>  作者：SmartBrain<br>  原文：<a href="https://blog.csdn.net/Peter_Changyb/article/details/81562855" target="_blank" rel="noopener">https://blog.csdn.net/Peter_Changyb/article/details/81562855</a> </p>
-</li>
-</ul>
+<pre><code>- broker在zk中注册
 
+    kafka的每个broker（相当于一个节点，相当于一个机器）在启动时，都会在zk中注册，告诉zk其brokerid，在整个的集群中，`broker.id/brokers/ids`，当节点失效时，zk就会删除该节点，就很方便的监控整个集群broker的变化，及时调整负载均衡。
+
+- topic在zk中注册
+
+    在kafka中可以定义很多个topic，每个topic又被分为很多个分区。一般情况下，每个分区独立在存在一个broker上，所有的这些topic和broker的对应关系都有zk进行维护
+
+- consumer(消费者)在zk中注册
+
+    - 注册新的消费者，当有新的消费者注册到zk中，zk会创建专用的节点来保存相关信息，路径`ls /consumers/{group_id}/  [ids,owners,offset]`，Ids:记录该消费分组有几个正在消费的消费者，Owmners：记录该消费分组消费的topic信息，Offset：记录topic每个分区中的每个offset
+
+    - 监听消费者分组中消费者的变化 ,监听/consumers/{group_id}/ids的子节点的变化，一旦发现消费者新增或者减少及时调整消费者的负载均衡。
+
+--------------------- 
+转载
+作者：SmartBrain 
+原文：https://blog.csdn.net/Peter_Changyb/article/details/81562855 
+</code></pre>
         </div>
         
           
@@ -349,10 +350,10 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-03-20T11:02:07+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-09T18:41:07+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 2019年3月20日</p>
+    <p>最后更新于 2019年9月9日</p>
   </a>
 </div>
 
@@ -372,7 +373,7 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/03/20/Kafka如何利用Zookeeper做负载均衡/&title=Kafka如何利用Zookeeper做负载均衡 | YMLiang&summary=">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/03/20/Kafka如何利用Zookeeper做负载均衡/&title=Kafka如何利用Zookeeper做负载均衡 | YMLiang&summary=Kafka与Zookeeper  Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -380,7 +381,7 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/03/20/Kafka如何利用Zookeeper做负载均衡/&title=Kafka如何利用Zookeeper做负载均衡 | YMLiang&summary=">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/03/20/Kafka如何利用Zookeeper做负载均衡/&title=Kafka如何利用Zookeeper做负载均衡 | YMLiang&summary=Kafka与Zookeeper  Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -388,7 +389,7 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/03/20/Kafka如何利用Zookeeper做负载均衡/&title=Kafka如何利用Zookeeper做负载均衡 | YMLiang&summary=">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/03/20/Kafka如何利用Zookeeper做负载均衡/&title=Kafka如何利用Zookeeper做负载均衡 | YMLiang&summary=Kafka与Zookeeper  Kafka使用zk的分布式协调服务，将生产者，消费者，消息储存（broker，用于存储信息，消息读写等）结合在一起。同时借助zk，kafka能够将生产者，消费者和broker在内的所有组件在无状态的条件下建立起生产者和消费者的订阅关系，实现生产者的负载均衡">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           

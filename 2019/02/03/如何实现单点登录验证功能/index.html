@@ -308,11 +308,11 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           <h2 id="单点登录-SSO-gt-Single-Sign-On"><a href="#单点登录-SSO-gt-Single-Sign-On" class="headerlink" title="单点登录(SSO =&gt; Single Sign On)"></a>单点登录(SSO =&gt; Single Sign On)</h2><blockquote>
-<p>单点登录SSO是指Single Sign On 从一个系统登录，其他系统免登录，在一个系统用户增多，架构完善之后为了方便运营人员登录多个系统而不需要每次都输入用户名密码，所以实现单点登录显得尤为重要，这里分享一下我在项目中如何用单点登录实现用户登录一次即可访问其他相互信任的系统</p>
-</blockquote>
+<p>单点登录SSO是指Single Sign On 从一个系统登录，其他系统免登录，在一个系统用户增多，架构完善之后为了方便运营人员登录多个系统而不需要每次都输入用户名密码，所以实现单点登录显得尤为重要，这里分享一下我在项目中如何用单点登录实现用户登录一次即可访问其他相互信任的系统<br><a id="more"></a></p>
 <ol>
 <li>首先我们的认证系统是独立的一个模块，即我们在用户登录后，会调用认证系统的方法来生成用户唯一的session并进行保存，认证系统返回给客户端一个唯一的登录凭证，用这个登录凭证即可直接访问其他的子系统不用再进行登录了</li>
 </ol>
+</blockquote>
 <img src="/2019/02/03/如何实现单点登录验证功能/SSO.jpg" title="SSO单点登录">
 <ol start="2">
 <li><p>在进行登录认证返回登录凭证后，我们还需要配置一个拦截器，用于拦截服务的请求，即我们需要哪些请求要验证这个登录凭证才能访问我们的其他服务，这样写可能不是很清楚，举个栗子</p>
@@ -386,10 +386,10 @@ public class CheckInterceptorConfiguration implements WebMvcConfigurer {
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-02-06T01:45:11+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-09T18:41:27+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 2019年2月6日</p>
+    <p>最后更新于 2019年9月9日</p>
   </a>
 </div>
 
@@ -406,7 +406,8 @@ public class CheckInterceptorConfiguration implements WebMvcConfigurer {
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/02/03/如何实现单点登录验证功能/&title=如何实现单点登录验证功能 | YMLiang&summary=">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ymliang.com/2019/02/03/如何实现单点登录验证功能/&title=如何实现单点登录验证功能 | YMLiang&summary=单点登录(SSO =&gt; Single Sign On)
+单点登录SSO是指Single Sign On 从一个系统登录，其他系统免登录，在一个系统用户增多，架构完善之后为了方便运营人员登录多个系统而不需要每次都输入用户名密码，所以实现单点登录显得尤为重要，这里分享一下我在项目中如何用单点登录实现用户登录一次即可访问其他相互信任的系统">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -414,7 +415,8 @@ public class CheckInterceptorConfiguration implements WebMvcConfigurer {
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/02/03/如何实现单点登录验证功能/&title=如何实现单点登录验证功能 | YMLiang&summary=">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://ymliang.com/2019/02/03/如何实现单点登录验证功能/&title=如何实现单点登录验证功能 | YMLiang&summary=单点登录(SSO =&gt; Single Sign On)
+单点登录SSO是指Single Sign On 从一个系统登录，其他系统免登录，在一个系统用户增多，架构完善之后为了方便运营人员登录多个系统而不需要每次都输入用户名密码，所以实现单点登录显得尤为重要，这里分享一下我在项目中如何用单点登录实现用户登录一次即可访问其他相互信任的系统">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -422,7 +424,8 @@ public class CheckInterceptorConfiguration implements WebMvcConfigurer {
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/02/03/如何实现单点登录验证功能/&title=如何实现单点登录验证功能 | YMLiang&summary=">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://ymliang.com/2019/02/03/如何实现单点登录验证功能/&title=如何实现单点登录验证功能 | YMLiang&summary=单点登录(SSO =&gt; Single Sign On)
+单点登录SSO是指Single Sign On 从一个系统登录，其他系统免登录，在一个系统用户增多，架构完善之后为了方便运营人员登录多个系统而不需要每次都输入用户名密码，所以实现单点登录显得尤为重要，这里分享一下我在项目中如何用单点登录实现用户登录一次即可访问其他相互信任的系统">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           
