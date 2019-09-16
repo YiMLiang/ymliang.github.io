@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ymliang.com/about/index.html</loc>
+    
+    <lastmod>2019-09-16T11:02:45.904Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ymliang.com/2019/01/30/hello-world/</loc>
     
     <lastmod>2019-09-09T10:44:33.342Z</lastmod>
@@ -180,13 +187,6 @@
     <loc>http://ymliang.com/2019/06/04/Go%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</loc>
     
     <lastmod>2019-06-10T07:38:05.806Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ymliang.com/about/index.html</loc>
-    
-    <lastmod>2019-06-07T08:53:49.132Z</lastmod>
     
   </url>
   
