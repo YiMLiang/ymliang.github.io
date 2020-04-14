@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ymliang.com/"/>
-  <updated>2019-12-05T11:07:26.861Z</updated>
+  <updated>2020-04-14T06:50:13.969Z</updated>
   <id>http://ymliang.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React脚手架创建项目异常[npm ERR! code ENOLOCAL]</title>
+    <link href="http://ymliang.com/React%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BC%82%E5%B8%B8-npm-ERR-code-ENOLOCAL.html"/>
+    <id>http://ymliang.com/React脚手架创建项目异常-npm-ERR-code-ENOLOCAL.html</id>
+    <published>2020-04-14T06:41:44.000Z</published>
+    <updated>2020-04-14T06:50:13.969Z</updated>
+    
+    <content type="html"><![CDATA[<p>npm ERR! code ENOLOCAL<br>npm ERR! Could not install from “Files\nodejs\node_cache_npx\21364” as it does not contain a package.json file.</p><p>npm ERR! A complete log of this run can be found in:<br>npm ERR!     C:\Program Files\nodejs\node_cache_logs\2020-04-02T08_18_09_189Z-debug.log<br>Install for create-react-app@latest failed with code 1<br><a id="more"></a></p><p>解决：</p><pre><code>“更换node cache 路径”在项目目录下面运行：npm config set cache &quot;C:\Users\登录windows的用户名\AppData\Roaming\npm-cache&quot;--global切记目录和“--global”之间没有空格。</code></pre><ul><li>还有再使用npm install的时候,react会重新下载并更新需要的包,路径在当前文件夹下的node_modules</li><li>有的同学再使用的时候会提示上面的问题，或者操作不允许，网上会有教程说让使用管理员方式运行，这种回答都是杯水车薪，治标不治本的，我们要一步到位，使用上面的方法即可</li></ul><p><img src="/images/react/reactError01.png" alt="reactError"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;npm ERR! code ENOLOCAL&lt;br&gt;npm ERR! Could not install from “Files\nodejs\node_cache_npx\21364” as it does not contain a package.json file.&lt;/p&gt;
+&lt;p&gt;npm ERR! A complete log of this run can be found in:&lt;br&gt;npm ERR!     C:\Program Files\nodejs\node_cache_logs\2020-04-02T08_18_09_189Z-debug.log&lt;br&gt;Install for create-react-app@latest failed with code 1&lt;br&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://ymliang.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="React" scheme="http://ymliang.com/tags/React/"/>
+    
+      <category term="前端" scheme="http://ymliang.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>组装电脑：你不知道的事儿</title>
@@ -506,32 +531,6 @@ END      结尾代码块，在对每一行进行处理之后再执行的代码�
       <category term="springCloud" scheme="http://ymliang.com/tags/springCloud/"/>
     
       <category term="springboot" scheme="http://ymliang.com/tags/springboot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL分析函数场景实例</title>
-    <link href="http://ymliang.com/SQL%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B0%E5%9C%BA%E6%99%AF%E5%AE%9E%E4%BE%8B.html"/>
-    <id>http://ymliang.com/SQL分析函数场景实例.html</id>
-    <published>2019-04-18T10:51:34.000Z</published>
-    <updated>2019-05-15T08:22:28.824Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="分析函数"><a href="#分析函数" class="headerlink" title="分析函数"></a>分析函数</h3><ol><li><p>用来排序的函数<br>它和聚合函数的不同之处是对于每个组返回多行<br><code>row_number() over()rank() over()dense_rank() over()first_value() over()</code></p><a id="more"></a><p><a href="https://blog.csdn.net/myflysun/article/details/70477204" target="_blank" rel="noopener">语法:</a></p><p> row_number() over([partition by xxx] [order by xxx]) 返回的是行信息，没有排名<br> rank ( )  over([partition by xxx] [order by xxx]) 返回的相关等级不会跳跃<br> dense_rank ( ) over([partition by xxx] [order by xxx]) 返回的返回的相关等级会跳跃</p></li></ol><p>场景: 查询每个班的第一名的成绩</p><pre><code>SELECT * FROM (select t.name,t.class,t.sroce,rank() over(partition by t.class order by t.sroce desc) mm from T2_TEMP t) where mm = 1;</code></pre><p><code>LagLead</code></p><p><a href="https://blog.csdn.net/pelifymeng2/article/details/70313943" target="_blank" rel="noopener">语法:</a></p><pre><code>lag(exp_str,offset,defval) over(partion by ..order by …)lead(exp_str,offset,defval) over(partion by ..order by …)其中exp_str是字段名Offset是偏移量，即是上1个或上N个的值，假设当前行在表中排在第5行，则offset 为3，则表示我们所要找的数据行就是表中的第2行（即5-3=2）,默认值是1Defval默认值，当两个函数取上N/下N个值，当在表中从当前行位置向前数N行已经超出了表的范围时，lag（）函数将defval这个参数值作为函数的返回值，若没有指定默认值，则返回NULL，那么在数学运算中，总要给一个默认值才不会出错。</code></pre><ol start="2"><li><p>聚合函数</p><pre><code>聚合函数对于每个组只返回一行count、max、min、sum、avg、Variance、StddevCount 用来求有效数据的数量Max 用来求给定数据中最大的那一个数据Min    用来求给定数据中最小的那一个数据Avg    用来求给定数据的平均值Sum 用来求给定数据的总和Variance 用来求给定数据的标准差Stddev 用来求给定数据的方差median 主要用于统计整表或者分组情况下的中位数（限定参数为数值型或日期/时间型），忽略NULL值对于聚合函数，如果给定的值中存在空值的话，oracle将会直接忽略select count(*) from xxx对于聚合函数中可以使用distinct关键字来压缩重复值比如我们想统计总共有多少个部门的话我们如果写Select count(deptno) from emp;将会得到错误的结果。因为实际上有很多重复的值也被计算在内。为了找到正确的答案，你应该这样写。Select count(distinct deptno) from emp;</code></pre></li><li><p><a href="http://www.cnblogs.com/cc11001100/p/9043946.html" target="_blank" rel="noopener">collect函数</a></p></li></ol><p><code>collect_listcollect_set</code></p><p>它们都是将分组中的某列转为一个数组返回，不同的是collect_list不去重而collect_set去重。</p><p>语法: </p><pre><code>collect_list(column_name)collect_set(column_name)有的时候我们想根据A进行分组然后随便取出每个分组中的一个B，代入到这个实验中就是按照用户进行分组，然后随便拿出一个他看过的视频名称即可collect_list(column_name)[0] 和取数组一样简单</code></pre><p>### </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;分析函数&quot;&gt;&lt;a href=&quot;#分析函数&quot; class=&quot;headerlink&quot; title=&quot;分析函数&quot;&gt;&lt;/a&gt;分析函数&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;用来排序的函数&lt;br&gt;它和聚合函数的不同之处是对于每个组返回多行&lt;br&gt;&lt;code&gt;row_number() over()
-rank() over()
-dense_rank() over()
-first_value() over()&lt;/code&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="sql" scheme="http://ymliang.com/categories/sql/"/>
-    
-    
-      <category term="sql" scheme="http://ymliang.com/tags/sql/"/>
     
   </entry>
   

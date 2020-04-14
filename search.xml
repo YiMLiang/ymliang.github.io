@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>React脚手架创建项目异常[npm ERR! code ENOLOCAL]</title>
+      <link href="/React%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BC%82%E5%B8%B8-npm-ERR-code-ENOLOCAL.html"/>
+      <url>/React%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BC%82%E5%B8%B8-npm-ERR-code-ENOLOCAL.html</url>
+      
+        <content type="html"><![CDATA[<p>npm ERR! code ENOLOCAL<br>npm ERR! Could not install from “Files\nodejs\node_cache_npx\21364” as it does not contain a package.json file.</p><p>npm ERR! A complete log of this run can be found in:<br>npm ERR!     C:\Program Files\nodejs\node_cache_logs\2020-04-02T08_18_09_189Z-debug.log<br>Install for create-react-app@latest failed with code 1<br><a id="more"></a></p><p>解决：</p><pre><code>“更换node cache 路径”在项目目录下面运行：npm config set cache &quot;C:\Users\登录windows的用户名\AppData\Roaming\npm-cache&quot;--global切记目录和“--global”之间没有空格。</code></pre><ul><li>还有再使用npm install的时候,react会重新下载并更新需要的包,路径在当前文件夹下的node_modules</li><li>有的同学再使用的时候会提示上面的问题，或者操作不允许，网上会有教程说让使用管理员方式运行，这种回答都是杯水车薪，治标不治本的，我们要一步到位，使用上面的方法即可</li></ul><p><img src="/images/react/reactError01.png" alt="reactError"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> React </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>组装电脑：你不知道的事儿</title>
       <link href="/%E7%BB%84%E8%A3%85%E7%94%B5%E8%84%91%EF%BC%9A%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B%E5%84%BF.html"/>
       <url>/%E7%BB%84%E8%A3%85%E7%94%B5%E8%84%91%EF%BC%9A%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B%E5%84%BF.html</url>
