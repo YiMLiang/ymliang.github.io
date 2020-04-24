@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Mac电脑Item2当XShell使用</title>
+      <link href="/Mac%E7%94%B5%E8%84%91Item2%E5%BD%93XShell%E4%BD%BF%E7%94%A8.html"/>
+      <url>/Mac%E7%94%B5%E8%84%91Item2%E5%BD%93XShell%E4%BD%BF%E7%94%A8.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="在mac系统中优雅的将控制台item2当作windows-XShell使用"><a href="#在mac系统中优雅的将控制台item2当作windows-XShell使用" class="headerlink" title="在mac系统中优雅的将控制台item2当作windows-XShell使用"></a>在mac系统中优雅的将控制台item2当作windows-XShell使用</h3><pre><code>windows工作环境下，连接服务器很方便的使用xshell就可以，比较方便，傻瓜式操作但再macOs操作系统下需要下载软件，当然软件也有，但macOs自带的控制台软件就可以，而且还比较方便，来说下步骤</code></pre><ul><li><p>第一步是要先建立密码文件：sshpass {这是个目录}下的文件，用公司系统名字命名，方便查找<br>目录：/Users/你的苹果电脑登录用户名(我的是abc)/Downloads/sshpass 不会找的去百度一下苹果电脑Downloads文件夹怎么在控制台找到,你下载的文件，视频等都在这个文件夹下</p></li><li><p>第二步<br>vim 文件名(你自己起)<br>示例： vim password</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123456</span><br></pre></td></tr></table></figure><p> :wq   输入密码后保存</p></li><li><p>第三步<br>打开item2的设置<br>ietm2 打开 Preferences 的快捷键 command + 逗号<br>需要改的地方就两处，一是Name，二是Command<br>Name起个名字方便用的时候好找，Command是执行的命令<br><img src="/images/mac/item2.png" alt="item2设置"><br>执行的命令如下：<br><code>/usr/local/bin/sshpass -f /Users/abc/Downloads/sshpass/password ssh -p22 supdev@ip地址</code></p></li></ul><pre><code>​/usr/local/bin/sshpass是sshpass执行文件的路径，默认情况安装现在这个位置上sshpass下载:brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb-f是告诉sshpass加载文件/Users/abc/Downloads/sshpass/password 就是要加载的的密码文件​ssh -p22 supdev@ip地址  意思是用ssh链接，端口22，用户名和IP地址</code></pre><p>保存后，第一次先通过终端运行ssh 用户名@ip，登录成功后再选择该profile，就可以实现ssh登录(如果配置了密码文件，就是刚刚讲的password文件)那么第二次开始到以后都不需要输密码了<br>第一次使用命令：ssh supdev@ip  登录服务器</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> XShell </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> XShell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>React脚手架创建项目异常[npm ERR! code ENOLOCAL]</title>
       <link href="/React%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BC%82%E5%B8%B8-npm-ERR-code-ENOLOCAL.html"/>
       <url>/React%E8%84%9A%E6%89%8B%E6%9E%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BC%82%E5%B8%B8-npm-ERR-code-ENOLOCAL.html</url>

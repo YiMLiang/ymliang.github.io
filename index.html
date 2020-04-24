@@ -417,9 +417,129 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/Mac电脑Item2当XShell使用.html">
+      Mac电脑Item2当XShell使用
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://ymliang.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YMLiang</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-04-24</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/XShell/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>XShell</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h3 id="在mac系统中优雅的将控制台item2当作windows-XShell使用"><a href="#在mac系统中优雅的将控制台item2当作windows-XShell使用" class="headerlink" title="在mac系统中优雅的将控制台item2当作windows-XShell使用"></a>在mac系统中优雅的将控制台item2当作windows-XShell使用</h3><pre><code>windows工作环境下，连接服务器很方便的使用xshell就可以，比较方便，傻瓜式操作
+但再macOs操作系统下需要下载软件，当然软件也有，但macOs自带的控制台软件就可以，而且还比较方便，来说下步骤
+</code></pre><ul>
+<li><p>第一步是要先建立密码文件：sshpass {这是个目录}下的文件，用公司系统名字命名，方便查找<br>目录：/Users/你的苹果电脑登录用户名(我的是abc)/Downloads/sshpass 不会找的去百度一下苹果电脑Downloads文件夹怎么在控制台找到,你下载的文件，视频等都在这个文件夹下</p>
+</li>
+<li><p>第二步<br>vim 文件名(你自己起)<br>示例： vim password</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123456</span><br></pre></td></tr></table></figure>
+<p> :wq   输入密码后保存</p>
+</li>
+<li><p>第三步<br>打开item2的设置<br>ietm2 打开 Preferences 的快捷键 command + 逗号<br>需要改的地方就两处，一是Name，二是Command<br>Name起个名字方便用的时候好找，Command是执行的命令<br><img src="/images/mac/item2.png" alt="item2设置"><br>执行的命令如下：<br><code>/usr/local/bin/sshpass -f /Users/abc/Downloads/sshpass/password ssh -p22 supdev@ip地址</code></p>
+</li>
+</ul>
+<pre><code>​/usr/local/bin/sshpass是sshpass执行文件的路径，默认情况安装现在这个位置上
+sshpass下载:
+brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
+
+-f是告诉sshpass加载文件
+
+/Users/abc/Downloads/sshpass/password 就是要加载的的密码文件
+​ssh -p22 supdev@ip地址  意思是用ssh链接，端口22，用户名和IP地址
+</code></pre><p>保存后，第一次先通过终端运行ssh 用户名@ip，登录成功后再选择该profile，就可以实现ssh登录(如果配置了密码文件，就是刚刚讲的password文件)那么第二次开始到以后都不需要输密码了<br>第一次使用命令：ssh supdev@ip  登录服务器</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/XShell/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>XShell</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class="post-wrapper">
@@ -1363,114 +1483,6 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/Go开发基础入门——3.html">
-      Go开发基础入门——3
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://ymliang.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YMLiang</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-06-05</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/go/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>go</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h3 id="Go-向函数传递指针参数"><a href="#Go-向函数传递指针参数" class="headerlink" title="Go 向函数传递指针参数"></a>Go 向函数传递指针参数</h3><ul>
-<li><p>Go 语言允许向函数传递指针，只需要在函数定义的参数上设置为指针类型即可</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    /* 定义局部变量 */</span><br><span class="line">    var a int = 100</span><br><span class="line">    var b int = 200</span><br><span class="line"></span><br><span class="line">    fmt.Printf(&quot;交换前 a 的值 : %d\n&quot;, a)</span><br><span class="line">    fmt.Printf(&quot;交换前 b 的值 : %d\n&quot;, b)</span><br><span class="line"></span><br><span class="line">    /* 调用函数用于交换值</span><br><span class="line">    * &amp;a 指向 a 变量的地址</span><br><span class="line">    * &amp;b 指向 b 变量的地址</span><br><span class="line">    */</span><br><span class="line">    swap(&amp;a, &amp;b)</span><br><span class="line"></span><br><span class="line">    fmt.Printf(&quot;交换后 a 的值 : %d\n&quot;, a)</span><br><span class="line">    fmt.Printf(&quot;交换后 b 的值 : %d\n&quot;, b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func swap(x *int, y *int) &#123;</span><br><span class="line">    var temp int</span><br><span class="line">    temp = *x /* 保存 x 地址的值 */</span><br><span class="line">    *x = *y   /* 将 y 赋值给 x */</span><br><span class="line">    *y = temp /* 将 temp 赋值给 y */</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">交换前 a 的值 : 100</span><br><span class="line">交换前 b 的值 : 200</span><br><span class="line">交换后 a 的值 : 200</span><br><span class="line">交换后 b 的值 : 100</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-      
-        <div class="readmore">
-          <a href="/Go开发基础入门——3.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1480,7 +1492,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
         <div class="prev-next">
           
           <p class="current">
-            1 / 4
+            1 / 5
           </p>
           
             <a class="next" rel="next" href="/page/2/">
@@ -1628,6 +1640,8 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
     <div class="content pure">
       <ul class="entry">
         
+          <li><a class="flat-box" title="/categories/XShell/" href="/categories/XShell/"><div class="name">XShell</div><div class="badge">(1)</div></a></li>
+        
           <li><a class="flat-box" title="/categories/git/" href="/categories/git/"><div class="name">git</div><div class="badge">(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/go/" href="/categories/go/"><div class="name">go</div><div class="badge">(8)</div></a></li>
@@ -1683,7 +1697,7 @@ select 随机执行一个可运行的case。如果没有case可运行，它将�
 </header>
 
     <div class="content pure">
-      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/React/" style="font-size: 14px; color: #999">React</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 21.5px; color: #666">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 16.5px; color: #888">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 16.5px; color: #888">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 19px; color: #777">springCloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/前端/" style="font-size: 14px; color: #999">前端</a> <a href="/tags/电脑组装/" style="font-size: 14px; color: #999">电脑组装</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
+      <a href="/tags/Hbase/" style="font-size: 14px; color: #999">Hbase</a> <a href="/tags/React/" style="font-size: 14px; color: #999">React</a> <a href="/tags/SQL/" style="font-size: 14px; color: #999">SQL</a> <a href="/tags/Spark/" style="font-size: 14px; color: #999">Spark</a> <a href="/tags/SparkSql/" style="font-size: 14px; color: #999">SparkSql</a> <a href="/tags/XShell/" style="font-size: 14px; color: #999">XShell</a> <a href="/tags/beego/" style="font-size: 14px; color: #999">beego</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/leetcode/" style="font-size: 21.5px; color: #666">leetcode</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 14px; color: #999">maven</a> <a href="/tags/redis/" style="font-size: 16.5px; color: #888">redis</a> <a href="/tags/scala/" style="font-size: 14px; color: #999">scala</a> <a href="/tags/spark/" style="font-size: 14px; color: #999">spark</a> <a href="/tags/sparkSql/" style="font-size: 16.5px; color: #888">sparkSql</a> <a href="/tags/springCloud/" style="font-size: 19px; color: #777">springCloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/sql/" style="font-size: 14px; color: #999">sql</a> <a href="/tags/前端/" style="font-size: 14px; color: #999">前端</a> <a href="/tags/电脑组装/" style="font-size: 14px; color: #999">电脑组装</a> <a href="/tags/面试题/" style="font-size: 14px; color: #999">面试题</a>
     </div>
   </section>
 
